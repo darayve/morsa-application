@@ -5,8 +5,9 @@ que rodam **100% offline** em Windows, macOS, Linux e no navegador. Sem conta, s
 servidor: nenhum arquivo sai do seu computador. Código aberto, sob
 **MIT OR Apache-2.0**.
 
-> **Situação:** em desenvolvimento (Marco 1, esqueleto). Hoje o app converte **PNG → JPG**
-> de ponta a ponta no desktop e na web. O plano completo está em
+> **Situação:** em desenvolvimento (Marco 2, infraestrutura). Hoje o app converte
+> **PNG → JPG** de ponta a ponta no desktop e na web, com CI nas quatro plataformas,
+> política de licenças e teste automatizado de zero rede. O plano completo está em
 > [`docs/requisitos.md`](docs/requisitos.md), §18.
 
 ## Como o projeto é organizado
@@ -19,7 +20,10 @@ core/       núcleo em Rust: recebe bytes e opções, devolve bytes (sem telas, 
 corpus/     arquivos de teste, válidos e corrompidos (origem em corpus/SOURCES.md)
 design/     protótipos e sistema visual
 docs/       requisitos, regras de negócio e decisões
-scripts/    geradores (ícones, tokens de cor) e utilitários de build
+scripts/    geradores (ícones, tokens de cor), verificações e utilitários de build
+tests/      teste de zero rede da build web (Playwright)
+.github/    integração contínua (GitHub Actions)
+deny.toml   política de dependências Rust (licenças, clientes de rede, vulnerabilidades)
 ```
 
 A interface chama o núcleo pelo [flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge)
@@ -37,6 +41,8 @@ WebAssembly e roda em Web Workers, para a interface nunca travar.
 | wasm-pack | 0.15.0 |
 | wasm-bindgen-cli | 0.2.129 (igual à versão do `core/Cargo.lock`) |
 | cargo-deny | 0.20.2 |
+| Node.js (só para o teste de zero rede da web) | 24 LTS |
+| Playwright | 1.64.0 (fixado em `tests/zero_network/package.json`) |
 
 ## Pré-requisitos
 
@@ -54,7 +60,8 @@ WebAssembly e roda em Web Workers, para a interface nunca travar.
    cargo install wasm-bindgen-cli --version 0.2.129 --locked
    cargo install cargo-deny --locked
    ```
-3. Python 3 (só para servir a build web localmente).
+3. Python 3 (para servir a build web localmente).
+4. Node.js 24 LTS (só para o teste de zero rede da web).
 
 ### Windows
 
@@ -133,6 +140,64 @@ flutter test integration_test -d windows      # app + núcleo reais (ou -d macos
 
 Os testes de integração gravam numa pasta temporária, nunca em Documentos.
 
+### Galeria de componentes
+
+Os componentes base do sistema visual (botões, campos, seletor, segmentado, caixas de
+seleção, menu, linhas de tabela, ficha, progresso, avisos, área de soltar, miniaturas)
+podem ser vistos numa tela à parte, que não faz parte do app:
+
+```sh
+cd app
+flutter run -d windows -t gallery/main.dart   # Ctrl+T (⌘T) alterna claro/escuro
+```
+
+## Verificações
+
+Tudo isto roda na CI a cada push e pull request (`.github/workflows/ci.yml`);
+os comandos abaixo repetem cada verificação na sua máquina.
+
+### Licenças e clientes de rede
+
+```sh
+cargo deny --manifest-path core/Cargo.toml --config deny.toml check
+dart run scripts/check_dart_deps.dart
+```
+
+O `deny.toml` só aceita licenças permissivas (§13.1: nada de GPL, AGPL ou LGPL), barra
+crates de rede (`reqwest`, `hyper`, `ureq`…) e confere vulnerabilidades conhecidas. O
+script Dart faz o mesmo com os pacotes do app.
+
+### Teste de zero rede
+
+Na web, o teste abre a build com o Playwright, desliga a rede do navegador e faz uma
+conversão. Ele falha se qualquer requisição sair da origem. Antes, rode a build web:
+
+```sh
+cd tests/zero_network
+npm ci
+npx playwright install chromium
+npx playwright test
+```
+
+Deve aparecer `3 passed`. Um dos testes é um controle negativo: ele provoca um vazamento
+de propósito e confere que o monitor o detecta.
+
+No desktop, a CI do Linux roda os testes de integração num namespace de rede isolado e sob o
+`scripts/net_monitor.py`, que falha se o app tentar qualquer conexão (requisitos DC15).
+
+### Fuzzing
+
+O fuzzing joga milhões de arquivos malformados no conversor, procurando panics e travamentos
+(SEG14). Ele exige Linux ou macOS e o Rust nightly:
+
+```sh
+cargo install cargo-fuzz
+cd core
+cargo +nightly fuzz run convert_image -- -max_total_time=60
+```
+
+A CI roda 5 minutos a cada push e 1 hora por dia (`.github/workflows/fuzz.yml`).
+
 ## Quando mudar…
 
 | …isto | rode (na raiz, salvo indicação) |
@@ -148,8 +213,8 @@ Os testes de integração gravam numa pasta temporária, nunca em Documentos.
 O Morsa não faz nenhuma requisição de rede em execução: sem telemetria, sem
 verificação de versão, sem fontes ou recursos de CDN. As fontes (IBM Plex Sans
 Condensed e Ioskeley Mono NL, ambas OFL-1.1) vêm empacotadas em `app/assets/fonts`.
-Na web, a Content Security Policy só permite a própria origem. O teste
-automatizado de zero rede entra no Marco 2.
+Na web, a Content Security Policy só permite a própria origem. Testes automatizados
+na CI garantem isso a cada mudança (ver "Teste de zero rede").
 
 ## Licença
 
