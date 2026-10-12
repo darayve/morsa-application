@@ -5,7 +5,7 @@ import 'package:web/web.dart' as web;
 
 import 'output_writer.dart';
 
-OutputWriter createWriter() => _BrowserWriter();
+OutputWriter createWriter({String? folder}) => _BrowserWriter();
 
 /// Na web, a saída vira um download gerado localmente (Blob): nada sai do
 /// navegador. A gravação direta numa pasta (File System Access API) e o ZIP

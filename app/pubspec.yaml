@@ -28,6 +28,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
+  integration_test:
+    sdk: flutter
 
 flutter:
   # Ícones Material não são usados; desligar evita empacotar a fonte deles.

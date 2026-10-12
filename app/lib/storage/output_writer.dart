@@ -18,7 +18,9 @@ class SavedOutput {
 /// Grava arquivos de saída. A implementação muda por plataforma:
 /// desktop grava em `Documentos/Morsa/`; web dispara um download.
 abstract class OutputWriter {
-  factory OutputWriter() => impl.createWriter();
+  /// `folder` substitui a pasta padrão no desktop (usado nos testes de
+  /// integração, para não gravar nos Documentos de quem roda os testes).
+  factory OutputWriter({String? folder}) => impl.createWriter(folder: folder);
 
   /// `true` quando a saída vai para os downloads do navegador.
   bool get isDownload;

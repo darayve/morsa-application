@@ -127,8 +127,11 @@ flutter run -d chrome --web-header=Cross-Origin-Opener-Policy=same-origin --web-
 ```sh
 cd app
 flutter analyze
-flutter test
+flutter test                                  # testes unitários
+flutter test integration_test -d windows      # app + núcleo reais (ou -d macos, -d linux)
 ```
+
+Os testes de integração gravam numa pasta temporária, nunca em Documentos.
 
 ## Quando mudar…
 

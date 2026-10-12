@@ -8,15 +8,20 @@ import '../app/failure.dart';
 import 'output_name.dart';
 import 'output_writer.dart';
 
-OutputWriter createWriter() => _DesktopWriter();
+OutputWriter createWriter({String? folder}) => _DesktopWriter(folder);
 
 class _DesktopWriter implements OutputWriter {
+  _DesktopWriter(this._folder);
+
+  final String? _folder;
+
   @override
   bool get isDownload => false;
 
   /// Pasta padrão: `Morsa` dentro de Documentos (RF10).
   @override
   Future<String?> outputFolder() async {
+    if (_folder != null) return _folder;
     final docs = await getApplicationDocumentsDirectory();
     return p.join(docs.path, 'Morsa');
   }
