@@ -1,0 +1,313 @@
+# Integração contínua do Morsa (requisitos §15.1).
+#
+# Roda em todo push e pull request. Como o trabalho hoje vai direto para a
+# main, as etapas que o documento prevê "só em PR" (build debug, integração,
+# zero rede e fuzzing curto) também rodam no push, para nada passar sem elas.
+#
+# Etapas de release (tag v*) e publicação da PWA entram no Marco 6.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  FLUTTER_VERSION: 3.47.7
+  CARGO_TERM_COLOR: always
+  # Nenhuma ferramenta do Flutter manda estatística de uso durante a CI.
+  FLUTTER_SUPPRESS_ANALYTICS: "true"
+  DART_SUPPRESS_ANALYTICS: "true"
+
+jobs:
+  # ---------------------------------------------------------------------------
+  lint:
+    name: Formatação e análise
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rust (versão do rust-toolchain.toml)
+        run: rustup toolchain install
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: |
+            core -> target
+            scripts/icons -> target
+      - name: cargo fmt
+        run: |
+          cargo fmt --manifest-path core/Cargo.toml --check
+          cargo fmt --manifest-path core/fuzz/Cargo.toml --check
+          cargo fmt --manifest-path scripts/icons/Cargo.toml --check
+      - name: cargo clippy (desktop e WASM)
+        run: |
+          cargo clippy --manifest-path core/Cargo.toml --locked --all-targets -- -D warnings
+          cargo clippy --manifest-path core/Cargo.toml --locked --lib --target wasm32-unknown-unknown -- -D warnings
+          cargo clippy --manifest-path scripts/icons/Cargo.toml --locked --all-targets -- -D warnings
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: flutter pub get
+        working-directory: app
+        run: flutter pub get --enforce-lockfile
+      - name: dart format
+        run: dart format --output=none --set-exit-if-changed app/lib app/test app/integration_test app/gallery scripts
+      - name: flutter analyze
+        working-directory: app
+        run: flutter analyze --fatal-infos
+      - name: Arquivos gerados estão em dia (tokens de cor)
+        run: |
+          dart run scripts/gen_tokens.dart
+          git diff --exit-code -- app/lib/design/tokens.dart
+
+  # ---------------------------------------------------------------------------
+  deps:
+    name: Licenças e vulnerabilidades
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rust (versão do rust-toolchain.toml)
+        run: rustup toolchain install
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-deny@0.20.2,cargo-audit
+      - name: cargo deny (licenças, clientes de rede, vulnerabilidades, origens)
+        run: |
+          cargo deny --manifest-path core/Cargo.toml --config deny.toml check
+          cargo deny --manifest-path scripts/icons/Cargo.toml --config deny.toml check
+      - name: cargo audit
+        run: |
+          cargo audit --file core/Cargo.lock
+          cargo audit --file scripts/icons/Cargo.lock
+
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: flutter pub get
+        working-directory: app
+        run: flutter pub get --enforce-lockfile
+      - name: Dependências Dart (licenças e clientes de rede)
+        run: dart run scripts/check_dart_deps.dart
+
+  # ---------------------------------------------------------------------------
+  core:
+    name: Núcleo · testes (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2025, macos-15]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rust (versão do rust-toolchain.toml)
+        run: rustup toolchain install
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: core -> target
+      - name: cargo test
+        working-directory: core
+        run: cargo test --locked
+      - name: Corpus reproduzível (gerador dá os mesmos bytes)
+        if: runner.os == 'Linux'
+        run: |
+          cargo run --manifest-path core/Cargo.toml --locked --example gen_corpus
+          git diff --exit-code -- corpus
+
+      - uses: taiki-e/install-action@v2
+        if: runner.os == 'Linux'
+        with:
+          tool: cargo-llvm-cov
+      - name: Cobertura (meta ≥ 80% de linhas, RNF09)
+        if: runner.os == 'Linux'
+        working-directory: core
+        run: |
+          rustup component add llvm-tools-preview
+          cargo llvm-cov --locked --summary-only \
+            --ignore-filename-regex 'frb_generated|examples' \
+            --fail-under-lines 80
+
+  # ---------------------------------------------------------------------------
+  flutter:
+    name: Flutter · testes unitários e de widget
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: flutter test
+        working-directory: app
+        run: |
+          flutter pub get --enforce-lockfile
+          flutter test
+      - name: Testes do monitor de rede do desktop
+        run: python3 scripts/test_net_monitor.py
+
+  # ---------------------------------------------------------------------------
+  web:
+    name: Web · WASM, build e zero rede
+    runs-on: ubuntu-24.04
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rust stable e nightly (a build WASM com threads exige o nightly)
+        run: |
+          rustup toolchain install
+          rustup toolchain install nightly --profile minimal -c rust-src -t wasm32-unknown-unknown
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: wasm-pack@0.15.0,wasm-bindgen@0.2.129
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: core -> target
+          key: web
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: flutter pub get
+        working-directory: app
+        run: flutter pub get --enforce-lockfile
+      - name: Build do núcleo (WASM) e do app web
+        run: sh scripts/build_web.sh
+      - name: Tamanho da build web
+        run: |
+          du -sh app/build/web
+          ls -l app/web/pkg/*.wasm
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: tests/zero_network/package-lock.json
+      - name: Playwright
+        working-directory: tests/zero_network
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+      - name: Teste de zero rede (TST10 b)
+        working-directory: tests/zero_network
+        run: npx playwright test
+      - name: Relatório do Playwright
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: |
+            tests/zero_network/report
+            tests/zero_network/results
+          retention-days: 7
+
+  # ---------------------------------------------------------------------------
+  desktop:
+    name: Desktop · build e integração (${{ matrix.device }})
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-24.04
+            device: linux
+          - os: windows-2025
+            device: windows
+          - os: macos-15
+            device: macos
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rust (versão do rust-toolchain.toml)
+        run: rustup toolchain install
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: core -> target
+          key: desktop
+      - name: Pacotes do Linux
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev libstdc++-12-dev xvfb strace
+      - uses: subosito/flutter-action@v2
+        with:
+          flutter-version: ${{ env.FLUTTER_VERSION }}
+          channel: stable
+          cache: true
+      - name: flutter pub get
+        working-directory: app
+        run: flutter pub get --enforce-lockfile
+
+      - name: Build debug
+        working-directory: app
+        run: flutter build ${{ matrix.device }} --debug
+      # O teste de integração é compilado aqui, ainda com rede, para que a
+      # etapa seguinte não precise baixar nada.
+      - name: Build do teste de integração
+        working-directory: app
+        run: flutter build ${{ matrix.device }} --debug -t integration_test/png_to_jpg_test.dart
+
+      - name: Testes de integração (Windows e macOS)
+        if: runner.os != 'Linux'
+        working-directory: app
+        run: flutter test integration_test -d ${{ matrix.device }} --no-pub
+
+      # TST10 a: no Linux, o teste roda num namespace de rede sem nenhuma
+      # interface além do loopback (a rede do sistema não existe para ele) e
+      # sob o monitor, que falha se o app tentar qualquer conexão IPv4/IPv6.
+      - name: Testes de integração + zero rede (Linux, rede bloqueada)
+        if: runner.os == 'Linux'
+        working-directory: app
+        run: |
+          ORIG_PATH="$PATH" sudo --preserve-env unshare --net -- sh -c '
+            ip link set lo up
+            exec sudo --preserve-env -u "$SUDO_USER" env "PATH=$ORIG_PATH" CARGO_NET_OFFLINE=true \
+              python3 ../scripts/net_monitor.py -- \
+              xvfb-run -a flutter test integration_test -d linux --no-pub
+          '
+
+  # ---------------------------------------------------------------------------
+  fuzz:
+    name: Fuzzing curto (5 min)
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rust nightly (o libFuzzer exige)
+        run: rustup toolchain install nightly --profile minimal
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-fuzz
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: core/fuzz -> target
+      - name: convert_image
+        working-directory: core
+        run: |
+          mkdir -p fuzz/corpus/convert_image
+          cargo +nightly fuzz run convert_image fuzz/corpus/convert_image ../corpus/image/png ../corpus/image/jpg -- \
+            -max_total_time=300 -rss_limit_mb=4096 -max_len=1048576
+      - name: Entradas que quebraram o núcleo
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuzz-artifacts
+          path: core/fuzz/artifacts
+          retention-days: 30

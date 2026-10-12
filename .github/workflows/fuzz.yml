@@ -1,0 +1,55 @@
+# Fuzzing longo do núcleo: 1 hora por alvo, todo dia (requisitos §15.1, SEG14).
+# O corpus que o libFuzzer acumula fica em cache entre as execuções, para
+# cada dia continuar de onde o anterior parou.
+
+name: Fuzzing diário
+
+on:
+  schedule:
+    - cron: "17 4 * * *" # 04:17 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  fuzz:
+    name: Fuzzing longo · ${{ matrix.target }}
+    strategy:
+      fail-fast: false
+      matrix:
+        target: [convert_image]
+    runs-on: ubuntu-24.04
+    timeout-minutes: 80
+    steps:
+      - uses: actions/checkout@v5
+      - name: Rust nightly (o libFuzzer exige)
+        run: rustup toolchain install nightly --profile minimal
+      - uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-fuzz
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: core/fuzz -> target
+      - name: Corpus acumulado
+        uses: actions/cache@v4
+        with:
+          path: core/fuzz/corpus/${{ matrix.target }}
+          key: fuzz-corpus-${{ matrix.target }}-${{ github.run_id }}
+          restore-keys: fuzz-corpus-${{ matrix.target }}-
+      - name: Fuzzing (1 h)
+        working-directory: core
+        run: |
+          mkdir -p fuzz/corpus/${{ matrix.target }}
+          cargo +nightly fuzz run ${{ matrix.target }} fuzz/corpus/${{ matrix.target }} ../corpus/image/png ../corpus/image/jpg -- \
+            -max_total_time=3600 -rss_limit_mb=4096 -max_len=1048576
+      - name: Entradas que quebraram o núcleo
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuzz-artifacts-${{ matrix.target }}
+          path: core/fuzz/artifacts
+          retention-days: 30
