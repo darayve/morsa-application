@@ -90,6 +90,16 @@ void main() {
   );
   out.createSync(recursive: true);
   out.writeAsStringSync(b.toString());
+  // Formata com o mesmo Dart que rodou o script, para o arquivo gerado bater
+  // byte a byte com o versionado (a CI confere isso).
+  final fmt = Process.runSync(Platform.resolvedExecutable, [
+    'format',
+    out.path,
+  ]);
+  if (fmt.exitCode != 0) {
+    stderr.writeln(fmt.stderr);
+    exit(1);
+  }
   stdout.writeln('escrito: ${out.path}');
 }
 

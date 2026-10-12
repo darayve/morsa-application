@@ -301,9 +301,14 @@ jobs:
       - name: convert_image
         working-directory: core
         run: |
+          set -o pipefail
           mkdir -p fuzz/corpus/convert_image
-          cargo +nightly fuzz run convert_image fuzz/corpus/convert_image ../corpus/image/png ../corpus/image/jpg -- \
-            -max_total_time=300 -rss_limit_mb=4096 -max_len=1048576
+          cargo +nightly fuzz run convert_image fuzz/corpus/convert_image ../corpus/image/png ../corpus/image/jpg -- \n            -max_total_time=300 -rss_limit_mb=4096 -max_len=1048576 2>&1 | tee fuzz.log
+      - name: Resumo da falha (anotação pública)
+        if: failure()
+        working-directory: core
+        run: |
+          tail -n 40 fuzz.log | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}' | sed 's/^/::error title=Fuzzing::/'; echo
       - name: Entradas que quebraram o núcleo
         if: failure()
         uses: actions/upload-artifact@v4

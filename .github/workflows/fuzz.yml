@@ -43,9 +43,14 @@ jobs:
       - name: Fuzzing (1 h)
         working-directory: core
         run: |
+          set -o pipefail
           mkdir -p fuzz/corpus/${{ matrix.target }}
-          cargo +nightly fuzz run ${{ matrix.target }} fuzz/corpus/${{ matrix.target }} ../corpus/image/png ../corpus/image/jpg -- \
-            -max_total_time=3600 -rss_limit_mb=4096 -max_len=1048576
+          cargo +nightly fuzz run ${{ matrix.target }} fuzz/corpus/${{ matrix.target }} ../corpus/image/png ../corpus/image/jpg -- \n            -max_total_time=3600 -rss_limit_mb=4096 -max_len=1048576 2>&1 | tee fuzz.log
+      - name: Resumo da falha (anotação pública)
+        if: failure()
+        working-directory: core
+        run: |
+          tail -n 40 fuzz.log | sed 's/%/%25/g' | awk '{printf "%s%%0A", $0}' | sed 's/^/::error title=Fuzzing::/'; echo
       - name: Entradas que quebraram o núcleo
         if: failure()
         uses: actions/upload-artifact@v4
