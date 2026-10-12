@@ -1,0 +1,72 @@
+{
+  "@@locale": "pt",
+  "appTitle": "Morsa",
+  "breadcrumbHome": "Início",
+  "toolImg01Name": "Converter imagens",
+  "sectionFile": "Arquivo",
+  "sectionParameters": "Parâmetros",
+  "sectionResult": "Resultado",
+  "openFiles": "Abrir arquivos…",
+  "noFileChosen": "Nenhum arquivo escolhido.",
+  "acceptedFormatsM1": "PNG · outros formatos chegam nas próximas versões",
+  "targetLabel": "Destino",
+  "qualityLabel": "Qualidade",
+  "qualityRangeError": "Fora do intervalo: use de {min} a {max}.",
+  "@qualityRangeError": {
+    "placeholders": { "min": { "type": "int" }, "max": { "type": "int" } }
+  },
+  "outputFolderLabel": "Pasta de saída",
+  "outputFolderWeb": "Downloads do navegador",
+  "convert": "Converter",
+  "stateQueued": "Na fila",
+  "stateRunning": "Executando",
+  "stateDone": "Concluído",
+  "stateFailed": "Falha",
+  "formatsAndCount": "{from} → {to} · {count, plural, =1{1 arquivo} other{{count} arquivos}}",
+  "@formatsAndCount": {
+    "placeholders": {
+      "from": { "type": "String" },
+      "to": { "type": "String" },
+      "count": { "type": "int" }
+    }
+  },
+  "savedAs": "Salvo como {name}",
+  "@savedAs": { "placeholders": { "name": { "type": "String" } } },
+  "downloadedAs": "Baixado como {name}",
+  "@downloadedAs": { "placeholders": { "name": { "type": "String" } } },
+  "extensionMismatch": "Este arquivo é {real}, apesar da extensão .{ext}",
+  "@extensionMismatch": {
+    "placeholders": { "real": { "type": "String" }, "ext": { "type": "String" } }
+  },
+  "statusOffline": "OFFLINE",
+  "statusNoNetwork": "Sem acesso à rede",
+  "statusLocal": "Processamento local",
+  "statusConverting": "Convertendo · {done} de {total}",
+  "@statusConverting": {
+    "placeholders": { "done": { "type": "int" }, "total": { "type": "int" } }
+  },
+  "statusVersion": "Morsa · v{version}",
+  "@statusVersion": { "placeholders": { "version": { "type": "String" } } },
+
+  "errorE101": "Esta conversão não é suportada.",
+  "suggestE101": "Escolha outro formato de destino.",
+  "errorE102": "O formato deste arquivo não é suportado.",
+  "suggestE102": "Confira se o arquivo é do tipo esperado.",
+  "errorE103": "O arquivo está vazio (0 bytes).",
+  "suggestE103": "Peça o arquivo novamente a quem o enviou.",
+  "errorE104": "Uma opção está fora do intervalo permitido.",
+  "suggestE104": "Ajuste o valor destacado.",
+  "errorE105": "O arquivo terminou antes do esperado; pode estar corrompido.",
+  "suggestE105": "Tente reexportar o arquivo na origem.",
+  "errorE106": "A imagem é grande demais para ser processada com segurança ({width} × {height}).",
+  "@errorE106": {
+    "placeholders": { "width": { "type": "String" }, "height": { "type": "String" } }
+  },
+  "suggestE106": "Reduza a imagem em outro programa ou use o app desktop.",
+  "errorE199": "Ocorreu um erro inesperado ao processar este arquivo.",
+  "suggestE199": "Copie o relatório e informe no repositório do projeto.",
+  "errorE201": "Não é possível salvar na pasta escolhida.",
+  "suggestE201": "Escolha outra pasta de destino.",
+  "errorE204": "O arquivo original não pode mais ser lido (foi movido ou apagado).",
+  "suggestE204": "Adicione o arquivo novamente."
+}

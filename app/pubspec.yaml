@@ -1,0 +1,57 @@
+name: morsa
+description: "Utilitários para arquivos, 100% offline."
+publish_to: 'none'
+
+# Versão do app (MAJOR.MINOR.PATCH+build). O MVP sai como 0.1.0 (§15.2).
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.5
+
+# Toda dependência nova precisa ter licença permissiva (MIT, BSD, Apache…).
+# Nenhum cliente HTTP é permitido (RNF10).
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  file_selector: ^1.1.0 # BSD-3 · seletor de arquivos nativo e web
+  flutter_rust_bridge: 2.13.0 # MIT · versão idêntica à do crate Rust
+  intl: ^0.20.3 # BSD-3 · formatação por idioma
+  morsa_core: # compila o núcleo Rust (../core) via cargokit
+    path: rust_builder
+  path: ^1.9.1 # BSD-3 · manipulação de caminhos
+  path_provider: ^2.1.6 # BSD-3 · pasta Documentos no desktop
+  web: ^1.1.1 # BSD-3 · download de arquivos na web
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  # Ícones Material não são usados; desligar evita empacotar a fonte deles.
+  uses-material-design: false
+  generate: true
+
+  fonts:
+    # Títulos e rótulos de seção (§9.3).
+    - family: IBM Plex Sans Condensed
+      fonts:
+        - asset: assets/fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-SemiBold.ttf
+          weight: 600
+        - asset: assets/fonts/ibm-plex-sans-condensed/IBMPlexSansCondensed-Bold.ttf
+          weight: 700
+    # Todo o resto. Variante NL: sem ligaduras.
+    - family: Ioskeley Mono NL
+      fonts:
+        - asset: assets/fonts/ioskeley-mono-nl/IoskeleyMonoNL-Light.ttf
+          weight: 300
+        - asset: assets/fonts/ioskeley-mono-nl/IoskeleyMonoNL-Regular.ttf
+          weight: 400
+        - asset: assets/fonts/ioskeley-mono-nl/IoskeleyMonoNL-Medium.ttf
+          weight: 500
+        - asset: assets/fonts/ioskeley-mono-nl/IoskeleyMonoNL-Bold.ttf
+          weight: 700

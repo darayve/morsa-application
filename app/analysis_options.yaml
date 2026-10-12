@@ -1,0 +1,19 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    # Ferramenta de build do cargokit (roda só na compilação, não faz parte do app).
+    - rust_builder/**
+    # Código gerado pelo flutter_rust_bridge e pelo gen-l10n.
+    - lib/core_api/**
+    - lib/app/l10n/**
+    - build/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
+
+linter:
+  rules:
+    prefer_single_quotes: true
+    always_declare_return_types: true

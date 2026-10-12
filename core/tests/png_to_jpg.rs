@@ -58,7 +58,7 @@ fn png_valido_vira_jpg_com_mesmas_dimensoes() {
 
     assert_eq!(out.source, FileFormat::Png);
     assert_eq!(out.target, FileFormat::Jpeg);
-    assert_eq!(out.extension, "jpg");
+    assert_eq!(out.output_extension, "jpg");
     assert_eq!(
         &out.bytes[..3],
         &[0xFF, 0xD8, 0xFF],

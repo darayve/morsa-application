@@ -30,7 +30,7 @@ pub struct ConvertedImage {
     pub source: FileFormat,
     pub target: FileFormat,
     /// Extensão da saída sem o ponto (`jpg`), conforme RN15.
-    pub extension: String,
+    pub output_extension: String,
 }
 
 /// Par nome → valor usado para preencher a mensagem traduzida do erro.
@@ -85,7 +85,7 @@ pub fn convert_image(
         };
         let out = image::convert(&input, options)?;
         Ok(ConvertedImage {
-            extension: out.target.extension().to_string(),
+            output_extension: out.target.extension().to_string(),
             bytes: out.bytes,
             source: out.source.into(),
             target: out.target.into(),

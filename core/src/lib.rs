@@ -14,3 +14,6 @@ pub mod detect;
 pub mod error;
 pub mod image;
 pub mod limits;
+
+// Código gerado pelo flutter_rust_bridge (não editar à mão).
+mod frb_generated;

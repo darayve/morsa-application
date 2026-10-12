@@ -1,0 +1,5 @@
+# Configuração do gerador da ponte (flutter_rust_bridge_codegen generate).
+# O núcleo fica fora do app, em ../core; o código Dart gerado vai para lib/core_api.
+rust_input: crate::api
+rust_root: ../core/
+dart_output: lib/core_api/
