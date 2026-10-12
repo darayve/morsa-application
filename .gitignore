@@ -23,3 +23,17 @@ app/web/pkg/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# Fuzzing (gerados pelo cargo-fuzz)
+/core/fuzz/target/
+/core/fuzz/artifacts/
+/core/fuzz/corpus/
+/core/fuzz/coverage/
+
+# Teste de zero rede (Playwright)
+/tests/zero_network/node_modules/
+/tests/zero_network/report/
+/tests/zero_network/results/
+
+# Python
+__pycache__/

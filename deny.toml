@@ -1,0 +1,118 @@
+# Política de dependências Rust (requisitos §13.1, RNF10 e SEG12), aplicada
+# pelo cargo-deny na CI. Qualquer violação faz a CI falhar e bloqueia o merge.
+#
+#   cargo deny --manifest-path core/Cargo.toml check
+#   cargo deny --manifest-path scripts/icons/Cargo.toml check
+#
+# Seções: advisories (falhas de segurança conhecidas, base RustSec),
+# licenses (só permissivas), bans (nada de cliente de rede) e sources
+# (só crates.io).
+
+[graph]
+# Confere as dependências de todas as plataformas-alvo, não só da máquina
+# que roda a verificação: desktop e web (WASM).
+targets = [
+  "x86_64-pc-windows-msvc",
+  "aarch64-pc-windows-msvc",
+  "x86_64-apple-darwin",
+  "aarch64-apple-darwin",
+  "x86_64-unknown-linux-gnu",
+  "aarch64-unknown-linux-gnu",
+  "wasm32-unknown-unknown",
+]
+all-features = false
+
+[advisories]
+# Falha em vulnerabilidades e em crates retirados (yanked).
+# Crates sem manutenção ou com aviso informativo também precisam de decisão:
+# entram em `ignore` com o motivo, nunca em silêncio.
+yanked = "deny"
+unmaintained = "all"
+ignore = []
+
+[licenses]
+# §13.1: licenças aceitas. GPL, AGPL e LGPL (todas as versões) não estão na
+# lista e, portanto, barram, mesmo como opção dentro de um "OR".
+allow = [
+  "MIT",
+  "Apache-2.0",
+  "Apache-2.0 WITH LLVM-exception",
+  "BSD-2-Clause",
+  "BSD-3-Clause",
+  "Zlib",
+  "ISC",
+  "Unicode-3.0",
+  "Unicode-DFS-2016",
+  "BSL-1.0",
+]
+# Uma licença precisa ser reconhecida com alta confiança para valer.
+confidence-threshold = 0.93
+# A lista vale para os dois crates verificados; nem toda licença aparece em
+# ambos, e isso não é problema.
+unused-allowed-license = "allow"
+# MPL-2.0 só seria aceita para fontes ou dados não linkados (§13.1); nenhum
+# crate entra nessa condição hoje, então ela fica de fora.
+exceptions = []
+
+[licenses.private]
+# Os crates do próprio projeto (publish = false) não são publicados e já
+# declaram MIT OR Apache-2.0.
+ignore = true
+
+[bans]
+multiple-versions = "allow"
+wildcards = "deny"
+allow-wildcard-paths = true
+
+# RNF10 · zero rede: clientes HTTP, WebSocket, TLS e telemetria não podem
+# entrar no núcleo, nem indiretamente.
+deny = [
+  { crate = "reqwest", reason = "cliente HTTP (RNF10)" },
+  { crate = "hyper", reason = "cliente/servidor HTTP (RNF10)" },
+  { crate = "hyper-util", reason = "HTTP (RNF10)" },
+  { crate = "h2", reason = "HTTP/2 (RNF10)" },
+  { crate = "h3", reason = "HTTP/3 (RNF10)" },
+  { crate = "quinn", reason = "QUIC (RNF10)" },
+  { crate = "ureq", reason = "cliente HTTP (RNF10)" },
+  { crate = "isahc", reason = "cliente HTTP (RNF10)" },
+  { crate = "attohttpc", reason = "cliente HTTP (RNF10)" },
+  { crate = "minreq", reason = "cliente HTTP (RNF10)" },
+  { crate = "surf", reason = "cliente HTTP (RNF10)" },
+  { crate = "curl", reason = "cliente HTTP (RNF10)" },
+  { crate = "curl-sys", reason = "cliente HTTP (RNF10)" },
+  { crate = "gloo-net", reason = "fetch/WebSocket na web (RNF10)" },
+  { crate = "tungstenite", reason = "WebSocket (RNF10)" },
+  { crate = "tokio-tungstenite", reason = "WebSocket (RNF10)" },
+  { crate = "native-tls", reason = "TLS, só faz sentido com rede (RNF10)" },
+  { crate = "openssl", reason = "TLS, só faz sentido com rede (RNF10)" },
+  { crate = "rustls", reason = "TLS, só faz sentido com rede (RNF10)" },
+  { crate = "sentry", reason = "telemetria (RNF10)" },
+  { crate = "opentelemetry", reason = "telemetria (RNF10)" },
+]
+
+# Crates que existem no núcleo por outros motivos, mas não podem ligar a parte
+# de rede. O tokio vem do flutter_rust_bridge (pool de tarefas); o web-sys é a
+# ponte com o navegador, usada para Workers e Blobs.
+[[bans.features]]
+crate = "tokio"
+deny = ["net", "full"]
+
+[[bans.features]]
+crate = "web-sys"
+deny = [
+  "Request",
+  "RequestInit",
+  "Response",
+  "Headers",
+  "WebSocket",
+  "XmlHttpRequest",
+  "EventSource",
+  "RtcPeerConnection",
+  "WebTransport",
+  "Navigator",
+]
+
+[sources]
+# Só crates.io. Nada de dependência direto de repositório git.
+unknown-registry = "deny"
+unknown-git = "deny"
