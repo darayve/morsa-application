@@ -1,0 +1,24 @@
+[package]
+name = "morsa_core"
+version = "0.1.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+description = "Núcleo de processamento de arquivos do Morsa: recebe bytes e opções, devolve bytes."
+publish = false
+
+[lib]
+# cdylib: biblioteca dinâmica que o app desktop carrega (e que vira .wasm na web).
+# staticlib: usada pelo cargokit em algumas plataformas (macOS).
+# rlib: permite que os testes em tests/ e os exemplos usem o crate normalmente.
+crate-type = ["cdylib", "staticlib", "rlib"]
+
+[dependencies]
+# Ponte com o Flutter. A versão precisa ser idêntica à do pacote Dart.
+flutter_rust_bridge = "=2.13.0"
+# Decodificação e codificação de imagens. Só os formatos em uso são ligados,
+# o que mantém o binário pequeno; os demais entram no Marco 3.
+image = { version = "0.25.10", default-features = false, features = ["png", "jpeg"] }
+
+[lints.rust]
+# O FRB usa este cfg no código gerado.
+unexpected_cfgs = { level = "warn", check-cfg = ['cfg(frb_expand)'] }
