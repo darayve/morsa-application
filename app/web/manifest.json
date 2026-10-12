@@ -1,12 +1,11 @@
 {
-    "name": "morsa",
-    "short_name": "morsa",
+    "name": "Morsa",
+    "short_name": "Morsa",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "Utilitários para arquivos, 100% offline.",
-    "orientation": "portrait-primary",
+    "background_color": "#fafaf8",
+    "theme_color": "#121212",
+    "description": "Utilitários para arquivos, 100% offline. Nenhum arquivo sai do seu computador.",
     "prefer_related_applications": false,
     "icons": [
         {

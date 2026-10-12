@@ -944,7 +944,7 @@ O principal vetor é o **arquivo malicioso ou malformado** que o usuário recebe
 | SEG10 | Arquivos extraídos não recebem permissão de execução (RF20). |
 | SEG11 | Senhas: só em memória, zeradas após uso quando possível (`zeroize`), nunca logadas (RN13). |
 | SEG12 | Dependências auditadas a cada build com `cargo audit` e `cargo deny check advisories`; vulnerabilidade conhecida em dependência bloqueia a versão. |
-| SEG13 | Web: CSP restritiva (RNF10), sem `eval`, sem conteúdo de terceiros, servida com `Cross-Origin-Opener-Policy` e `Cross-Origin-Embedder-Policy` quando necessário para os workers **[P]**. |
+| SEG13 | Web: CSP restritiva (RNF10), sem `eval` (exceção registrada em DC13), sem conteúdo de terceiros, servida com `Cross-Origin-Opener-Policy` e `Cross-Origin-Embedder-Policy` quando necessário para os workers **[P]**. |
 | SEG14 | *Fuzzing* contínuo (`cargo-fuzz`) para os decodificadores de entrada: detecção de formato, imagens, SVG, PDF e ZIP. Cada falha encontrada vira caso no corpus de regressão. |
 | SEG15 | Política de divulgação responsável publicada em `SECURITY.md`, com canal privado de contato. |
 
@@ -1318,6 +1318,7 @@ A build web do Flutter não funciona aberta via `file://`. O README **DEVE** doc
 | DC10 | Nome: Morsa | Bancada, Crisol, Casulo e outros |
 | DC11 | Web distribuída como PWA estática; desktop é o produto principal | Abrir `index.html` via `file://` (não funciona) |
 | DC12 | Sem atualização automática pela rede | Checagem de versão opcional |
+| DC13 | Desvio do SEG13: a CSP da web permite `'unsafe-eval'` em `script-src`, porque o `flutter_rust_bridge` avalia dois textos fixos da própria biblioteca (expor o módulo WASM e localizar o script dos workers). Nada vindo do usuário ou da rede é avaliado; `connect-src` e `default-src` continuam restritos à própria origem, então o RNF10 não muda. Revisitar a cada atualização do FRB (2026-10-12, Marco 1) | Interceptar as duas chamadas com um script próprio (frágil); ponte web própria sem FRB (mais trabalho) |
 
 ### 20.2 Pendências
 

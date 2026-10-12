@@ -27,31 +27,39 @@ class MorsaStatusBar extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Text('●', style: style.copyWith(color: t.ok, fontSize: 9)),
-          const SizedBox(width: 6),
-          Text(
-            l.statusOffline,
-            style: style.copyWith(color: t.ink, fontWeight: FontWeight.w500),
-          ),
-          Flexible(
-            child: Text(
-              ' · ${l.statusNoNetwork} · ${l.statusLocal}',
-              style: style,
-              overflow: TextOverflow.ellipsis,
+          // Esquerda: a afirmação fixa ocupa o espaço livre e corta com "…"
+          // em janelas estreitas, sem empurrar a versão para fora.
+          Expanded(
+            child: Row(
+              children: [
+                Text('●', style: style.copyWith(color: t.ok, fontSize: 9)),
+                const SizedBox(width: 6),
+                Text(
+                  l.statusOffline,
+                  style: style.copyWith(
+                    color: t.ink,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                Flexible(
+                  child: Text(
+                    ' · ${l.statusNoNetwork} · ${l.statusLocal}',
+                    style: style,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
             ),
           ),
-          Expanded(
-            child: progress == null
-                ? const SizedBox.shrink()
-                : Semantics(
-                    liveRegion: true,
-                    child: Text(
-                      progress!,
-                      style: style.copyWith(color: t.run),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-          ),
+          if (progress != null)
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child: Semantics(
+                liveRegion: true,
+                child: Text(progress!, style: style.copyWith(color: t.run)),
+              ),
+            ),
+          // Direita: nome e versão do app.
           Text(l.statusVersion(kAppVersion), style: style),
         ],
       ),

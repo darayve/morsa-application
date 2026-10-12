@@ -16,4 +16,5 @@ pub mod image;
 pub mod limits;
 
 // Código gerado pelo flutter_rust_bridge (não editar à mão).
+#[rustfmt::skip]
 mod frb_generated;
