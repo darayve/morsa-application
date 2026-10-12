@@ -1,0 +1,33 @@
+# Fuzzing do núcleo (requisitos SEG14 e §15.1), com cargo-fuzz + libFuzzer.
+# Precisa do Rust nightly e roda no Linux ou no macOS:
+#
+#   cd core
+#   cargo +nightly fuzz run convert_image -- -max_total_time=300
+#
+# Este crate só existe para testes: não entra no app nem no WASM.
+[package]
+name = "morsa_core_fuzz"
+version = "0.0.0"
+edition = "2024"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[package.metadata]
+cargo-fuzz = true
+
+[dependencies]
+libfuzzer-sys = "0.4"
+# Mesma versão e mesmos formatos do núcleo; usado só para ler as dimensões.
+image = { version = "0.25.10", default-features = false, features = ["png", "jpeg"] }
+morsa_core = { path = ".." }
+
+[[bin]]
+name = "convert_image"
+path = "fuzz_targets/convert_image.rs"
+test = false
+doc = false
+bench = false
+
+# Isolado do crate principal.
+[workspace]
+members = ["."]
