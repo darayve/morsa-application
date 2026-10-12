@@ -303,7 +303,7 @@ jobs:
         run: |
           set -o pipefail
           mkdir -p fuzz/corpus/convert_image
-          cargo +nightly fuzz run convert_image fuzz/corpus/convert_image ../corpus/image/png ../corpus/image/jpg -- \
+          cargo +nightly fuzz run --target x86_64-unknown-linux-gnu convert_image fuzz/corpus/convert_image ../corpus/image/png ../corpus/image/jpg -- \
             -max_total_time=300 -rss_limit_mb=4096 -max_len=1048576 2>&1 | tee fuzz.log
       - name: Resumo da falha (anotação pública)
         if: failure()
