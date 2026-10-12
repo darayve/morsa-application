@@ -377,6 +377,7 @@ class _Img01ScreenState extends State<Img01Screen> {
               label: l.qualityLabel,
               errorText: qualityError,
               width: 72,
+              numeric: true,
               keyboardType: TextInputType.number,
               inputFormatters: [
                 FilteringTextInputFormatter.digitsOnly,

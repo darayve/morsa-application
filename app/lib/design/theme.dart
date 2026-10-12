@@ -64,11 +64,11 @@ ThemeData buildTheme(Brightness brightness) {
         color: t.ink,
         height: 1.15,
       ),
-      // Rótulo de seção: Plex Condensed 12 / 600, caixa alta.
+      // Rótulo de seção: Plex Condensed 12 / 700, caixa alta (§9.3).
       labelMedium: TextStyle(
         fontFamily: kTitle,
         fontSize: 12,
-        fontWeight: FontWeight.w600,
+        fontWeight: FontWeight.w700,
         letterSpacing: 0.9,
         color: t.ink,
       ),

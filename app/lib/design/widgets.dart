@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'focus_ring.dart';
 import 'theme.dart';
 
 /// Altura padrão de controles (§9.5).
 const kControlHeight = 28.0;
 
-/// Botão do sistema visual: cantos retos, 28 px, anel de foco azul de 2 px
-/// com respiro de 2 px por fora. Primário é tinta cheia; secundário é contorno.
+/// Botão do sistema visual: cantos retos, 28 px, anel de foco azul por fora.
+/// Primário é tinta cheia; secundário é contorno. Hover é tom de papel,
+/// nunca cor (DOC-01 §5).
 class MorsaButton extends StatefulWidget {
   const MorsaButton({
     super.key,
@@ -16,6 +18,7 @@ class MorsaButton extends StatefulWidget {
     this.primary = false,
     this.shortcut,
     this.autofocus = false,
+    this.focusNode,
   });
 
   final String label;
@@ -25,6 +28,7 @@ class MorsaButton extends StatefulWidget {
   /// Atalho exibido no próprio controle (ex.: `Ctrl O`).
   final String? shortcut;
   final bool autofocus;
+  final FocusNode? focusNode;
 
   @override
   State<MorsaButton> createState() => _MorsaButtonState();
@@ -62,69 +66,170 @@ class _MorsaButtonState extends State<MorsaButton> {
     return Semantics(
       button: true,
       enabled: _enabled,
+      focusable: _enabled,
+      focused: _focus,
       label: widget.label,
+      // Leitores de tela (e o teste web) acionam o botão por aqui.
+      onTap: widget.onPressed,
       excludeSemantics: true,
-      child: FocusableActionDetector(
+      child: _Pressable(
         enabled: _enabled,
         autofocus: widget.autofocus,
-        mouseCursor: _enabled
-            ? SystemMouseCursors.click
-            : SystemMouseCursors.basic,
-        onShowHoverHighlight: (v) => setState(() => _hover = v),
-        onShowFocusHighlight: (v) => setState(() => _focus = v),
-        shortcuts: const {
-          SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
-          SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
-        },
-        actions: {
-          ActivateIntent: CallbackAction<ActivateIntent>(
-            onInvoke: (_) => widget.onPressed?.call(),
-          ),
-        },
-        child: GestureDetector(
-          onTapDown: _enabled ? (_) => setState(() => _pressed = true) : null,
-          onTapCancel: () => setState(() => _pressed = false),
-          onTapUp: _enabled
-              ? (_) {
-                  setState(() => _pressed = false);
-                  widget.onPressed?.call();
-                }
-              : null,
+        focusNode: widget.focusNode,
+        onPressed: widget.onPressed,
+        onHover: (v) => setState(() => _hover = v),
+        onFocus: (v) => setState(() => _focus = v),
+        onPressedChange: (v) => setState(() => _pressed = v),
+        child: FocusRing(
+          visible: _focus,
           child: Container(
-            // Respiro de 2 px + anel de 2 px por fora do controle.
-            padding: const EdgeInsets.all(2),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: _focus ? t.focus : Colors.transparent,
-                width: 2,
-              ),
+            height: kControlHeight,
+            padding: EdgeInsets.only(
+              left: 12,
+              right: widget.shortcut == null ? 12 : 6,
             ),
-            child: Container(
-              height: kControlHeight,
-              padding: EdgeInsets.only(
-                left: 12,
-                right: widget.shortcut == null ? 12 : 6,
-              ),
-              decoration: BoxDecoration(
-                color: bg,
-                border: Border.all(color: border),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(widget.label, style: text),
-                  if (widget.shortcut != null) ...[
-                    const SizedBox(width: 10),
-                    ShortcutChip(
-                      widget.shortcut!,
-                      inverted: widget.primary && _enabled,
-                    ),
-                  ],
+            decoration: BoxDecoration(
+              color: bg,
+              border: Border.all(color: border),
+            ),
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(widget.label, style: text),
+                if (widget.shortcut != null) ...[
+                  const SizedBox(width: 10),
+                  ShortcutChip(
+                    widget.shortcut!,
+                    inverted: widget.primary && _enabled,
+                  ),
                 ],
-              ),
+              ],
             ),
           ),
         ),
+      ),
+    );
+  }
+}
+
+/// Link de texto sublinhado (DOC-01 §5): hover engrossa o sublinhado,
+/// pressionado fica em `ink2`, foco é o anel azul.
+class MorsaLink extends StatefulWidget {
+  const MorsaLink({super.key, required this.label, required this.onPressed});
+
+  final String label;
+  final VoidCallback? onPressed;
+
+  @override
+  State<MorsaLink> createState() => _MorsaLinkState();
+}
+
+class _MorsaLinkState extends State<MorsaLink> {
+  bool _hover = false;
+  bool _focus = false;
+  bool _pressed = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final t = context.tokens;
+    final enabled = widget.onPressed != null;
+    final color = !enabled ? t.dis : (_pressed ? t.ink2 : t.ink);
+    return Semantics(
+      link: true,
+      enabled: enabled,
+      focusable: enabled,
+      focused: _focus,
+      label: widget.label,
+      onTap: widget.onPressed,
+      excludeSemantics: true,
+      child: _Pressable(
+        enabled: enabled,
+        onPressed: widget.onPressed,
+        onHover: (v) => setState(() => _hover = v),
+        onFocus: (v) => setState(() => _focus = v),
+        onPressedChange: (v) => setState(() => _pressed = v),
+        child: FocusRing(
+          visible: _focus,
+          child: Container(
+            // O Flutter não tem `text-underline-offset`; o sublinhado é uma
+            // régua 3 px abaixo da linha de base.
+            padding: const EdgeInsets.only(bottom: 1),
+            decoration: BoxDecoration(
+              border: Border(
+                bottom: BorderSide(
+                  color: color,
+                  width: enabled && (_hover || _pressed) ? 2 : 1,
+                ),
+              ),
+            ),
+            child: Text(
+              widget.label,
+              style: Theme.of(context).textTheme.bodyMedium!
+                  .copyWith(color: color),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+/// Clique, Enter e Espaço acionam; informa hover, foco e pressão para o
+/// componente desenhar seus estados. Base de botões, links e afins.
+class _Pressable extends StatelessWidget {
+  const _Pressable({
+    required this.enabled,
+    required this.onPressed,
+    required this.onHover,
+    required this.onFocus,
+    required this.onPressedChange,
+    required this.child,
+    this.autofocus = false,
+    this.focusNode,
+  });
+
+  final bool enabled;
+  final VoidCallback? onPressed;
+  final ValueChanged<bool> onHover;
+  final ValueChanged<bool> onFocus;
+  final ValueChanged<bool> onPressedChange;
+  final bool autofocus;
+  final FocusNode? focusNode;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    return FocusableActionDetector(
+      enabled: enabled,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      mouseCursor: enabled
+          ? SystemMouseCursors.click
+          : SystemMouseCursors.basic,
+      onShowHoverHighlight: onHover,
+      onShowFocusHighlight: onFocus,
+      shortcuts: const {
+        SingleActivator(LogicalKeyboardKey.enter): ActivateIntent(),
+        SingleActivator(LogicalKeyboardKey.numpadEnter): ActivateIntent(),
+        SingleActivator(LogicalKeyboardKey.space): ActivateIntent(),
+      },
+      actions: {
+        ActivateIntent: CallbackAction<ActivateIntent>(
+          onInvoke: (_) => onPressed?.call(),
+        ),
+      },
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+        excludeFromSemantics: true,
+        onTapDown: enabled ? (_) => onPressedChange(true) : null,
+        onTapCancel: enabled ? () => onPressedChange(false) : null,
+        onTapUp: enabled
+            ? (_) {
+                onPressedChange(false);
+                onPressed?.call();
+              }
+            : null,
+        child: child,
       ),
     );
   }
@@ -172,7 +277,7 @@ class SectionLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     return Container(
-      padding: const EdgeInsets.only(bottom: 6),
+      height: kControlHeight,
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: t.ink, width: 2)),
       ),
@@ -194,12 +299,19 @@ class SectionLabel extends StatelessWidget {
   }
 }
 
-/// Linha de ficha rótulo → valor, 26 px, com régua fraca embaixo.
+/// Linha de ficha rótulo → valor: 26 px, rótulo de 130 px em `ink2`, valor
+/// em 500, régua fraca embaixo. A última linha da ficha usa régua de tinta.
 class FichaRow extends StatelessWidget {
-  const FichaRow({super.key, required this.label, required this.value});
+  const FichaRow({
+    super.key,
+    required this.label,
+    required this.value,
+    this.last = false,
+  });
 
   final String label;
   final Widget value;
+  final bool last;
 
   @override
   Widget build(BuildContext context) {
@@ -209,17 +321,19 @@ class FichaRow extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: 26),
       padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
-        border: Border(bottom: BorderSide(color: t.weak)),
+        border: Border(bottom: BorderSide(color: last ? t.ink : t.weak)),
       ),
       child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(
-            width: 110,
+            width: 130,
             child: Text(label, style: style.copyWith(color: t.ink2)),
           ),
           Expanded(
-            child: DefaultTextStyle(style: style, child: value),
+            child: DefaultTextStyle(
+              style: style.copyWith(fontWeight: FontWeight.w500),
+              child: value,
+            ),
           ),
         ],
       ),
@@ -227,8 +341,12 @@ class FichaRow extends StatelessWidget {
   }
 }
 
-/// Campo de texto de 28 px, cantos retos; borda vermelha e mensagem no erro.
-class MorsaTextField extends StatelessWidget {
+/// Campo de texto de 28 px, cantos retos (DOC-01 §5).
+///
+/// Estados: normal (borda de controle), foco (anel azul por fora), erro
+/// (borda de 2 px em `fail` e mensagem "✕ …" embaixo) e desabilitado.
+/// Campos numéricos alinham à direita, com a unidade na mesma caixa (§9.3).
+class MorsaTextField extends StatefulWidget {
   const MorsaTextField({
     super.key,
     required this.controller,
@@ -236,62 +354,117 @@ class MorsaTextField extends StatelessWidget {
     this.errorText,
     this.width = 96,
     this.suffix,
+    this.numeric = false,
+    this.enabled = true,
     this.keyboardType,
     this.inputFormatters,
     this.onChanged,
   });
 
   final TextEditingController controller;
+
+  /// Nome do campo para leitores de tela.
   final String label;
   final String? errorText;
   final double width;
+
+  /// Unidade exibida dentro da caixa, à direita (ex.: `DPI`).
   final String? suffix;
+  final bool numeric;
+  final bool enabled;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final ValueChanged<String>? onChanged;
 
   @override
+  State<MorsaTextField> createState() => _MorsaTextFieldState();
+}
+
+class _MorsaTextFieldState extends State<MorsaTextField> {
+  final _focus = FocusNode();
+
+  @override
+  void initState() {
+    super.initState();
+    _focus.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    _focus.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final t = context.tokens;
     final body = Theme.of(context).textTheme.bodyMedium!;
-    OutlineInputBorder border(Color c, [double w = 1]) => OutlineInputBorder(
-      borderRadius: BorderRadius.zero,
-      borderSide: BorderSide(color: c, width: w),
-    );
+    final error = widget.errorText;
+    final enabled = widget.enabled;
+    final border = !enabled
+        ? Border.all(color: t.dis)
+        : error != null
+        ? Border.all(color: t.fail, width: 2)
+        : Border.all(color: t.ctrl);
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
       children: [
-        SizedBox(
-          width: width,
-          height: kControlHeight,
-          child: TextField(
-            controller: controller,
-            style: body,
-            keyboardType: keyboardType,
-            inputFormatters: inputFormatters,
-            onChanged: onChanged,
-            textAlign: TextAlign.right, // números à direita (§9.3)
-            decoration: InputDecoration(
-              isDense: true,
-              contentPadding: const EdgeInsets.symmetric(
-                horizontal: 8,
-                vertical: 6,
-              ),
-              suffixText: suffix,
-              suffixStyle: body.copyWith(color: t.ink2),
-              enabledBorder: border(errorText != null ? t.fail : t.ctrl),
-              focusedBorder: border(errorText != null ? t.fail : t.focus, 2),
-              semanticCounterText: label,
+        FocusRing(
+          visible: _focus.hasFocus,
+          child: Container(
+            width: widget.width,
+            height: kControlHeight,
+            padding: const EdgeInsets.symmetric(horizontal: 8),
+            decoration: BoxDecoration(border: border),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Semantics(
+                    label: widget.label,
+                    child: TextField(
+                      controller: widget.controller,
+                      focusNode: _focus,
+                      enabled: enabled,
+                      style: body.copyWith(color: enabled ? t.ink : t.dis),
+                      keyboardType: widget.keyboardType,
+                      inputFormatters: widget.inputFormatters,
+                      onChanged: widget.onChanged,
+                      textAlign: widget.numeric
+                          ? TextAlign.right
+                          : TextAlign.start,
+                      decoration: const InputDecoration(
+                        isCollapsed: true,
+                        border: InputBorder.none,
+                      ),
+                    ),
+                  ),
+                ),
+                if (widget.suffix != null) ...[
+                  const SizedBox(width: 6),
+                  Text(
+                    widget.suffix!,
+                    style: TextStyle(fontSize: 11, color: t.ink2),
+                  ),
+                ],
+              ],
             ),
           ),
         ),
-        if (errorText != null)
+        if (error != null)
           Padding(
             padding: const EdgeInsets.only(top: 4),
-            child: Text(
-              '✕ ${errorText!}',
-              style: Theme.of(context).textTheme.bodySmall!
-                  .copyWith(color: t.fail),
+            child: Semantics(
+              liveRegion: true,
+              child: Text(
+                '✕ $error',
+                style: TextStyle(
+                  fontSize: 11,
+                  fontWeight: FontWeight.w500,
+                  color: t.fail,
+                ),
+              ),
             ),
           ),
       ],
