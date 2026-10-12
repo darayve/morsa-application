@@ -17,8 +17,24 @@ import 'package:morsa/storage/output_name.dart';
 import 'package:morsa/storage/output_writer.dart';
 import 'package:path/path.dart' as p;
 
-File corpus(String relative) =>
-    File(p.join(Directory.current.path, '..', 'corpus', relative));
+/// Arquivo do corpus do repositório. A pasta atual do app muda conforme o
+/// sistema (no macOS ela não é a do projeto), então a busca sobe a partir
+/// dela e do executável até achar `corpus/SOURCES.md`.
+File corpus(String relative) {
+  for (final start in [Directory.current.path, Platform.resolvedExecutable]) {
+    var dir = Directory(start).absolute;
+    while (true) {
+      if (File(p.join(dir.path, 'corpus', 'SOURCES.md')).existsSync()) {
+        return File(p.join(dir.path, 'corpus', relative));
+      }
+      if (dir.parent.path == dir.path) break;
+      dir = dir.parent;
+    }
+  }
+  throw StateError(
+    'Pasta corpus/ não encontrada a partir de ${Directory.current.path}',
+  );
+}
 
 void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();

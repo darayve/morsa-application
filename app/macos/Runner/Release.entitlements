@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Sem App Sandbox (requisitos §20.1, DC14): o Morsa grava em Documentos/Morsa
+  e na pasta da origem (RF10), o que o sandbox não permite. A distribuição é
+  por DMG com Developer ID e notarização (§16.1), que não exige sandbox.
+  Nenhuma permissão de rede é pedida.
+-->
 <plist version="1.0">
 <dict>
 	<key>com.apple.security.app-sandbox</key>
-	<true/>
+	<false/>
 </dict>
 </plist>
