@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap">
+<style>
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Light.ttf") format("truetype");font-weight:300}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Regular.ttf") format("truetype");font-weight:400}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Medium.ttf") format("truetype");font-weight:500}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Bold.ttf") format("truetype");font-weight:700}
+:root{--paper:#fafaf8;--ink:#121212;--ink2:#5d5d58;--weak:#dcdcd7;--weak2:#cfcfca;--ctrl:#121212;--sunk:#f0f0ec;--sel:#e6e6e1;--inkH:#3a3a37;--inkP:#000000;--dis:#a3a39e;--ok:oklch(0.45 0.12 150);--run:oklch(0.45 0.15 255);--fail:oklch(0.48 0.18 28);--focus:oklch(0.50 0.16 255);--img:oklch(0.62 0.13 235);--pdf:oklch(0.60 0.16 30);--zip:oklch(0.74 0.13 85);--fut:#8f8f8a;--new:oklch(0.62 0.13 310)}
+[data-theme="dark"]{--paper:#121211;--ink:#e8e8e4;--ink2:#a2a29c;--weak:#3d3d3a;--weak2:#4a4a46;--ctrl:#6a6a65;--sunk:#1c1c1a;--sel:#262624;--inkH:#ffffff;--inkP:#c9c9c4;--dis:#5f5f5a;--ok:oklch(0.74 0.13 150);--run:oklch(0.74 0.12 255);--fail:oklch(0.72 0.15 28);--focus:oklch(0.72 0.14 255)}
+body{margin:0;background:#fafaf8}
+a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background:var(--paper);color:var(--ink);font-family:'Ioskeley Mono',ui-monospace,monospace;font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0;font-size:13px;line-height:1.5">
+<div style="max-width:1200px;margin:0 auto;padding:32px 32px 64px;display:flex;flex-direction:column;gap:48px">
+
+<header style="display:flex;flex-direction:column;gap:0">
+  <div style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding-bottom:6px;border-bottom:2px solid var(--ink)">
+    <span>Conversor · Modelo CV-01 · Bancada</span><span>Folha DOC-01 · Sistema visual</span>
+  </div>
+  <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,320px);gap:32px;padding-top:20px;align-items:end">
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <span style="font-size:11px;color:var(--ink2)">Documentação técnica · Interface</span>
+      <h1 style="margin:0;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:34px;font-weight:700;line-height:1.1">Sistema visual</h1>
+      <p style="margin:0;max-width:64ch;color:var(--ink2);text-wrap:pretty">Tipografia, tinta, réguas, componentes e a regra de codificação do catálogo. Todas as telas da bancada derivam desta folha.</p>
+    </div>
+    <div style="display:grid;grid-template-columns:110px minmax(0,1fr);font-size:12px;border-top:1px solid var(--ink)">
+      <span style="color:var(--ink2);padding:5px 0;border-bottom:1px solid var(--weak)">Documento</span><span style="padding:5px 0;border-bottom:1px solid var(--weak)">DOC-01</span>
+      <span style="color:var(--ink2);padding:5px 0;border-bottom:1px solid var(--weak)">Revisão</span><span style="padding:5px 0;border-bottom:1px solid var(--weak)">B · Plex Sans Condensed, vocabulário comum</span>
+      <span style="color:var(--ink2);padding:5px 0;border-bottom:1px solid var(--weak)">Data</span><span style="padding:5px 0;border-bottom:1px solid var(--weak)">2026-10-03</span>
+      <span style="color:var(--ink2);padding:5px 0;border-bottom:1px solid var(--ink)">Situação</span><span style="padding:5px 0;border-bottom:1px solid var(--ink);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--run)"></span><span style="color:var(--run);font-weight:500">Em revisão</span></span>
+    </div>
+  </div>
+</header>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:6px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase"><span>§1</span><span>Tipografia</span><span style="margin-left:auto;font-weight:300;letter-spacing:0;text-transform:none;color:var(--ink2)">Títulos e seções: IBM Plex Sans Condensed · resto: Ioskeley Mono NL · ambas OFL, empacotadas</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1px;background:var(--weak);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink)">
+    <div style="padding:16px;background:var(--paper);display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;color:var(--ink2)">300 · Light</span><span style="font-size:24px;font-weight:300">Aa 0143</span><span style="font-size:11px;color:var(--ink2)">Só metadados ≥ 11 px</span></div>
+    <div style="padding:16px;background:var(--paper);display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;color:var(--ink2)">400 · Regular</span><span style="font-size:24px;font-weight:400">Aa 0143</span><span style="font-size:11px;color:var(--ink2)">Corpo, células, campos</span></div>
+    <div style="padding:16px;background:var(--paper);display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;color:var(--ink2)">500 · Medium</span><span style="font-size:24px;font-weight:500">Aa 0143</span><span style="font-size:11px;color:var(--ink2)">Valores, botões, ativos</span></div>
+    <div style="padding:16px;background:var(--paper);display:flex;flex-direction:column;gap:6px"><span style="font-size:11px;color:var(--ink2)">700 · Bold</span><span style="font-size:24px;font-weight:700">Aa 0143</span><span style="font-size:11px;color:var(--ink2)">Títulos, rótulos de seção</span></div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:32px">
+    <div style="display:flex;flex-direction:column">
+      <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 110px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span>Papel</span><span>Amostra</span><span style="text-align:right">Tam / Peso</span></div>
+      <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 110px;min-height:44px;align-items:center;border-bottom:1px solid var(--weak)"><span style="color:var(--ink2);font-size:12px">Título de tela</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Converter imagens</span><span style="text-align:right;font-size:12px">Plex Cn 30 / 700</span></div>
+      <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 110px;min-height:36px;align-items:center;border-bottom:1px solid var(--weak)"><span style="color:var(--ink2);font-size:12px">Título de painel</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Opções de saída</span><span style="text-align:right;font-size:12px">Plex Cn 18 / 700</span></div>
+      <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 110px;height:28px;align-items:center;border-bottom:1px solid var(--weak)"><span style="color:var(--ink2);font-size:12px">Rótulo de seção</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Parâmetros</span><span style="text-align:right;font-size:12px">Plex Cn 12 / 600 · CA</span></div>
+      <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 110px;height:28px;align-items:center;border-bottom:1px solid var(--weak)"><span style="color:var(--ink2);font-size:12px">Corpo</span><span style="font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">fornecedor-lote-0012.tiff</span><span style="text-align:right;font-size:12px">13 / 400</span></div>
+      <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 110px;height:28px;align-items:center;border-bottom:1px solid var(--weak)"><span style="color:var(--ink2);font-size:12px">Ênfase / botão</span><span style="font-size:13px;font-weight:500">Converter 12 arquivos</span><span style="text-align:right;font-size:12px">13 / 500</span></div>
+      <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 110px;height:28px;align-items:center;border-bottom:1px solid var(--weak)"><span style="color:var(--ink2);font-size:12px">Ficha / tabela · mono NL</span><span style="font-size:12px">Rede · sem acesso à rede</span><span style="text-align:right;font-size:12px">12 / 400</span></div>
+      <div style="display:grid;grid-template-columns:150px minmax(0,1fr) 110px;height:28px;align-items:center;border-bottom:1px solid var(--ink)"><span style="color:var(--ink2);font-size:12px">Metadado</span><span style="font-size:11px;font-weight:300;color:var(--ink2)">2026-10-03 14:22 · 3,2 s</span><span style="text-align:right;font-size:12px">11 / 300</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Colunas numéricas</div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>capa.png</span><span>1 204,3 KB</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>logo.ico</span><span>88,0 KB</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>planta-B.tiff</span><span>12 940,1 KB</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;height:28px;align-items:center;border-top:2px solid var(--ink);font-size:12px;font-weight:700"><span>Total · 3 itens</span><span>14 232,4 KB</span></div>
+      <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:12px 0 0;font-size:11px;color:var(--ink2);text-wrap:pretty">Nota — números sempre alinhados à direita, com espaço fino de milhar e vírgula decimal (pt-BR). Unidade na mesma célula, nunca em coluna separada.</p></sc-if>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:6px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase"><span>§2</span><span>Tinta e papel</span><span style="margin-left:auto;font-weight:300;letter-spacing:0;text-transform:none;color:var(--ink2)">Sem cor de marca</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:32px">
+    <div style="display:flex;flex-direction:column">
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span>Token</span><span>Claro</span><span>Escuro</span><span style="text-align:right">Contr.</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>Papel</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#fafaf8;border:1px solid #121212"></span>#fafaf8</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#121211;border:1px solid #6a6a65"></span>#121211</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>Tinta</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#121212;border:1px solid #121212"></span>#121212</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#e8e8e4;border:1px solid #6a6a65"></span>#e8e8e4</span><span style="text-align:right">≈18:1</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>Texto secundário</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#5d5d58;border:1px solid #121212"></span>#5d5d58</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#a2a29c;border:1px solid #6a6a65"></span>#a2a29c</span><span style="text-align:right">≈6,5:1</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>Régua forte</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#121212;border:1px solid #121212"></span>#121212</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#e8e8e4;border:1px solid #6a6a65"></span>#e8e8e4</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>Régua fraca</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#dcdcd7;border:1px solid #121212"></span>#dcdcd7</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#3d3d3a;border:1px solid #6a6a65"></span>#3d3d3a</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>Régua fraca 2 / pauta</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#cfcfca;border:1px solid #121212"></span>#cfcfca</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#4a4a46;border:1px solid #6a6a65"></span>#4a4a46</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>Borda de controle</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#121212;border:1px solid #121212"></span>#121212</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#6a6a65;border:1px solid #6a6a65"></span>#6a6a65</span><span style="text-align:right">≥3:1</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>Hover de linha</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#f0f0ec;border:1px solid #121212"></span>#f0f0ec</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#1c1c1a;border:1px solid #6a6a65"></span>#1c1c1a</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr) minmax(0,1fr) 64px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:12px"><span>Linha selecionada</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#e6e6e1;border:1px solid #121212"></span>#e6e6e1</span><span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;background:#262624;border:1px solid #6a6a65"></span>#262624</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:24px">
+      <div style="display:flex;flex-direction:column">
+        <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Etiquetas de categoria</div>
+        <div style="display:grid;grid-template-columns:20px 48px minmax(0,1fr) auto;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:12px;height:12px;background:var(--img)"></span><span style="font-weight:700">IMG</span><span>Imagens</span><span style="font-size:11px;color:var(--ink2)">L.62 C.13 H235</span></div>
+        <div style="display:grid;grid-template-columns:20px 48px minmax(0,1fr) auto;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:12px;height:12px;background:var(--pdf)"></span><span style="font-weight:700">PDF</span><span>Documentos PDF</span><span style="font-size:11px;color:var(--ink2)">L.60 C.16 H30</span></div>
+        <div style="display:grid;grid-template-columns:20px 48px minmax(0,1fr) auto;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:12px;height:12px;background:var(--zip)"></span><span style="font-weight:700">ZIP</span><span>Pacotes</span><span style="font-size:11px;color:var(--ink2)">L.74 C.13 H85</span></div>
+        <div style="display:grid;grid-template-columns:20px 48px minmax(0,1fr) auto;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:12px"><span style="width:12px;height:12px;background:var(--fut)"></span><span style="font-weight:700">—</span><span>Futuro / Em breve</span><span style="font-size:11px;color:var(--ink2)">#8f8f8a</span></div>
+      </div>
+      <div style="display:flex;flex-direction:column">
+        <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Estados · sempre com texto</div>
+        <div style="display:flex;align-items:center;gap:8px;height:28px;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--ok)"></span><span style="color:var(--ok);font-weight:500">Concluído</span></div>
+        <div style="display:flex;align-items:center;gap:8px;height:28px;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--run)"></span><span style="color:var(--run);font-weight:500">Executando</span></div>
+        <div style="display:flex;align-items:center;gap:8px;height:28px;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--fail)"></span><span style="color:var(--fail);font-weight:500">Falha</span></div>
+        <div style="display:flex;align-items:center;gap:8px;height:28px;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:6px;height:6px;border:1px solid var(--ink2)"></span><span style="color:var(--ink2)">Na fila</span></div>
+        <div style="display:flex;align-items:center;gap:8px;height:28px;border-bottom:1px solid var(--ink);font-size:12px"><span style="width:8px;height:8px;border:1px solid var(--focus);outline:2px solid var(--focus);outline-offset:2px;margin:0 2px"></span><span style="padding-left:4px">Anel de foco · 2 px, respiro 2 px</span></div>
+      </div>
+    </div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:80ch;font-size:11px;color:var(--ink2);text-wrap:pretty">Nota — etiquetas aparecem só como quadrados sólidos de 8–12 px ao lado do código; o texto ao lado é sempre tinta. Estados usam a cor também no texto porque todas as variantes passam 4,5:1 sobre o papel. No escuro, cada estado sobe para L≈0,72 mantendo a matiz.</p></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:6px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase"><span>§3</span><span>Réguas, grade e medidas</span><span style="margin-left:auto;font-weight:300;letter-spacing:0;text-transform:none;color:var(--ink2)">Base 4 px · linha 28 px</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:32px">
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <div style="display:grid;grid-template-columns:160px minmax(0,1fr);align-items:center;gap:16px;font-size:12px"><span style="height:2px;background:var(--ink)"></span><span><b style="font-weight:700">Régua forte 2 px</b> · sob cabeçalhos de seção, acima de totais</span></div>
+      <div style="display:grid;grid-template-columns:160px minmax(0,1fr);align-items:center;gap:16px;font-size:12px"><span style="height:1px;background:var(--ink)"></span><span><b style="font-weight:700">Régua de tabela 1 px</b> · topo/base de tabelas e fichas</span></div>
+      <div style="display:grid;grid-template-columns:160px minmax(0,1fr);align-items:center;gap:16px;font-size:12px"><span style="height:1px;background:var(--weak)"></span><span><b style="font-weight:700">Régua fraca 1 px</b> · entre linhas</span></div>
+      <div style="display:grid;grid-template-columns:160px minmax(0,1fr);align-items:center;gap:16px;font-size:12px"><span style="height:0;border-top:1px dashed var(--ink)"></span><span><b style="font-weight:700">Tracejada 1 px</b> · só áreas de soltar</span></div>
+      <div style="display:grid;grid-template-columns:160px minmax(0,1fr);align-items:center;gap:16px;font-size:12px"><span style="height:48px;border:1px solid var(--weak2);background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--weak) 23px 24px)"></span><span><b style="font-weight:700">Pauta 24 px</b> · fundo de formulário em áreas de soltar e miniaturas</span></div>
+      <div style="display:flex;align-items:flex-end;gap:12px;padding-top:8px">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:4px;height:4px;background:var(--ink)"></span><span style="font-size:11px;color:var(--ink2)">4</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:8px;height:8px;background:var(--ink)"></span><span style="font-size:11px;color:var(--ink2)">8</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:12px;height:12px;background:var(--ink)"></span><span style="font-size:11px;color:var(--ink2)">12</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:16px;height:16px;background:var(--ink)"></span><span style="font-size:11px;color:var(--ink2)">16</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:24px;height:24px;background:var(--ink)"></span><span style="font-size:11px;color:var(--ink2)">24</span></div>
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px"><span style="width:32px;height:32px;background:var(--ink)"></span><span style="font-size:11px;color:var(--ink2)">32</span></div>
+        <span style="font-size:11px;color:var(--ink2);padding-bottom:20px">Espaçamento · px</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:8px">
+      <div style="aspect-ratio:1200/760;border:1px solid var(--ink);display:grid;grid-template-rows:7% minmax(0,1fr) 5%;font-size:10px;color:var(--ink2)">
+        <div style="border-bottom:1px solid var(--ink);display:flex;align-items:center;padding:0 8px;color:var(--ink)">Barra de título · 28</div>
+        <div style="display:grid;grid-template-columns:21% minmax(0,1fr) 24%">
+          <div style="border-right:1px solid var(--ink);padding:6px 8px;display:flex;flex-direction:column;justify-content:space-between"><span style="color:var(--ink)">Índice · 250</span><span style="border-top:1px solid var(--weak);padding-top:4px">SYS-00</span></div>
+          <div style="padding:6px 8px;display:grid;grid-template-rows:auto minmax(0,1fr) auto;gap:4px"><span style="border-bottom:2px solid var(--ink);padding-bottom:4px;color:var(--ink)">Cabeçalho · caminho + OS</span><span style="background:repeating-linear-gradient(to bottom,transparent 0 9px,var(--weak) 9px 10px)"></span><span style="border-top:2px solid var(--ink);padding-top:4px">Totais</span></div>
+          <div style="border-left:1px solid var(--weak);padding:6px 8px;color:var(--ink)">Parâmetros · 280</div>
+        </div>
+        <div style="border-top:1px solid var(--ink);display:flex;align-items:center;padding:0 8px">Barra de status · 24</div>
+      </div>
+      <span style="font-size:11px;color:var(--ink2)">Janela 1200 × 760 · mínimo 1024 · sem sombra interna; uma sombra suave só na janela</span>
+    </div>
+  </div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:20px">
+  <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:6px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase"><span>§4</span><span>Regra de codificação</span><span style="margin-left:auto;font-weight:300;letter-spacing:0;text-transform:none;color:var(--ink2)">Catálogo · ordens · páginas</span></div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,380px),1fr));gap:32px">
+    <div style="display:flex;flex-direction:column;gap:20px">
+      <div style="display:flex;gap:2px;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:40px;font-weight:700;line-height:1;padding:0 4px 6px 0;border-bottom:2px solid var(--ink)">PDF</span><span style="font-size:11px;color:var(--ink2)">categoria · 3 letras</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:40px;font-weight:300;line-height:1;padding:0 4px 6px;color:var(--ink2)">-</span></div>
+        <div style="display:flex;flex-direction:column;gap:6px"><span style="font-size:40px;font-weight:700;line-height:1;padding:0 0 6px 4px;border-bottom:2px solid var(--ink)">03</span><span style="font-size:11px;color:var(--ink2)">sequência</span></div>
+      </div>
+      <div style="display:grid;grid-template-columns:110px minmax(0,1fr);font-size:12px;border-top:1px solid var(--ink)">
+        <span style="color:var(--ink2);padding:6px 0;border-bottom:1px solid var(--weak)">Ferramenta</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)"><b style="font-weight:500">CAT-NN</b> · NN começa em 01 e cresce na ordem de entrada. Nunca é reutilizado.</span>
+        <span style="color:var(--ink2);padding:6px 0;border-bottom:1px solid var(--weak)">-00</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)">Reservado ao próprio sistema (SYS-00).</span>
+        <span style="color:var(--ink2);padding:6px 0;border-bottom:1px solid var(--weak)">Em breve</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)">Recebe código na categoria-destino (PDF-06) e estado "Em breve". Etiqueta cinza até ser lançada.</span>
+        <span style="color:var(--ink2);padding:6px 0;border-bottom:1px solid var(--weak)">Nº da tarefa</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)"><b style="font-weight:500">Nº NNNN</b> · sequencial local. Só detalhe secundário (metadado 11 px), nunca título. Itens: 001, 002…</span>
+        <span style="color:var(--ink2);padding:6px 0;border-bottom:1px solid var(--ink)">Página</span><span style="padding:6px 0;border-bottom:1px solid var(--ink)"><b style="font-weight:500">Ref + nº</b> · A1, B6, C2. A ref. é a ordem de entrada do arquivo.</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column">
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span></span><span>Cód.</span><span>Ferramenta</span><span style="text-align:right">Estado</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--img)"></span><span style="font-weight:700">IMG-01</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Converter imagens</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--pdf)"></span><span style="font-weight:700">PDF-01</span><span>PDF → imagem</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--pdf)"></span><span style="font-weight:700">PDF-02</span><span>Imagens → PDF</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--pdf)"></span><span style="font-weight:700">PDF-03</span><span>Juntar PDFs</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--pdf)"></span><span style="font-weight:700">PDF-04</span><span>Dividir PDF</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--pdf)"></span><span style="font-weight:700">PDF-05</span><span>Reordenar páginas</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--fut)"></span><span style="font-weight:700;color:var(--ink2)">PDF-06</span><span style="color:var(--ink2)">Editar PDF</span><span style="text-align:right;color:var(--ink2)">Em breve</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--zip)"></span><span style="font-weight:700">ZIP-01</span><span>Ver conteúdo</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--zip)"></span><span style="font-weight:700">ZIP-02</span><span>Extrair</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--zip)"></span><span style="font-weight:700">ZIP-03</span><span>Criar ZIP</span><span style="text-align:right;color:var(--ink2)">—</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:8px;height:8px;background:var(--fut)"></span><span style="font-weight:700;color:var(--ink2)">CLR-01</span><span style="color:var(--ink2)">Seletor de cores</span><span style="text-align:right;color:var(--ink2)">Em breve</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border:1px dashed var(--ink);font-size:12px;margin:2px 0"><span style="width:8px;height:8px;background:var(--new);margin-left:4px"></span><span style="font-weight:700">TXT-01</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">Converter texto <span style="color:var(--ink2)">· exemplo de categoria nova</span></span><span style="text-align:right;padding-right:6px;font-weight:500">Nova</span></div>
+      <div style="display:grid;grid-template-columns:20px 64px minmax(0,1fr) 96px;height:28px;align-items:center;border-top:2px solid var(--ink);font-size:12px"><span></span><span style="font-weight:700">SYS-00</span><span>Configurações</span><span style="text-align:right;color:var(--ink2)">Fixo</span></div>
+    </div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:80ch;font-size:11px;color:var(--ink2);text-wrap:pretty">Nota — uma categoria nova entra como mais um bloco no índice (etiqueta + prefixo + ferramentas), sem mudar a estrutura. Sua etiqueta toma a próxima matiz livre com L e C próximos às existentes (TXT: H310). As categorias seguem a ordem de entrada; SYS-00 sempre no rodapé.</p></sc-if>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:24px">
+  <div style="display:flex;align-items:baseline;gap:12px;padding-bottom:6px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase"><span>§5</span><span>Componentes base</span><span style="margin-left:auto;font-weight:300;letter-spacing:0;text-transform:none;color:var(--ink2)">Passe o mouse e use Tab para testar</span></div>
+
+  <div style="display:flex;flex-direction:column;overflow-x:auto">
+    <div style="display:grid;grid-template-columns:120px repeat(5,minmax(132px,1fr));height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;min-width:800px"><span>Botões</span><span>Normal</span><span>Hover</span><span>Foco</span><span>Pressionado</span><span>Desabilitado</span></div>
+    <div style="display:grid;grid-template-columns:120px repeat(5,minmax(132px,1fr));min-height:52px;align-items:center;border-bottom:1px solid var(--weak);min-width:800px">
+      <span style="font-size:12px;color:var(--ink2)">Primário</span>
+      <span><button style="height:28px;padding:0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;cursor:pointer;border-radius:0" style-hover="background:var(--inkH);border-color:var(--inkH)" style-active="background:var(--inkP);border-color:var(--inkP)" style-focus="outline:2px solid var(--focus);outline-offset:2px">Converter</button></span>
+      <span><button style="height:28px;padding:0 12px;border:1px solid var(--inkH);background:var(--inkH);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">Converter</button></span>
+      <span><button style="height:28px;padding:0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;outline:2px solid var(--focus);outline-offset:2px;border-radius:0">Converter</button></span>
+      <span><button style="height:28px;padding:0 12px;border:1px solid var(--inkP);background:var(--inkP);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">Converter</button></span>
+      <span><button disabled="" style="height:28px;padding:0 12px;border:1px solid var(--dis);background:var(--dis);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">Converter</button></span>
+    </div>
+    <div style="display:grid;grid-template-columns:120px repeat(5,minmax(132px,1fr));min-height:52px;align-items:center;border-bottom:1px solid var(--weak);min-width:800px">
+      <span style="font-size:12px;color:var(--ink2)">Secundário</span>
+      <span><button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)" style-active="background:var(--sel)" style-focus="outline:2px solid var(--focus);outline-offset:2px">Abrir pasta</button></span>
+      <span><button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:var(--sunk);color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">Abrir pasta</button></span>
+      <span><button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;outline:2px solid var(--focus);outline-offset:2px;border-radius:0">Abrir pasta</button></span>
+      <span><button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:var(--sel);color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">Abrir pasta</button></span>
+      <span><button disabled="" style="height:28px;padding:0 12px;border:1px solid var(--dis);background:transparent;color:var(--dis);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">Abrir pasta</button></span>
+    </div>
+    <div style="display:grid;grid-template-columns:120px repeat(5,minmax(132px,1fr));min-height:52px;align-items:center;border-bottom:1px solid var(--weak);min-width:800px">
+      <span style="font-size:12px;color:var(--ink2)">Link</span>
+      <span><a href="#" style="font-size:13px;color:var(--ink);text-underline-offset:3px" style-focus="outline:2px solid var(--focus);outline-offset:2px">Copiar relatório</a></span>
+      <span><a href="#" style="font-size:13px;color:var(--ink);text-underline-offset:3px;text-decoration-thickness:2px">Copiar relatório</a></span>
+      <span><a href="#" style="font-size:13px;color:var(--ink);text-underline-offset:3px;outline:2px solid var(--focus);outline-offset:2px">Copiar relatório</a></span>
+      <span><a href="#" style="font-size:13px;color:var(--ink2);text-underline-offset:3px;text-decoration-thickness:2px">Copiar relatório</a></span>
+      <span style="font-size:13px;color:var(--dis);text-decoration:underline;text-underline-offset:3px">Copiar relatório</span>
+    </div>
+    <div style="display:grid;grid-template-columns:120px repeat(5,minmax(132px,1fr));min-height:52px;align-items:center;border-bottom:1px solid var(--ink);min-width:800px">
+      <span style="font-size:12px;color:var(--ink2)">Com atalho</span>
+      <span style="grid-column:span 2"><button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)" style-focus="outline:2px solid var(--focus);outline-offset:2px">Abrir arquivos…<span style="font-size:11px;font-weight:400;color:var(--ink2);border:1px solid var(--weak2);padding:0 4px;line-height:16px">Ctrl O</span></button></span>
+      <span style="grid-column:span 3;font-size:11px;color:var(--ink2)">Atalho sempre visível no próprio controle · 11 px · régua fraca</span>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Campos</div>
+      <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px 12px;align-items:center;font-size:12px">
+        <span style="color:var(--ink2)">Normal</span><input value="Qualidade 85" style="height:28px;box-sizing:border-box;padding:0 8px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:400 13px 'Ioskeley Mono',monospace;border-radius:0;outline:none" style-focus="outline:2px solid var(--focus);outline-offset:2px"></input>
+        <span style="color:var(--ink2)">Foco</span><span style="height:28px;box-sizing:border-box;padding:0 8px;border:1px solid var(--ctrl);outline:2px solid var(--focus);outline-offset:2px;display:flex;align-items:center;font-size:13px">300<span style="width:1px;height:14px;background:var(--ink);margin-left:1px"></span><span style="margin-left:auto;color:var(--ink2);font-size:11px">DPI</span></span>
+        <span style="color:var(--ink2)">Erro</span><span style="display:flex;flex-direction:column;gap:4px"><span style="height:28px;box-sizing:border-box;padding:0 8px;border:2px solid var(--fail);display:flex;align-items:center;font-size:13px">1200<span style="margin-left:auto;color:var(--ink2);font-size:11px">DPI</span></span><span style="font-size:11px;color:var(--fail);font-weight:500">✕ Fora do intervalo: use de 72 a 600.</span></span>
+        <span style="color:var(--ink2)">Desabilitado</span><span style="height:28px;box-sizing:border-box;padding:0 8px;border:1px solid var(--dis);display:flex;align-items:center;font-size:13px;color:var(--dis)">~/Saída</span>
+        <span style="color:var(--ink2)">Seletor</span><span style="height:28px;box-sizing:border-box;padding:0 8px;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:space-between;font-size:13px;cursor:pointer" style-hover="background:var(--sunk)">PNG · sem perdas<span style="font-size:10px">▾</span></span>
+        <span style="color:var(--ink2)">Segmentado</span><span style="display:flex;height:28px;border:1px solid var(--ctrl);width:max-content"><span style="padding:0 12px;display:flex;align-items:center;background:var(--ink);color:var(--paper);font-weight:500">PNG</span><span style="padding:0 12px;display:flex;align-items:center;border-left:1px solid var(--ctrl);cursor:pointer" style-hover="background:var(--sunk)">JPG</span><span style="padding:0 12px;display:flex;align-items:center;border-left:1px solid var(--ctrl);cursor:pointer" style-hover="background:var(--sunk)">WebP</span><span style="padding:0 12px;display:flex;align-items:center;border-left:1px solid var(--ctrl);color:var(--dis)">TIFF</span></span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Seleção e menu</div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px">
+        <div style="display:flex;flex-direction:column;gap:8px;font-size:12px">
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:10px;line-height:1">✕</span>Marcado</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl)"></span>Desmarcado</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:center"><span style="width:6px;height:2px;background:var(--ink)"></span></span>Parcial</span>
+          <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);outline:2px solid var(--focus);outline-offset:2px"></span>Foco</span>
+          <span style="display:flex;align-items:center;gap:8px;color:var(--dis)"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--dis)"></span>Desabilitado</span>
+          <span style="font-size:13px;padding-top:4px;white-space:nowrap">☒ Manter metadados <span style="color:var(--ink2);font-size:11px">· texto</span></span>
+        </div>
+        <div style="border:1px solid var(--ink);background:var(--paper);display:flex;flex-direction:column;padding:4px 0;font-size:12px;align-self:start">
+          <span style="display:flex;justify-content:space-between;gap:12px;padding:0 10px;height:26px;align-items:center;background:var(--ink);color:var(--paper)">Girar 90°<span>R</span></span>
+          <span style="display:flex;justify-content:space-between;gap:12px;padding:0 10px;height:26px;align-items:center" style-hover="background:var(--sunk)">Duplicar<span style="color:var(--ink2)">Ctrl D</span></span>
+          <span style="display:flex;justify-content:space-between;gap:12px;padding:0 10px;height:26px;align-items:center;color:var(--dis)">Extrair página<span>E</span></span>
+          <span style="height:1px;background:var(--weak);margin:4px 0"></span>
+          <span style="display:flex;justify-content:space-between;gap:12px;padding:0 10px;height:26px;align-items:center" style-hover="background:var(--sunk)">Remover<span style="color:var(--ink2)">Del</span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column">
+    <div style="height:28px;display:flex;align-items:center;border-bottom:2px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Linhas de tabela · 28 px</div>
+    <div style="overflow-x:auto"><div style="min-width:720px">
+    <div style="display:grid;grid-template-columns:28px 44px minmax(0,1fr) 100px 100px 120px 120px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span></span><span>Item</span><span>Arquivo</span><span>Origem</span><span>Destino</span><span style="text-align:right">Tamanho</span><span style="text-align:right">Situação</span></div>
+    <div style="display:grid;grid-template-columns:28px 44px minmax(0,1fr) 100px 100px 120px 120px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px" style-hover="background:var(--sunk)"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl)"></span><span style="color:var(--ink2)">001</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="foto-fornecedor-lote-0012-revisao-final-aprovada.tiff">foto-fornecedor-lote-0012-revisao-final-aprovada.tiff</span><span>TIFF</span><span>→ PNG</span><span style="text-align:right">12 940,1 KB</span><span style="text-align:right;color:var(--ink2)">Na fila</span></div>
+    <div style="display:grid;grid-template-columns:28px 44px minmax(0,1fr) 100px 100px 120px 120px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px;background:var(--sunk)"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl)"></span><span style="color:var(--ink2)">002</span><span>capa.png <span style="color:var(--ink2);font-size:11px">· hover</span></span><span>PNG</span><span>→ WebP</span><span style="text-align:right">1 204,3 KB</span><span style="text-align:right;color:var(--run);font-weight:500">Executando</span></div>
+    <div style="display:grid;grid-template-columns:28px 44px minmax(0,1fr) 100px 100px 120px 120px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px;background:var(--sel)"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:10px;line-height:1">✕</span><span style="color:var(--ink2)">003</span><span>logo.ico <span style="color:var(--ink2);font-size:11px">· selecionada</span></span><span>ICO</span><span style="font-weight:500">→ PNG*</span><span style="text-align:right">88,0 KB</span><span style="text-align:right;color:var(--ok);font-weight:500">Concluído</span></div>
+    <div style="display:grid;grid-template-columns:28px 44px minmax(0,1fr) 100px 100px 120px 120px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px;outline:2px solid var(--focus);outline-offset:-2px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);margin-left:4px"></span><span style="color:var(--ink2)">004</span><span>planta-B.svg <span style="color:var(--ink2);font-size:11px">· foco de teclado</span></span><span>SVG</span><span>→ PNG</span><span style="text-align:right">42,7 KB</span><span style="text-align:right;color:var(--ink2)">Na fila</span></div>
+    <div style="display:grid;grid-template-columns:28px 44px minmax(0,1fr) 100px 100px 120px 120px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl)"></span><span style="color:var(--ink2)">005</span><span>scan-03.bmp</span><span>BMP</span><span>→ JPG</span><span style="text-align:right">6 120,0 KB</span><span style="text-align:right;color:var(--fail);font-weight:500">Falha</span></div>
+    <div style="display:grid;grid-template-columns:28px 44px minmax(0,1fr) 100px 100px 120px 120px;min-height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:11px;color:var(--ink2)"><span></span><span></span><span style="grid-column:span 5;padding:4px 0">* 003 · ICO → PNG: ICO só é aceito como entrada nesta saída; o maior quadro (256 px) foi usado. · 005 · O arquivo terminou antes do esperado; pode estar corrompido.</span></div>
+    <div style="display:grid;grid-template-columns:28px 44px minmax(0,1fr) 100px 100px 120px 120px;height:28px;align-items:center;border-top:2px solid var(--ink);font-size:12px;font-weight:700"><span></span><span></span><span>5 itens · 1 concluído · 1 falha</span><span></span><span></span><span style="text-align:right">20 395,1 KB</span><span></span></div>
+    </div></div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Ficha rótulo → valor</div>
+      <div style="display:grid;grid-template-columns:130px minmax(0,1fr);font-size:12px">
+        <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Modelo</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">CV-01</span>
+        <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Versão</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">0.1.0</span>
+        <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Rede</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Não utilizada</span>
+        <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Enviados</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">0 B</span>
+        <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Conta</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Inexistente</span>
+        <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Licença</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-weight:500">Código aberto</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Progresso</div>
+      <div style="display:grid;grid-template-columns:minmax(0,1fr) 92px;gap:10px 12px;align-items:center;font-size:12px">
+        <span style="height:8px;border:1px solid var(--ink)"></span><span style="color:var(--ink2)">Na fila</span>
+        <span style="height:8px;border:1px solid var(--ink);display:flex"><span style="width:46%;background:var(--ink)"></span></span><span style="color:var(--run);font-weight:500">46%</span>
+        <span style="height:8px;border:1px solid var(--ink);display:flex"><span style="width:100%;background:var(--ink)"></span></span><span style="color:var(--ok);font-weight:500">Concluído</span>
+        <span style="height:8px;border:1px solid var(--ink);display:flex"><span style="width:31%;background:var(--ink)"></span></span><span style="color:var(--fail);font-weight:500">Falha · 31%</span>
+        <span style="height:14px;border:1px solid var(--ink);display:flex;grid-column:span 2;margin-top:6px"><span style="width:62%;background:var(--ink)"></span></span>
+        <span style="grid-column:span 2;display:flex;justify-content:space-between;font-size:11px;color:var(--ink2)"><span>3 de 5 arquivos</span><span>~4 s</span></span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Avisos</div>
+      <div style="border:1px solid var(--ink);display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:8px;padding:0 10px;height:26px;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span style="width:8px;height:8px;background:var(--ink)"></span>Atenção · ZIP-02</div>
+        <p style="margin:0;padding:8px 10px;font-size:12px;text-wrap:pretty">contratos.zip está protegido por senha. Informe a senha para extrair; ela não é guardada.</p>
+      </div>
+      <div style="border:1px solid var(--fail);display:flex;flex-direction:column">
+        <div style="display:flex;align-items:center;gap:8px;padding:0 10px;height:26px;border-bottom:1px solid var(--fail);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--fail)"><span style="width:8px;height:8px;background:var(--fail)"></span>Falha · item 005</div>
+        <p style="margin:0;padding:8px 10px;font-size:12px;text-wrap:pretty">scan-03.bmp terminou antes do esperado. Tente reexportar o arquivo na origem.</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:32px">
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Área de soltar</div>
+      <div style="height:168px;border:1px dashed var(--ink);background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--weak) 23px 24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+        <span style="font-size:13px;font-weight:500;background:var(--paper);padding:0 6px">Solte arquivos em qualquer lugar da janela</span>
+        <span style="display:flex;align-items:center;gap:12px;background:var(--paper);padding:0 6px"><span style="font-size:11px;color:var(--ink2)">ou</span><button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ctrl);background:var(--paper);color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)" style-focus="outline:2px solid var(--focus);outline-offset:2px">Abrir arquivos…<span style="font-size:11px;font-weight:400;color:var(--ink2);border:1px solid var(--weak2);padding:0 4px;line-height:16px">Ctrl O</span></button></span>
+        <span style="font-size:11px;color:var(--ink2);background:var(--paper);padding:0 6px">PNG JPG WebP GIF BMP TIFF ICO SVG · PDF · ZIP</span>
+      </div>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:12px">
+      <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Miniaturas</div>
+      <div style="display:flex;gap:12px;align-items:flex-start">
+        <div style="display:flex;flex-direction:column;gap:4px;width:84px"><div style="height:112px;border:1px solid var(--ink);display:flex;background:repeating-linear-gradient(to bottom,transparent 0 11px,var(--weak) 11px 12px)"><span style="width:6px;background:var(--pdf)"></span></div><span style="font-size:11px;font-weight:700">A1</span></div>
+        <div style="display:flex;flex-direction:column;gap:4px;width:84px"><div style="height:112px;border:2px solid var(--ink);box-sizing:border-box;display:flex;background:repeating-linear-gradient(to bottom,transparent 0 11px,var(--weak) 11px 12px);outline:2px solid var(--focus);outline-offset:2px"><span style="width:6px;background:var(--pdf)"></span></div><span style="font-size:11px;font-weight:700;display:flex;justify-content:space-between">A2<span style="font-weight:400;color:var(--ink2)">☒</span></span></div>
+        <div style="width:2px;height:112px;background:var(--focus)"></div>
+        <div style="display:flex;flex-direction:column;gap:4px;width:84px"><div style="height:112px;border:1px solid var(--ink);display:flex;background:repeating-linear-gradient(to bottom,transparent 0 11px,var(--weak) 11px 12px)"><span style="width:6px;background:var(--img)"></span></div><span style="font-size:11px;font-weight:700;display:flex;justify-content:space-between">C1<span style="font-weight:400;color:var(--ink2)">↻ 90°</span></span></div>
+      </div>
+      <span style="font-size:11px;color:var(--ink2)">Faixa = categoria da origem · A2 selecionada com foco · régua azul = ponto de inserção</span>
+    </div>
+  </div>
+
+  <div style="display:flex;flex-direction:column;gap:12px">
+    <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Barra de status · fixa</div>
+    <div style="height:24px;border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);display:flex;align-items:center;gap:12px;padding:0 10px;font-size:11px;overflow:hidden;white-space:nowrap"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>SEM ACESSO À REDE</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">CV-01 · v0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:80ch;font-size:11px;color:var(--ink2);text-wrap:pretty">Nota — hover é um tom de papel, nunca cor. Seleção de linha usa tom mais forte + caixa marcada; a ferramenta ativa no índice é a única inversão total. Foco é sempre o anel azul, por fora em controles e por dentro (-2 px) em linhas, para não ser cortado pela rolagem. Desabilitado é isento de contraste (WCAG 1.4.3), mas mantém o texto legível.</p></sc-if>
+</section>
+
+<footer style="display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-top:8px;border-top:2px solid var(--ink);font-size:11px;color:var(--ink2)"><span>DOC-01 · Rev. A · Sistema visual</span><span>Próximo: Início · IMG-01 · PDF-03/05 · PDF-04/01 · ZIP · Livro · SYS-00</span></footer>
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;tema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;claro&quot;,&quot;escuro&quot;],&quot;default&quot;:&quot;claro&quot;,&quot;tsType&quot;:&quot;'claro'|'escuro'&quot;},&quot;notas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      theme: (this.props.tema ?? 'claro') === 'escuro' ? 'dark' : 'light',
+      notes: this.props.notas ?? true,
+    };
+  }
+}
+</script>
+</body>
+</html>

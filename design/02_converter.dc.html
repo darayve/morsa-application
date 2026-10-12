@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap">
+<style>
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Light.ttf") format("truetype");font-weight:300}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Regular.ttf") format("truetype");font-weight:400}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Medium.ttf") format("truetype");font-weight:500}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Bold.ttf") format("truetype");font-weight:700}
+:root{--paper:#fafaf8;--ink:#121212;--ink2:#5d5d58;--weak:#dcdcd7;--weak2:#cfcfca;--ctrl:#121212;--sunk:#f0f0ec;--sel:#e6e6e1;--inkH:#3a3a37;--dis:#a3a39e;--desk:#e9e9e5;--ok:oklch(0.45 0.12 150);--run:oklch(0.45 0.15 255);--fail:oklch(0.48 0.18 28);--focus:oklch(0.50 0.16 255);--img:oklch(0.62 0.13 235);--pdf:oklch(0.60 0.16 30);--zip:oklch(0.74 0.13 85);--fut:#8f8f8a;--nat:#efefed;--natInk:#1b1b1b;--natLine:#d4d4d0}
+[data-theme="dark"]{--paper:#121211;--ink:#e8e8e4;--ink2:#a2a29c;--weak:#3d3d3a;--weak2:#4a4a46;--ctrl:#6a6a65;--sunk:#1c1c1a;--sel:#262624;--inkH:#ffffff;--dis:#5f5f5a;--desk:#060606;--ok:oklch(0.74 0.13 150);--run:oklch(0.74 0.12 255);--fail:oklch(0.72 0.15 28);--focus:oklch(0.72 0.14 255);--nat:#272727;--natInk:#e6e6e6;--natLine:#000}
+body{margin:0}
+a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background:var(--desk);color:var(--ink);font-family:'Ioskeley Mono',ui-monospace,monospace;font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0;font-size:13px;line-height:1.5;padding:64px;box-sizing:border-box;width:max-content">
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:48px;max-width:1200px">
+  <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Conversor · Telas · 02</span>
+  <h1 style="margin:0;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:34px;font-weight:700;line-height:1.1">IMG-01 · Converter imagens</h1>
+  <span style="font-size:12px;color:var(--ink2)">Conversão em lote · 3 estados · <a href="01 Inicio v2.dc.html">Início</a> · <a href="Sistema Visual.dc.html">Sistema visual</a></span>
+</div>
+<div style="display:grid;grid-template-columns:1200px 1200px;gap:72px 64px">
+
+<div id="2a" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">2a</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Antes de converter</span><span style="font-size:11px;color:var(--ink2)">{{ A.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ A.os }}" titulo="Conversor" hint-size="100%,32px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="IMG-01" sistema="{{ A.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--img)"></span>Imagens · IMG-01</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Converter imagens</span></div>
+          <span style="display:flex;align-items:center;gap:6px;font-size:11px;white-space:nowrap"><span style="width:6px;height:6px;border:1px solid var(--ink)"></span>Pronto para converter</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column;min-height:0;overflow:hidden">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px;border-bottom:2px solid var(--ink)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Arquivos · 12</span><a href="#" style="font-size:11px">Adicionar… · {{ A.open }}</a></div>
+            <div style="display:grid;grid-template-columns:40px minmax(0,1fr) 120px 112px 132px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span>#</span><span>Arquivo</span><span>Formato</span><span>Dimensões</span><span>Situação</span></div>
+            <sc-for list="{{ rowsA }}" as="r" hint-placeholder-count="12">
+              <div style="display:grid;grid-template-columns:40px minmax(0,1fr) 120px 112px 132px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px;cursor:default" style-hover="background:var(--sunk)"><span style="font-size:11px;color:var(--ink2)">{{ r.i }}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</span><span style="white-space:nowrap">{{ r.fmt }}</span><span style="font-size:11px;color:var(--ink2);white-space:nowrap">{{ r.dim }}</span><span style="display:flex;align-items:center;gap:6px;color:var(--ink2)"><span style="width:6px;height:6px;border:1px solid var(--ink2)"></span>Pronto</span></div>
+            </sc-for>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:20px;font-size:12px">
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Formato de saída</div>
+              <div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px">
+                <span style="height:28px;display:flex;align-items:center;justify-content:center;background:var(--ink);color:var(--paper);font-weight:700">PNG</span>
+                <span style="height:28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1px solid var(--ctrl);cursor:pointer">JPG</span>
+                <span style="height:28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1px solid var(--ctrl);cursor:pointer">WebP</span>
+                <span style="height:28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1px solid var(--ctrl);cursor:pointer">GIF</span>
+                <span style="height:28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1px solid var(--ctrl);cursor:pointer">BMP</span>
+                <span style="height:28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1px solid var(--ctrl);cursor:pointer">TIFF</span>
+                <span style="height:28px;box-sizing:border-box;display:flex;align-items:center;justify-content:center;border:1px solid var(--ctrl);cursor:pointer">ICO</span>
+              </div>
+              <div style="display:grid;grid-template-columns:72px minmax(0,1fr) 28px;gap:8px;align-items:center;color:var(--dis)"><span>Qualidade</span><span style="height:2px;background:var(--dis);position:relative"><span style="position:absolute;left:85%;top:-5px;width:6px;height:12px;background:var(--dis)"></span></span><span style="text-align:right">85</span></div>
+              <span style="font-size:11px;color:var(--ink2)">Qualidade só vale para JPG e WebP.</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Tamanho</div>
+              <span style="height:28px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:space-between;padding:0 8px">Manter dimensões originais<span style="font-size:10px">▾</span></span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Metadados</div>
+              <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);color:var(--paper);font-size:10px;line-height:1;display:flex;align-items:center;justify-content:center">✕</span>Remover localização (GPS)</span>
+              <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl)"></span>Remover todos os metadados</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Destino</div>
+              <span style="font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ A.path }}</span>
+              <span style="display:flex;justify-content:space-between;font-size:11px"><a href="#">Alterar pasta…</a><span style="color:var(--ink2)">nome-original.png</span></span>
+              <span style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;align-items:center;margin-top:4px"><span style="color:var(--ink2)">Se já existir</span><span style="height:28px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:space-between;padding:0 8px">Acrescentar -1<span style="font-size:10px">▾</span></span></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 24px;border-top:2px solid var(--ink)">
+          <span style="font-size:12px;font-weight:700">12 arquivos → PNG</span><span style="font-size:12px;color:var(--ink2)">de TIFF, JPG, WebP, SVG, BMP, GIF</span>
+          <span style="margin-left:auto;display:flex;gap:8px">
+            <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)">Limpar lista</button>
+            <button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--inkH)">Converter 12 arquivos<span style="font-size:11px;font-weight:400;border:1px solid var(--paper);padding:0 4px;line-height:16px">{{ A.run }}</span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — O botão diz o que vai acontecer e quantos arquivos ("Converter 12 arquivos"). A coluna Formato mostra a troca linha a linha. Qualidade fica desabilitada, com o motivo escrito, em vez de sumir. Tudo já vem preenchido: quem soltou os arquivos só precisa apertar {{ A.run }}.</p></sc-if>
+</div>
+
+<div id="2b" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">2b</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Convertendo</span><span style="font-size:11px;color:var(--ink2)">{{ B.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);border-radius:10px;box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ B.os }}" titulo="Conversor — 7 de 12" hint-size="100%,28px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="IMG-01" exec="IMG-01:7/12" sistema="{{ B.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--img)"></span>Imagens · IMG-01</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Converter imagens</span></div>
+          <div style="display:grid;grid-template-columns:auto auto;gap:0 16px;font-size:11px;white-space:nowrap"><span style="color:var(--ink2)">Situação</span><span style="display:flex;align-items:center;gap:6px;color:var(--run);font-weight:500"><span style="width:8px;height:8px;background:var(--run)"></span>Convertendo</span><span style="color:var(--ink2)">Nº</span><span style="font-weight:300;color:var(--ink2)">0144</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column;min-height:0;overflow:hidden">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px;border-bottom:2px solid var(--ink)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Arquivos · 12</span><span style="font-size:11px;color:var(--ink2)">6 concluídos · 1 em curso · 5 na fila</span></div>
+            <div style="display:grid;grid-template-columns:40px minmax(0,1fr) 120px 112px 132px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span>#</span><span>Arquivo</span><span>Formato</span><span>Dimensões</span><span>Situação</span></div>
+            <sc-for list="{{ rowsB }}" as="r" hint-placeholder-count="12">
+              <div style="display:grid;grid-template-columns:40px minmax(0,1fr) 120px 112px 132px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px;background:{{ r.bg }};color:{{ r.ink }}"><span style="font-size:11px;color:var(--ink2)">{{ r.i }}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ r.name }}</span><span style="white-space:nowrap">{{ r.fmt }}</span><span style="font-size:11px;color:var(--ink2);white-space:nowrap">{{ r.dim }}</span>
+                <sc-if value="{{ r.bar }}" hint-placeholder-val="{{ false }}"><span style="display:grid;grid-template-columns:minmax(0,1fr) 32px;gap:8px;align-items:center"><span style="height:8px;border:1px solid var(--ink);display:flex"><span style="width:62%;background:var(--run)"></span></span><span style="font-size:11px;text-align:right;color:var(--run);font-weight:500">62%</span></span></sc-if>
+                <sc-if value="{{ r.nobar }}" hint-placeholder-val="{{ true }}"><span style="display:flex;align-items:center;gap:6px;color:{{ r.stc }};font-weight:{{ r.w }}"><span style="width:8px;height:8px;box-sizing:border-box;border:1px solid {{ r.stc }};background:{{ r.stbg }}"></span>{{ r.st }}</span></sc-if>
+              </div>
+            </sc-for>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:12px;font-size:12px">
+            <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Opções em uso</div>
+            <div style="display:grid;grid-template-columns:96px minmax(0,1fr);margin-top:-12px">
+              <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Formato</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">PNG</span>
+              <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Tamanho</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Original</span>
+              <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Metadados</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Sem GPS</span>
+              <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Se existir</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Acrescentar -1</span>
+              <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Destino</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-weight:500;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ B.path }}</span>
+            </div>
+            <p style="margin:0;font-size:11px;color:var(--ink2);text-wrap:pretty">As opções ficam travadas até terminar. Você pode trocar de ferramenta enquanto isso: o índice mostra "● 7/12" ao lado de IMG-01.</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 24px;border-top:2px solid var(--ink)">
+          <span style="font-size:12px;font-weight:700;white-space:nowrap">7 de 12</span>
+          <span style="flex:1;height:14px;border:1px solid var(--ink);display:flex"><span style="width:55%;background:var(--ink)"></span></span>
+          <span style="font-size:12px;color:var(--ink2);white-space:nowrap">~9 s restantes</span>
+          <button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)">Cancelar<span style="font-size:11px;font-weight:400;color:var(--ink2);border:1px solid var(--weak2);padding:0 4px;line-height:16px">Esc</span></button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Convertendo 7 de 12</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — O Nº 0144 nasce aqui, como metadado no canto, e não como título. O progresso aparece em três níveis: linha (62%), lote (7 de 12) e título da janela, que aparece no Dock ou na barra de tarefas. Cancelar mantém os 6 arquivos já gravados e diz isso no resultado.</p></sc-if>
+</div>
+
+<div id="2c" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">2c</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Resultado com falhas</span><span style="font-size:11px;color:var(--ink2)">{{ C.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);border-radius:8px 8px 0 0;box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ C.os }}" titulo="Conversor" hint-size="100%,40px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="IMG-01" historico="144" sistema="{{ C.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--img)"></span>Imagens · IMG-01</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Converter imagens</span></div>
+          <div style="display:grid;grid-template-columns:auto auto;gap:0 16px;font-size:11px;white-space:nowrap"><span style="color:var(--ink2)">Situação</span><span style="display:flex;align-items:center;gap:6px;color:var(--fail);font-weight:500"><span style="width:8px;height:8px;background:var(--fail)"></span>Concluída com 2 falhas</span><span style="color:var(--ink2)">Nº</span><span style="font-weight:300;color:var(--ink2)">0144 · 14:20</span></div>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column;min-height:0;overflow:hidden">
+            <div style="display:flex;justify-content:space-between;align-items:flex-end;padding-bottom:4px;border-bottom:2px solid var(--ink)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Arquivos · 12</span>
+              <span style="display:flex;font-size:11px;margin-bottom:-1px"><span style="padding:2px 8px;border:1px solid var(--ctrl);border-right:0;cursor:pointer">Todos 12</span><span style="padding:2px 8px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font-weight:700">Falhas 2</span><span style="padding:2px 8px;border:1px solid var(--ctrl);border-left:0;cursor:pointer">Convertidos 10</span></span></div>
+            <div style="display:grid;grid-template-columns:40px minmax(0,1fr) 120px 112px 132px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span>#</span><span>Arquivo</span><span>Formato</span><span>Dimensões</span><span>Situação</span></div>
+            <sc-for list="{{ rowsC }}" as="r" hint-placeholder-count="2">
+              <div style="display:flex;flex-direction:column;border-bottom:1px solid var(--weak);padding:4px 0 10px">
+                <div style="display:grid;grid-template-columns:40px minmax(0,1fr) 120px 112px 132px;gap:0 8px;height:28px;align-items:center;font-size:12px"><span style="font-size:11px;color:var(--ink2)">{{ r.i }}</span><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500">{{ r.name }}</span><span style="white-space:nowrap">{{ r.fmt }}</span><span style="font-size:11px;color:var(--ink2);white-space:nowrap">{{ r.dim }}</span><span style="display:flex;align-items:center;gap:6px;color:var(--fail);font-weight:700"><span style="width:8px;height:8px;background:var(--fail)"></span>Falhou</span></div>
+                <div style="display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 8px;font-size:12px"><span></span><span style="display:flex;flex-direction:column;gap:2px;border-left:2px solid var(--fail);padding-left:10px"><span style="color:var(--fail);font-weight:500">{{ r.reason }}</span><span style="color:var(--ink2);font-size:11px;text-wrap:pretty">{{ r.fix }}</span></span></div>
+              </div>
+            </sc-for>
+            <div style="height:1px;background:var(--ink)"></div>
+            <div style="display:grid;grid-template-columns:40px minmax(0,1fr);gap:0 8px;padding-top:12px;font-size:11px;color:var(--ink2)"><span></span><span>Os 10 convertidos já estão na pasta de destino. Os originais não foram alterados.</span></div>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:16px;font-size:12px">
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Resumo</div>
+              <div style="display:grid;grid-template-columns:96px minmax(0,1fr)">
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Convertidos</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:700;color:var(--ok)">10</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Falhas</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:700;color:var(--fail)">2</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Formatos</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">6 tipos → PNG</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Duração</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">18 s</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Destino</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-weight:500;overflow:hidden;white-space:nowrap;text-overflow:ellipsis">{{ C.path }}</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;cursor:pointer;border-radius:0;text-align:left" style-hover="background:var(--sunk)">Copiar relatório</button>
+              <span style="font-size:11px;color:var(--ink2);text-wrap:pretty">Texto simples com os 12 arquivos e os motivos. Fica salvo no histórico como Nº 0144.</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 24px;border-top:2px solid var(--ink)">
+          <span style="font-size:12px;font-weight:700">10 de 12 convertidos</span><span style="font-size:12px;color:var(--fail);font-weight:500">2 falhas</span>
+          <span style="margin-left:auto;display:flex;gap:8px">
+            <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)">Nova conversão</button>
+            <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)">Tentar as 2 de novo</button>
+            <button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--inkH)">Abrir pasta<span style="font-size:11px;font-weight:400;border:1px solid var(--paper);padding:0 4px;line-height:16px">Enter</span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — Com falhas, a lista já abre no filtro "Falhas". Cada falha diz o que aconteceu e o que fazer, em português comum. Nada de código de erro. A falha do SVG explica por que o app não busca a imagem: ele não acessa a rede. "Tentar as 2 de novo" reaproveita as mesmas opções. Sem falhas, o filtro abre em "Todos" e só sobra "Abrir pasta".</p></sc-if>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;sistema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;por tela&quot;,&quot;windows&quot;,&quot;macos&quot;,&quot;linux&quot;],&quot;default&quot;:&quot;por tela&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;claro&quot;,&quot;escuro&quot;],&quot;default&quot;:&quot;claro&quot;,&quot;tsType&quot;:&quot;'claro'|'escuro'&quot;},&quot;notas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.props.sistema ?? 'por tela';
+    const mk = d => {
+      const os = s === 'por tela' ? d : s; const m = os === 'macos';
+      const k = x => m ? '⌘' + (x === 'Enter' ? '↩' : x) : 'Ctrl ' + x;
+      return { os, open: k('O'), run: k('Enter'), path: m ? '~/Documents/Conversor' : os === 'linux' ? '~/Documentos/Conversor' : 'C:\\Users\\ana\\Documents\\Conversor' };
+    };
+    const files = [
+      ['foto-01.tiff', 'TIFF', '4032 × 3024'], ['foto-02.tiff', 'TIFF', '4032 × 3024'], ['foto-03.tiff', 'TIFF', '4032 × 3024'],
+      ['scan-04.tiff', 'TIFF', '2480 × 3508'], ['capa.jpg', 'JPG', '1920 × 1080'], ['banner-loja.jpg', 'JPG', '2400 × 800'],
+      ['produto-07.webp', 'WebP', '1200 × 1200'], ['produto-08.webp', 'WebP', '1200 × 1200'], ['icone-app.svg', 'SVG', 'vetor'],
+      ['logo.bmp', 'BMP', '512 × 512'], ['mapa-sede.tiff', 'TIFF', '6000 × 4000'], ['assinatura.gif', 'GIF', '600 × 200'],
+    ].map(([name, f, dim], i) => ({ i: String(i + 1).padStart(3, '0'), name, fmt: f + ' → PNG', dim }));
+    const rowsA = files;
+    const rowsB = files.map((r, i) => {
+      if (i < 6) return { ...r, nobar: true, bar: false, st: 'Concluído', stc: 'var(--ok)', stbg: 'var(--ok)', w: 500, bg: 'transparent', ink: 'var(--ink)' };
+      if (i === 6) return { ...r, nobar: false, bar: true, bg: 'var(--sel)', ink: 'var(--ink)' };
+      return { ...r, nobar: true, bar: false, st: 'Na fila', stc: 'var(--ink2)', stbg: 'transparent', w: 400, bg: 'transparent', ink: 'var(--ink2)' };
+    });
+    const rowsC = [
+      { ...files[3], reason: 'Arquivo danificado: a leitura parou no meio da imagem.', fix: 'Abra o original no programa que o criou e exporte de novo como TIFF.' },
+      { ...files[8], reason: 'O SVG usa uma imagem externa (logo-fundo.png) que não está na mesma pasta.', fix: 'Coloque logo-fundo.png ao lado do SVG e tente de novo. O app não busca arquivos na rede.' },
+    ];
+    return { theme: (this.props.tema ?? 'claro') === 'escuro' ? 'dark' : 'light', notes: this.props.notas ?? true,
+      A: mk('windows'), B: mk('macos'), C: mk('linux'), rowsA, rowsB, rowsC };
+  }
+}
+</script>
+</body>
+</html>

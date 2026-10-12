@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap">
+<style>
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Light.ttf") format("truetype");font-weight:300}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Regular.ttf") format("truetype");font-weight:400}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Medium.ttf") format("truetype");font-weight:500}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Bold.ttf") format("truetype");font-weight:700}
+:root{--paper:#fafaf8;--ink:#121212;--ink2:#5d5d58;--weak:#dcdcd7;--weak2:#cfcfca;--ctrl:#121212;--sunk:#f0f0ec;--sel:#e6e6e1;--inkH:#3a3a37;--dis:#a3a39e;--desk:#e9e9e5;--ok:oklch(0.45 0.12 150);--run:oklch(0.45 0.15 255);--fail:oklch(0.48 0.18 28);--focus:oklch(0.50 0.16 255);--img:oklch(0.62 0.13 235);--pdf:oklch(0.60 0.16 30);--zip:oklch(0.74 0.13 85);--fut:#8f8f8a;--nat:#efefed;--natInk:#1b1b1b;--natLine:#d4d4d0}
+[data-theme="dark"]{--paper:#121211;--ink:#e8e8e4;--ink2:#a2a29c;--weak:#3d3d3a;--weak2:#4a4a46;--ctrl:#6a6a65;--sunk:#1c1c1a;--sel:#262624;--inkH:#ffffff;--dis:#5f5f5a;--desk:#060606;--ok:oklch(0.74 0.13 150);--run:oklch(0.74 0.12 255);--fail:oklch(0.72 0.15 28);--focus:oklch(0.72 0.14 255);--nat:#272727;--natInk:#e6e6e6;--natLine:#000}
+body{margin:0}
+a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background:var(--desk);color:var(--ink);font-family:'Ioskeley Mono',ui-monospace,monospace;font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0;font-size:13px;line-height:1.5;padding:64px;box-sizing:border-box;width:max-content">
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:48px;max-width:1200px">
+  <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Conversor · Telas · 03</span>
+  <h1 style="margin:0;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:34px;font-weight:700;line-height:1.1">PDF-03 Juntar · PDF-05 Reordenar</h1>
+  <span style="font-size:12px;color:var(--ink2)">Miniaturas com referência de página (A1, B3…) · <a href="01 Inicio v2.dc.html">Início</a> · <a href="02 IMG-01 Converter.dc.html">IMG-01</a></span>
+</div>
+<div style="display:grid;grid-template-columns:1200px 1200px;gap:72px 64px">
+
+<div id="3a" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">3a</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Juntar · arrastando um documento</span><span style="font-size:11px;color:var(--ink2)">{{ A.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ A.os }}" titulo="Conversor" hint-size="100%,32px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="PDF-03" sistema="{{ A.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--pdf)"></span>PDF · PDF-03</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Juntar PDFs</span></div>
+          <span style="display:flex;align-items:center;gap:6px;font-size:11px;white-space:nowrap"><span style="width:6px;height:6px;border:1px solid var(--ink)"></span>Pronto para juntar</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 280px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column;min-height:0;overflow:hidden">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px;border-bottom:2px solid var(--ink)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Documentos · na ordem em que serão juntados</span><a href="#" style="font-size:11px">Adicionar… · {{ A.open }}</a></div>
+            <div style="position:relative;display:flex;flex-direction:column">
+              <sc-for list="{{ docs }}" as="d" hint-placeholder-count="3">
+                <div style="display:flex;flex-direction:column">
+                  <sc-if value="{{ d.insBefore }}" hint-placeholder-val="{{ false }}"><div style="height:3px;background:var(--focus);margin:4px 0 112px;position:relative"><span style="position:absolute;left:0;top:-5px;width:3px;height:13px;background:var(--focus)"></span></div></sc-if>
+                  <div style="display:flex;flex-direction:column;gap:8px;padding:10px 0 12px;border-bottom:1px solid var(--weak);opacity:{{ d.op }}">
+                    <div style="display:grid;grid-template-columns:28px 20px 24px minmax(0,1fr) 88px 140px 24px;gap:0 8px;align-items:center;font-size:12px">
+                      <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:20px;font-weight:700;line-height:1">{{ d.pos }}</span>
+                      <span style="color:var(--ink2);cursor:grab;letter-spacing:-2px">⋮⋮</span>
+                      <span style="font-weight:700;border:1px solid var(--ink);text-align:center;line-height:18px">{{ d.ref }}</span>
+                      <span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500">{{ d.name }}</span>
+                      <span style="color:var(--ink2);font-size:11px;text-align:right">{{ d.pages }} páginas</span>
+                      <span style="height:26px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:space-between;padding:0 8px;font-size:12px"><span style="color:var(--ink2);font-size:11px">Páginas</span><b style="font-weight:500">{{ d.range }}</b></span>
+                      <span style="text-align:center;color:var(--ink2);cursor:pointer">✕</span>
+                    </div>
+                    <div style="display:flex;gap:6px;padding-left:36px;flex-wrap:nowrap;overflow:hidden">
+                      <sc-for list="{{ d.thumbs }}" as="t" hint-placeholder-count="8">
+                        <div style="display:flex;flex-direction:column;align-items:center;gap:2px;flex:none;opacity:{{ t.op }}"><div style="width:40px;height:52px;box-sizing:border-box;border:1px solid var(--ink2);background:{{ t.bg }}"></div><span style="font-size:10px;color:var(--ink2)">{{ t.ref }}</span></div>
+                      </sc-for>
+                    </div>
+                  </div>
+                </div>
+              </sc-for>
+              <div style="position:absolute;left:24px;right:-12px;top:108px;display:flex;flex-direction:column;gap:8px;padding:10px 12px 12px;background:var(--paper);border:2px solid var(--ink);box-shadow:0 12px 28px rgba(0,0,0,.22);transform:translateY(6px)">
+                <div style="display:grid;grid-template-columns:28px 20px 24px minmax(0,1fr) 88px;gap:0 8px;align-items:center;font-size:12px"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:20px;font-weight:700;line-height:1;color:var(--focus)">→2</span><span style="cursor:grabbing;letter-spacing:-2px">⋮⋮</span><span style="font-weight:700;border:1px solid var(--ink);text-align:center;line-height:18px">C</span><span style="font-weight:500">anexo-c-assinaturas.pdf</span><span style="color:var(--ink2);font-size:11px;text-align:right">7 páginas</span></div>
+                <div style="display:flex;gap:6px;padding-left:36px">
+                  <sc-for list="{{ dragThumbs }}" as="t" hint-placeholder-count="7"><div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="width:40px;height:52px;box-sizing:border-box;border:1px solid var(--ink2);background:{{ t.bg }}"></div><span style="font-size:10px;color:var(--ink2)">{{ t.ref }}</span></div></sc-for>
+                </div>
+              </div>
+            </div>
+            <span style="font-size:11px;color:var(--ink2);padding-top:10px">Arraste pela alça ⋮⋮ ou use Alt ↑ ↓ no documento selecionado · Páginas aceita "1–4, 7"</span>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:20px;font-size:12px">
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Resultado</div>
+              <div style="display:grid;grid-template-columns:88px minmax(0,1fr)">
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Arquivos</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">3 → 1 PDF</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Páginas</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">23 · A12 C7 B4</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Ordem</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-weight:500">A · C · B</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Nome do arquivo</div>
+              <span style="height:28px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;padding:0 8px;font-weight:500">contrato-completo.pdf</span>
+              <span style="font-size:11px;color:var(--ink2)">{{ A.path }}</span>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Marcadores</div>
+              <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);color:var(--paper);font-size:10px;line-height:1;display:flex;align-items:center;justify-content:center">✕</span>Um marcador por documento</span>
+              <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl)"></span>Manter marcadores originais</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 24px;border-top:2px solid var(--ink)">
+          <span style="font-size:12px;font-weight:700">3 PDFs → 1 PDF</span><span style="font-size:12px;color:var(--ink2)">23 páginas</span>
+          <button style="margin-left:auto;height:28px;padding:0 6px 0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--inkH)">Juntar 3 PDFs<span style="font-size:11px;font-weight:400;border:1px solid var(--paper);padding:0 4px;line-height:16px">{{ A.run }}</span></button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — Cada documento recebe uma letra pela ordem de entrada (A, B, C) e mantém a letra quando muda de lugar. O número grande é a posição na junção. O documento arrastado sai da lista como cartão elevado e a linha azul mostra onde ele vai cair. Em B, as páginas fora do intervalo "1–4" aparecem apagadas na própria faixa de miniaturas.</p></sc-if>
+</div>
+
+<div id="3b" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">3b</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Reordenar · movendo 2 páginas</span><span style="font-size:11px;color:var(--ink2)">{{ B.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);border-radius:10px;box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ B.os }}" titulo="Conversor — contrato-a.pdf" hint-size="100%,28px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="PDF-05" sistema="{{ B.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto auto minmax(0,1fr) auto;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--pdf)"></span>PDF · PDF-05 · contrato-a.pdf</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Reordenar páginas</span></div>
+          <span style="display:flex;align-items:center;gap:6px;font-size:11px;white-space:nowrap"><span style="width:6px;height:6px;border:1px solid var(--ink)"></span>3 alterações não salvas</span>
+        </div>
+        <div style="display:flex;align-items:center;gap:6px;padding:8px 24px;border-bottom:1px solid var(--weak);font-size:12px">
+          <span style="font-weight:700;margin-right:8px">2 selecionadas</span>
+          <button style="height:26px;padding:0 10px;white-space:nowrap;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 12px 'Ioskeley Mono',monospace;border-radius:0;cursor:pointer">↺ Girar</button>
+          <button style="height:26px;padding:0 10px;white-space:nowrap;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 12px 'Ioskeley Mono',monospace;border-radius:0;cursor:pointer">↻ Girar</button>
+          <button style="height:26px;padding:0 10px;white-space:nowrap;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 12px 'Ioskeley Mono',monospace;border-radius:0;cursor:pointer">Excluir</button>
+          <span style="width:1px;height:18px;background:var(--weak);margin:0 6px"></span>
+          <button style="height:26px;padding:0 10px;white-space:nowrap;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 12px 'Ioskeley Mono',monospace;border-radius:0;cursor:pointer">Inverter ordem</button>
+          <button style="margin-left:auto;height:26px;padding:0 6px 0 10px;white-space:nowrap;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 12px 'Ioskeley Mono',monospace;border-radius:0;cursor:pointer;display:inline-flex;align-items:center;gap:8px">Desfazer<span style="font-size:11px;font-weight:400;color:var(--ink2);border:1px solid var(--weak2);padding:0 4px;line-height:16px">{{ B.undo }}</span></button>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 260px;min-height:0">
+          <div style="padding:16px 24px;min-height:0;overflow:hidden">
+            <div style="position:relative;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:8px 12px">
+              <sc-for list="{{ grid }}" as="p" hint-placeholder-count="18">
+                <div style="position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;gap:4px;height:138px;outline:{{ p.ol }};outline-offset:-1px;background:{{ p.cbg }}">
+                  <sc-if value="{{ p.ins }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;left:-8px;top:0;bottom:0;width:3px;background:var(--focus)"></span></sc-if>
+                  <div style="width:{{ p.w }}px;height:{{ p.h }}px;box-sizing:border-box;border:1px {{ p.bs }} {{ p.bd }};background:{{ p.bg }};opacity:{{ p.op }};position:relative"><sc-if value="{{ p.x }}" hint-placeholder-val="{{ false }}"><span style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:22px;color:var(--fail)">✕</span></sc-if></div>
+                  <span style="font-size:11px;display:flex;gap:6px;white-space:nowrap;padding-bottom:4px"><b style="font-weight:700">{{ p.pos }}</b><span style="color:var(--ink2)">{{ p.ref }}</span><span style="color:{{ p.tagc }};font-weight:500">{{ p.tag }}</span></span>
+                </div>
+              </sc-for>
+              <div style="position:absolute;left:196px;top:30px;display:flex;flex-direction:column;gap:4px;pointer-events:none">
+                <div style="position:relative;width:76px;height:96px"><div style="position:absolute;left:8px;top:-6px;width:64px;height:84px;border:1px solid var(--ink);background:#fff"></div><div style="position:absolute;left:0;top:0;width:64px;height:84px;border:2px solid var(--focus);box-sizing:border-box;background:repeating-linear-gradient(to bottom,#c9c9c4 0 2px,transparent 2px 6px) 8px 10px / 46px 60% no-repeat,#fff;box-shadow:0 10px 24px rgba(0,0,0,.25)"></div></div>
+                <span style="font-size:11px;font-weight:700;background:var(--focus);color:#fff;padding:1px 6px;align-self:flex-start">2 páginas → 3</span>
+              </div>
+            </div>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:16px 20px;display:flex;flex-direction:column;gap:20px;font-size:12px">
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Seleção</div>
+              <div style="display:grid;grid-template-columns:56px minmax(0,1fr)">
+                <span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:700">A7</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);color:var(--ink2)">posição 7 → 3</span>
+                <span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-weight:700">A8</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);color:var(--ink2)">posição 8 → 4</span>
+              </div>
+              <span style="display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:8px;align-items:center;margin-top:10px"><span style="color:var(--ink2)">Mover para posição</span><span style="height:28px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:flex-end;padding:0 8px;font-weight:500">3</span></span>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Teclado</div>
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;font-size:11px">
+                <span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Navegar</span><span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--weak);color:var(--ink2)">← → ↑ ↓</span>
+                <span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Selecionar várias</span><span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--weak);color:var(--ink2)">Shift + setas</span>
+                <span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Mover seleção</span><span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--weak);color:var(--ink2)">{{ B.alt }} ← →</span>
+                <span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Girar</span><span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--weak);color:var(--ink2)">R</span>
+                <span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Excluir</span><span style="height:24px;display:flex;align-items:center;border-bottom:1px solid var(--ink);color:var(--ink2)">{{ B.del }}</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Salvar como</div>
+              <span style="font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">contrato-a-reordenado.pdf</span>
+              <span style="display:flex;align-items:center;gap:8px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl)"></span>Substituir o original</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 24px;border-top:2px solid var(--ink)">
+          <span style="font-size:12px;font-weight:700">18 → 17 páginas</span><span style="font-size:12px;color:var(--ink2)">2 movidas · 1 girada · 1 excluída</span>
+          <button style="margin-left:auto;height:28px;padding:0 6px 0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--inkH)">Salvar PDF<span style="font-size:11px;font-weight:400;border:1px solid var(--paper);padding:0 4px;line-height:16px">{{ B.run }}</span></button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — Cada miniatura mostra a posição nova (negrito) e a referência original (A12). Por isso, dá para ver o que mudou sem abrir nada. Girada e excluída ficam marcadas no lugar: a excluída só sai ao salvar e pode ser recuperada com {{ B.undo }}. Por padrão, o resultado é salvo como cópia; substituir o original exige marcar a opção.</p></sc-if>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;sistema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;por tela&quot;,&quot;windows&quot;,&quot;macos&quot;,&quot;linux&quot;],&quot;default&quot;:&quot;por tela&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;claro&quot;,&quot;escuro&quot;],&quot;default&quot;:&quot;claro&quot;,&quot;tsType&quot;:&quot;'claro'|'escuro'&quot;},&quot;notas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.props.sistema ?? 'por tela';
+    const mk = d => {
+      const os = s === 'por tela' ? d : s; const m = os === 'macos';
+      const k = x => m ? '⌘' + (x === 'Enter' ? '↩' : x) : 'Ctrl ' + x;
+      return { os, open: k('O'), run: k('Enter'), undo: k('Z'), alt: m ? '⌥' : 'Alt', del: m ? '⌫' : 'Delete',
+        path: m ? '~/Documents/Conversor' : os === 'linux' ? '~/Documentos/Conversor' : 'C:\\Users\\ana\\Documents\\Conversor' };
+    };
+    const txt = 'repeating-linear-gradient(to bottom,#c9c9c4 0 2px,transparent 2px 5px) 5px 6px / calc(100% - 10px) 70% no-repeat,#fff';
+    const pic = 'linear-gradient(#d6d6d1,#d6d6d1) 5px 5px / calc(100% - 10px) 42% no-repeat,repeating-linear-gradient(to bottom,#c9c9c4 0 2px,transparent 2px 5px) 5px 62% / calc(100% - 10px) 30% no-repeat,#fff';
+    const pg = i => (i % 4 === 2 ? pic : txt);
+    const strip = (L, n, keep) => Array.from({ length: Math.min(n, 12) }, (_, i) => ({ ref: L + (i + 1), bg: pg(i + L.charCodeAt(0)), op: keep && !keep(i + 1) ? .3 : 1 }));
+    const docs = [
+      { pos: 1, ref: 'A', name: 'contrato-a.pdf', pages: 12, range: 'Todas', thumbs: strip('A', 12), op: 1, insBefore: false },
+      { pos: 3, ref: 'B', name: 'anexo-b-tabela-precos.pdf', pages: 6, range: '1–4', thumbs: strip('B', 6, p => p <= 4), op: 1, insBefore: true },
+      { pos: '·', ref: 'C', name: 'anexo-c-assinaturas.pdf · arrastando', pages: 7, range: 'Todas', thumbs: strip('C', 7), op: .3, insBefore: false },
+    ];
+    const dragThumbs = strip('C', 7);
+    const grid = [];
+    const order = ['A1', 'A2', 'A3', 'A4', 'A5', 'A6', 'A7', 'A8', 'A9', 'A10', 'A11', 'A12', 'A13', 'A14', 'A15', 'A16', 'A17', 'A18'];
+    const final = ['A1', 'A2', 'A7', 'A8', 'A3', 'A4', 'A5', 'A6', 'A9', 'A10', 'A11', 'A12', 'A13', 'A14', 'A16', 'A17', 'A18'];
+    order.forEach((ref, i) => {
+      const dragged = ref === 'A7' || ref === 'A8';
+      const rot = ref === 'A12', del = ref === 'A15';
+      const np = final.indexOf(ref) + 1;
+      grid.push({
+        ref, pos: del ? '—' : (dragged ? '→' : '') + np,
+        w: rot ? 92 : 72, h: rot ? 72 : 94,
+        bg: dragged ? 'transparent' : pg(i), bs: dragged ? 'dashed' : 'solid', bd: dragged ? 'var(--focus)' : 'var(--ink2)', op: del ? .35 : 1,
+        x: del, ins: ref === 'A3', ol: dragged ? '2px solid var(--focus)' : 'none', cbg: dragged ? 'color-mix(in oklch,var(--focus) 8%,transparent)' : 'transparent',
+        tag: rot ? '↻ 90°' : del ? 'excluída' : '', tagc: del ? 'var(--fail)' : 'var(--ink)',
+      });
+    });
+    return { theme: (this.props.tema ?? 'claro') === 'escuro' ? 'dark' : 'light', notes: this.props.notas ?? true, A: mk('windows'), B: mk('macos'), docs, dragThumbs, grid };
+  }
+}
+</script>
+</body>
+</html>

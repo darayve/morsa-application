@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap">
+<style>
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Light.ttf") format("truetype");font-weight:300}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Regular.ttf") format("truetype");font-weight:400}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Medium.ttf") format("truetype");font-weight:500}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Bold.ttf") format("truetype");font-weight:700}
+:root{--paper:#fafaf8;--ink:#121212;--ink2:#5d5d58;--weak:#dcdcd7;--weak2:#cfcfca;--ctrl:#121212;--sunk:#f0f0ec;--sel:#e6e6e1;--inkH:#3a3a37;--dis:#a3a39e;--desk:#e9e9e5;--ok:oklch(0.45 0.12 150);--run:oklch(0.45 0.15 255);--fail:oklch(0.48 0.18 28);--focus:oklch(0.50 0.16 255);--img:oklch(0.62 0.13 235);--pdf:oklch(0.60 0.16 30);--zip:oklch(0.74 0.13 85);--fut:#8f8f8a;--nat:#efefed;--natInk:#1b1b1b;--natLine:#d4d4d0}
+[data-theme="dark"]{--paper:#121211;--ink:#e8e8e4;--ink2:#a2a29c;--weak:#3d3d3a;--weak2:#4a4a46;--ctrl:#6a6a65;--sunk:#1c1c1a;--sel:#262624;--inkH:#ffffff;--dis:#5f5f5a;--desk:#060606;--ok:oklch(0.74 0.13 150);--run:oklch(0.74 0.12 255);--fail:oklch(0.72 0.15 28);--focus:oklch(0.72 0.14 255);--nat:#272727;--natInk:#e6e6e6;--natLine:#000}
+body{margin:0}
+a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background:var(--desk);color:var(--ink);font-family:'Ioskeley Mono',ui-monospace,monospace;font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0;font-size:13px;line-height:1.5;padding:64px;box-sizing:border-box;width:max-content">
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:48px;max-width:1200px">
+  <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Conversor · Telas · 01 · rev. B</span>
+  <h1 style="margin:0;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:34px;font-weight:700;line-height:1.1">Início</h1>
+  <span style="font-size:12px;color:var(--ink2)">Janela 1200 × 760 · barra de título nativa de cada sistema · referência: <a href="Sistema Visual.dc.html">Sistema visual</a> · próximas: <a href="02 IMG-01 Converter.dc.html">IMG-01</a> · <a href="03 PDF Juntar e Reordenar.dc.html">PDF-03/05</a> · <a href="04 ZIP-02 Extrair.dc.html">ZIP-02</a></span>
+</div>
+
+<section style="display:flex;flex-direction:column;gap:24px;margin-bottom:96px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:6px;border-bottom:2px solid var(--ink);max-width:2464px"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Aplicativo · desktop</span><span style="font-size:11px;color:var(--ink2)">Windows, macOS e Linux — atalhos seguem o sistema (Ctrl / ⌘)</span></div>
+<div style="display:grid;grid-template-columns:1200px 1200px;gap:72px 64px">
+
+<div id="1a" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">1a</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Uso recorrente</span><span style="font-size:11px;color:var(--ink2)">{{ A.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ A.os }}" titulo="Conversor" hint-size="100%,32px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="INI" sistema="{{ A.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2)">Bancada</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Início</span></div>
+          <span style="font-size:11px;color:var(--ink2)">2026-10-11</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 280px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:24px;min-height:0">
+            <div style="height:176px;flex:none;border:1px dashed var(--ink);background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--weak) 23px 24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+              <span style="font-size:13px;font-weight:500;background:var(--paper);padding:0 6px">Solte arquivos em qualquer lugar da janela</span>
+              <span style="display:flex;align-items:center;gap:12px;background:var(--paper);padding:0 6px"><span style="font-size:11px;color:var(--ink2)">ou</span><button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ctrl);background:var(--paper);color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)">Abrir arquivos…<span style="font-size:11px;font-weight:400;color:var(--ink2);border:1px solid var(--weak2);padding:0 4px;line-height:16px">{{ A.open }}</span></button></span>
+              <span style="font-size:11px;color:var(--ink2);background:var(--paper);padding:0 6px">PNG JPG WebP GIF BMP TIFF ICO SVG · PDF · ZIP</span>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px;border-bottom:2px solid var(--ink)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Recentes</span><a href="#" style="font-size:11px">Abrir histórico · {{ A.hist }}</a></div>
+              <div style="display:grid;grid-template-columns:44px minmax(0,1fr) 128px 84px 112px 56px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span>Nº</span><span>Ferramenta</span><span>Formatos</span><span style="text-align:right">Arquivos</span><span>Situação</span><span style="text-align:right">Data</span></div>
+              <sc-for list="{{ hist }}" as="r" hint-placeholder-count="6">
+                <div style="display:grid;grid-template-columns:44px minmax(0,1fr) 128px 84px 112px 56px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px;cursor:pointer" style-hover="background:var(--sunk)"><span style="font-size:11px;font-weight:300;color:var(--ink2)">{{ r.n }}</span><span style="display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap"><span style="width:8px;height:8px;flex:none;background:{{ r.color }}"></span><b style="font-weight:700">{{ r.code }}</b><span style="overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span></span><span style="white-space:nowrap">{{ r.fmt }}</span><span style="text-align:right;white-space:nowrap">{{ r.files }}</span><span style="display:flex;align-items:center;gap:6px;color:{{ r.stc }};font-weight:500;white-space:nowrap"><span style="width:8px;height:8px;box-sizing:border-box;border:1px solid {{ r.stc }};background:{{ r.stbg }}"></span>{{ r.st }}</span><span style="text-align:right;font-size:11px;color:var(--ink2)">{{ r.date }}</span></div>
+              </sc-for>
+              <div style="height:1px;background:var(--ink)"></div>
+            </div>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:24px">
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Ficha</div>
+              <div style="display:grid;grid-template-columns:88px minmax(0,1fr);font-size:12px">
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Versão</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">{{ A.ver }}</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Rede</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Sem acesso à rede</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Conta</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Nenhuma</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Histórico</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Só neste computador</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Licença</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-weight:500">Código aberto</span>
+              </div>
+              <a href="#" style="font-size:11px;margin-top:8px">Licenças e código-fonte · SYS-00</a>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Atalhos</div>
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;font-size:12px">
+                <span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Abrir arquivos</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-size:11px;color:var(--ink2)">{{ A.open }}</span>
+                <span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Buscar ferramenta</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-size:11px;color:var(--ink2)">{{ A.search }}</span>
+                <span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Histórico</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-size:11px;color:var(--ink2)">{{ A.hist }}</span>
+                <span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Converter / Juntar / Extrair</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;color:var(--ink2)">{{ A.run }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — O título é o nome da tela, nunca o número. O Nº aparece só como primeira coluna do histórico, em 11 px leve. "Formatos" e "Arquivos" descrevem o que foi feito (TIFF → PNG, 3 → 1). Tamanho não aparece porque o app não é um compressor. A barra de título é do sistema; o app só define o texto "Conversor".</p></sc-if>
+</div>
+
+<div id="1b" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">1b</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Primeira execução</span><span style="font-size:11px;color:var(--ink2)">{{ B.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);border-radius:10px;box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ B.os }}" titulo="Conversor" hint-size="100%,28px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="INI" historico="0" sistema="{{ B.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr);min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2)">Bancada</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Início</span></div>
+          <span style="font-size:11px;color:var(--ink2)">2026-10-11</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 280px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:24px">
+            <div style="height:260px;flex:none;border:1px dashed var(--ink);background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--weak) 23px 24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+              <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:22px;font-weight:700;background:var(--paper);padding:0 8px">Solte arquivos em qualquer lugar da janela</span>
+              <span style="display:flex;align-items:center;gap:12px;background:var(--paper);padding:0 6px"><span style="font-size:11px;color:var(--ink2)">ou</span><button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0;outline:2px solid var(--focus);outline-offset:2px">Abrir arquivos…<span style="font-size:11px;font-weight:400;border:1px solid var(--paper);padding:0 4px;line-height:16px">{{ B.open }}</span></button></span>
+              <span style="font-size:11px;color:var(--ink2);background:var(--paper);padding:0 6px">PNG JPG WebP GIF BMP TIFF ICO SVG · PDF · ZIP</span>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Como funciona</div>
+              <div style="display:grid;grid-template-columns:40px 200px minmax(0,1fr);height:32px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="font-weight:700">1</span><span style="font-weight:500">Soltar arquivos</span><span style="color:var(--ink2)">O app identifica os tipos e sugere a ferramenta certa.</span></div>
+              <div style="display:grid;grid-template-columns:40px 200px minmax(0,1fr);height:32px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="font-weight:700">2</span><span style="font-weight:500">Conferir o formato</span><span style="color:var(--ink2)">Formato e pasta de saída já vêm preenchidos.</span></div>
+              <div style="display:grid;grid-template-columns:40px 200px minmax(0,1fr);height:32px;align-items:center;border-bottom:1px solid var(--ink);font-size:12px"><span style="font-weight:700">3</span><span style="font-weight:500">Converter</span><span style="color:var(--ink2)">Tudo roda neste computador. O resultado fica no histórico.</span></div>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Recentes</div>
+              <div style="height:56px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:12px;color:var(--ink2)">Nada por aqui ainda. Cada conversão aparece nesta lista.</div>
+            </div>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:24px">
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Ficha</div>
+              <div style="display:grid;grid-template-columns:88px minmax(0,1fr);font-size:12px">
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Versão</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">{{ B.ver }}</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Rede</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Sem acesso à rede</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Conta</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Nenhuma</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Histórico</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">Só neste computador</span>
+                <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Licença</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-weight:500">Código aberto</span>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:8px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Pasta de saída</div>
+              <span style="font-size:12px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ B.path }}</span>
+              <a href="#" style="font-size:11px">Alterar em Configurações · {{ B.set }}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — No macOS a janela usa a barra unificada do sistema e cantos arredondados; o conteúdo continua com cantos retos. "Abrir arquivos…" já recebe o foco, então Enter abre o seletor. Os três passos somem quando existir a primeira conversão.</p></sc-if>
+</div>
+
+<div id="1c" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">1c</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Arrastando arquivos sobre a janela</span><span style="font-size:11px;color:var(--ink2)">{{ C.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);border-radius:8px 8px 0 0;box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ C.os }}" titulo="Conversor" hint-size="100%,40px"></dc-import>
+    <div style="position:relative;min-height:0">
+      <div style="display:grid;grid-template-columns:250px minmax(0,1fr);height:100%;opacity:.25">
+        <dc-import name="Indice" ativo="INI" sistema="{{ C.os }}" hint-size="250px,100%"></dc-import>
+        <div style="display:flex;flex-direction:column"><div style="padding:16px 24px 12px;border-bottom:2px solid var(--ink);display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2)">Bancada</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Início</span></div></div>
+      </div>
+      <div style="position:absolute;inset:12px;border:2px dashed var(--ink);background:color-mix(in srgb,var(--paper) 90%,transparent);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px">
+        <div style="position:absolute;inset:0;background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--weak) 23px 24px);opacity:.7"></div>
+        <div style="position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;background:var(--paper);padding:8px 16px">
+          <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:34px;font-weight:700;line-height:1.1">Solte para começar</span>
+          <span style="font-size:12px;color:var(--ink2)">9 arquivos · nada é lido antes de soltar</span>
+        </div>
+        <div style="position:relative;display:grid;grid-template-columns:20px 48px 140px 64px;min-width:320px;background:var(--paper);border-top:1px solid var(--ink);border-bottom:1px solid var(--ink);font-size:12px">
+          <span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak)"><span style="width:8px;height:8px;background:var(--img)"></span></span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:700">IMG</span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Imagens</span><span style="height:28px;display:flex;align-items:center;justify-content:flex-end;border-bottom:1px solid var(--weak)">5</span>
+          <span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak)"><span style="width:8px;height:8px;background:var(--pdf)"></span></span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:700">PDF</span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Documentos</span><span style="height:28px;display:flex;align-items:center;justify-content:flex-end;border-bottom:1px solid var(--weak)">2</span>
+          <span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak)"><span style="width:8px;height:8px;background:var(--zip)"></span></span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:700">ZIP</span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Pacotes</span><span style="height:28px;display:flex;align-items:center;justify-content:flex-end;border-bottom:1px solid var(--weak)">1</span>
+          <span style="height:28px;display:flex;align-items:center"><span style="width:6px;height:6px;border:1px solid var(--ink2)"></span></span><span style="height:28px;display:flex;align-items:center;font-weight:700;color:var(--ink2)">—</span><span style="height:28px;display:flex;align-items:center;color:var(--ink2)">Sem ferramenta</span><span style="height:28px;display:flex;align-items:center;justify-content:flex-end;color:var(--ink2)">1</span>
+        </div>
+        <span style="position:relative;font-size:11px;color:var(--ink2);background:var(--paper);padding:0 6px">Esc cancela · arraste para fora para desistir</span>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Recebendo 9 arquivos</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — No GNOME a barra de cabeçalho é do sistema (só o botão fechar, por padrão). A contagem por tipo depende de o sistema informar as extensões durante o arraste. Sem essa informação, aparece só "Solte para começar".</p></sc-if>
+</div>
+
+<div id="1d" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">1d</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Após soltar · tipos misturados</span><span style="font-size:11px;color:var(--ink2)">{{ D.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ D.os }}" titulo="Conversor" hint-size="100%,32px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="INI" marcar="IMG-01:5,PDF-03:2,ZIP-02:1" sistema="{{ D.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2)">Bancada · 9 arquivos recebidos</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Separar por ferramenta</span></div>
+          <span style="display:flex;align-items:center;gap:6px;font-size:11px;white-space:nowrap"><span style="width:6px;height:6px;border:1px solid var(--ink)"></span>Aguardando confirmação</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 280px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column">
+            <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Ferramentas sugeridas · uma por grupo</div>
+            <div style="display:grid;grid-template-columns:24px minmax(0,1fr) 180px 120px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span></span><span>Arquivos</span><span>Ferramenta</span><span>Saída</span></div>
+            <div style="display:grid;grid-template-columns:24px minmax(0,1fr) 180px 120px;gap:0 8px;min-height:52px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px">
+              <span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:10px;line-height:1">✕</span>
+              <span style="display:flex;flex-direction:column;min-width:0"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">foto-01.tiff, foto-02.tiff, capa.png, logo.ico +1</span><span style="font-size:11px;color:var(--ink2)">5 imagens · TIFF, PNG, ICO</span></span>
+              <span style="display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="width:8px;height:8px;background:var(--img)"></span><b style="font-weight:700">IMG-01</b>Converter</span>
+              <span style="height:28px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:space-between;padding:0 8px">→ PNG<span style="font-size:10px">▾</span></span>
+            </div>
+            <div style="display:grid;grid-template-columns:24px minmax(0,1fr) 180px 120px;gap:0 8px;min-height:52px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px;background:var(--sel);outline:2px solid var(--focus);outline-offset:-2px">
+              <span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:10px;line-height:1;margin-left:6px">✕</span>
+              <span style="display:flex;flex-direction:column;min-width:0"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">contrato-a.pdf, anexo-b.pdf</span><span style="font-size:11px;color:var(--ink2)">2 PDFs · 18 páginas</span></span>
+              <span style="display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="width:8px;height:8px;background:var(--pdf)"></span><b style="font-weight:700">PDF-03</b>Juntar</span>
+              <span style="height:28px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:space-between;padding:0 8px;background:var(--paper)">→ 1 PDF<span style="font-size:10px">▾</span></span>
+            </div>
+            <div style="display:grid;grid-template-columns:24px minmax(0,1fr) 180px 120px;gap:0 8px;min-height:52px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px">
+              <span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);display:flex;align-items:center;justify-content:center;color:var(--paper);font-size:10px;line-height:1">✕</span>
+              <span style="display:flex;flex-direction:column;min-width:0"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">amostras-fornecedor.zip</span><span style="font-size:11px;color:var(--ink2)">1 pacote · 34 itens</span></span>
+              <span style="display:flex;align-items:center;gap:6px;white-space:nowrap"><span style="width:8px;height:8px;background:var(--zip)"></span><b style="font-weight:700">ZIP-02</b>Extrair</span>
+              <span style="height:28px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:space-between;padding:0 8px">→ Pasta<span style="font-size:10px">▾</span></span>
+            </div>
+            <div style="display:grid;grid-template-columns:24px minmax(0,1fr) 180px 120px;gap:0 8px;min-height:52px;align-items:center;border-bottom:1px solid var(--ink);font-size:12px;color:var(--ink2)">
+              <span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--dis)"></span>
+              <span style="display:flex;flex-direction:column;min-width:0"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">planilha-precos.xlsx</span><span style="font-size:11px">1 arquivo · XLSX</span></span>
+              <span style="grid-column:span 2">Nenhuma ferramenta abre XLSX · fica de fora</span>
+            </div>
+            <span style="font-size:11px;color:var(--ink2);padding-top:8px">↑ ↓ escolhe o grupo · Espaço inclui ou exclui · a ferramenta de cada grupo pode ser trocada no painel →</span>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:12px">
+            <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Também servem · 2 PDFs</div>
+            <div style="display:flex;flex-direction:column;font-size:12px">
+              <div style="display:grid;grid-template-columns:20px 56px minmax(0,1fr);height:44px;align-items:center;border-bottom:1px solid var(--weak);background:var(--ink);color:var(--paper);margin:0 -8px;padding:0 8px"><span>●</span><b style="font-weight:700">PDF-03</b><span style="display:flex;flex-direction:column;line-height:1.3"><span style="font-weight:500">Juntar PDFs</span><span style="font-size:11px">2 → 1 · sugerida</span></span></div>
+              <div style="display:grid;grid-template-columns:20px 56px minmax(0,1fr);height:44px;align-items:center;border-bottom:1px solid var(--weak)"><span>○</span><b style="font-weight:700">PDF-05</b><span style="display:flex;flex-direction:column;line-height:1.3"><span>Reordenar páginas</span><span style="font-size:11px;color:var(--ink2)">18 páginas em grade</span></span></div>
+              <div style="display:grid;grid-template-columns:20px 56px minmax(0,1fr);height:44px;align-items:center;border-bottom:1px solid var(--weak)"><span>○</span><b style="font-weight:700">PDF-01</b><span style="display:flex;flex-direction:column;line-height:1.3"><span>PDF → imagem</span><span style="font-size:11px;color:var(--ink2)">18 imagens</span></span></div>
+              <div style="display:grid;grid-template-columns:20px 56px minmax(0,1fr);height:44px;align-items:center;border-bottom:1px solid var(--ink)"><span>○</span><b style="font-weight:700">PDF-04</b><span style="display:flex;flex-direction:column;line-height:1.3"><span>Dividir PDF</span><span style="font-size:11px;color:var(--ink2)">por intervalo</span></span></div>
+            </div>
+            <p style="margin:0;font-size:11px;color:var(--ink2);text-wrap:pretty">A sugestão segue a quantidade: 2 ou mais PDFs → Juntar; 1 PDF → Reordenar.</p>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 24px;border-top:2px solid var(--ink)">
+          <span style="font-size:12px;font-weight:700">3 ferramentas · 8 arquivos</span><span style="font-size:12px;color:var(--ink2)">1 fica de fora · abrem uma de cada vez, IMG-01 primeiro</span>
+          <span style="margin-left:auto;display:flex;gap:8px">
+            <button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)">Descartar<span style="font-size:11px;font-weight:400;color:var(--ink2);border:1px solid var(--weak2);padding:0 4px;line-height:16px">Esc</span></button>
+            <button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--inkH)">Continuar<span style="font-size:11px;font-weight:400;border:1px solid var(--paper);padding:0 4px;line-height:16px">Enter</span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — Só aparece quando os tipos se misturam; arquivos de um tipo só abrem direto na ferramenta. Os grupos não recebem número aqui: o Nº só existe depois de converter, no histórico.</p></sc-if>
+</div>
+
+</div>
+</section>
+
+<section style="display:flex;flex-direction:column;gap:24px">
+<div style="display:flex;align-items:baseline;gap:12px;padding-bottom:6px;border-bottom:2px solid var(--ink);max-width:2464px"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Versão web · janelas estreitas</span><span style="font-size:11px;color:var(--ink2)">Abaixo de 1024 px o índice e o painel lateral recolhem</span></div>
+<div style="display:grid;grid-template-columns:160px 260px 260px minmax(0,1fr);max-width:1200px;font-size:12px;border-top:1px solid var(--ink)">
+  <span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Largura</span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Índice</span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Painel lateral</span><span style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase">Tabelas</span>
+  <span style="padding:6px 0;border-bottom:1px solid var(--weak);font-weight:700">≥ 1024</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)">Completo · 250 px</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)">Fixo · 280 px</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)">Todas as colunas</span>
+  <span style="padding:6px 0;border-bottom:1px solid var(--weak);font-weight:700">768 – 1023</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)">Trilho de códigos · 64 px</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)">Vira botão no cabeçalho; abre por cima, à direita</span><span style="padding:6px 0;border-bottom:1px solid var(--weak)">Some a coluna Nº</span>
+  <span style="padding:6px 0;border-bottom:1px solid var(--ink);font-weight:700">&lt; 768</span><span style="padding:6px 0;border-bottom:1px solid var(--ink)">Botão "Ferramentas" na barra superior; abre como gaveta</span><span style="padding:6px 0;border-bottom:1px solid var(--ink)">Desce para o fim da página, recolhido</span><span style="padding:6px 0;border-bottom:1px solid var(--ink)">Linhas em 2 andares</span>
+</div>
+<div style="display:flex;gap:64px;align-items:flex-start">
+
+<div id="1e" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">1e</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">960 px · trilho</span></div>
+  <div style="width:960px;height:680px;background:var(--paper);border:1px solid var(--ink);display:grid;grid-template-rows:minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <div style="display:grid;grid-template-columns:64px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="INI" modo="trilho" sistema="{{ W.os }}" hint-size="64px,100%"></dc-import>
+      <div style="display:flex;flex-direction:column;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2)">Bancada</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Início</span></div>
+          <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0;cursor:pointer">Ficha e atalhos ▸</button>
+        </div>
+        <div style="padding:20px 24px;display:flex;flex-direction:column;gap:24px">
+          <div style="height:136px;flex:none;border:1px dashed var(--ink);background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--weak) 23px 24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
+            <span style="font-size:13px;font-weight:500;background:var(--paper);padding:0 6px">Solte arquivos aqui</span>
+            <button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ctrl);background:var(--paper);color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;border-radius:0">Abrir arquivos…<span style="font-size:11px;font-weight:400;color:var(--ink2);border:1px solid var(--weak2);padding:0 4px;line-height:16px">{{ W.open }}</span></button>
+          </div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px;border-bottom:2px solid var(--ink)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Recentes</span><a href="#" style="font-size:11px">Abrir histórico</a></div>
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 80px 104px 52px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span>Ferramenta</span><span>Formatos</span><span style="text-align:right">Arquivos</span><span>Situação</span><span style="text-align:right">Data</span></div>
+            <sc-for list="{{ hist }}" as="r" hint-placeholder-count="6">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) 120px 80px 104px 52px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap"><span style="width:8px;height:8px;flex:none;background:{{ r.color }}"></span><b style="font-weight:700">{{ r.code }}</b><span style="overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span></span><span style="white-space:nowrap">{{ r.fmt }}</span><span style="text-align:right;white-space:nowrap">{{ r.files }}</span><span style="display:flex;align-items:center;gap:6px;color:{{ r.stc }};font-weight:500;white-space:nowrap"><span style="width:8px;height:8px;box-sizing:border-box;border:1px solid {{ r.stc }};background:{{ r.stbg }}"></span>{{ r.st }}</span><span style="text-align:right;font-size:11px;color:var(--ink2)">{{ r.date }}</span></div>
+            </sc-for>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0 · web</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;width:960px;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — O trilho mantém só os códigos, com a cor da categoria no fio de cima de cada grupo. "≡" ou foco no trilho abre o índice completo por cima, sem empurrar o conteúdo. Ficha e atalhos saem do layout e abrem num painel à direita.</p></sc-if>
+</div>
+
+<div id="1f" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">1f</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">720 px · barra superior</span></div>
+  <div style="width:720px;height:680px;background:var(--paper);border:1px solid var(--ink);display:grid;grid-template-rows:44px minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-bottom:1px solid var(--ink)">
+      <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">≡ Ferramentas</button>
+      <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:16px;font-weight:700">Conversor</span>
+      <a href="#" style="margin-left:auto;font-size:12px">Histórico</a>
+    </div>
+    <div style="overflow:hidden;display:flex;flex-direction:column">
+      <div style="display:flex;flex-direction:column;gap:2px;padding:16px 16px 12px;border-bottom:2px solid var(--ink)"><span style="font-size:11px;color:var(--ink2)">Bancada</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:28px;font-weight:700;line-height:1.1">Início</span></div>
+      <div style="padding:16px;display:flex;flex-direction:column;gap:20px">
+        <div style="height:120px;flex:none;border:1px dashed var(--ink);background:repeating-linear-gradient(to bottom,transparent 0 23px,var(--weak) 23px 24px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px">
+          <span style="font-size:13px;font-weight:500;background:var(--paper);padding:0 6px">Solte arquivos aqui</span>
+          <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:var(--paper);color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">Abrir arquivos…</button>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Recentes</div>
+          <sc-for list="{{ histShort }}" as="r" hint-placeholder-count="4">
+            <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 12px;padding:8px 0;border-bottom:1px solid var(--weak);font-size:12px"><span style="display:flex;align-items:center;gap:6px;overflow:hidden;white-space:nowrap"><span style="width:8px;height:8px;flex:none;background:{{ r.color }}"></span><b style="font-weight:700">{{ r.code }}</b><span style="overflow:hidden;text-overflow:ellipsis">{{ r.name }}</span></span><span style="display:flex;align-items:center;gap:6px;color:{{ r.stc }};font-weight:500;white-space:nowrap"><span style="width:8px;height:8px;box-sizing:border-box;border:1px solid {{ r.stc }};background:{{ r.stbg }}"></span>{{ r.st }}</span><span style="font-size:11px;color:var(--ink2);padding-left:14px">{{ r.fmt }} · {{ r.files }} arquivos</span><span style="font-size:11px;color:var(--ink2);text-align:right">{{ r.date }}</span></div>
+          </sc-for>
+        </div>
+        <div style="display:flex;flex-direction:column;border-top:2px solid var(--ink)">
+          <div style="height:36px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--weak)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Ficha</span><span>▸</span></div>
+          <div style="height:36px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--ink)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Atalhos</span><span>▸</span></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="margin-left:auto;color:var(--ink2)">0.1.0 · web</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;width:720px;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — Cada linha do histórico vira dois andares: ferramenta e situação em cima, formatos e data embaixo. Ficha e atalhos descem para o fim, recolhidos.</p></sc-if>
+</div>
+
+<div id="1g" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">1g</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">720 px · índice aberto</span></div>
+  <div style="width:720px;height:680px;background:var(--paper);border:1px solid var(--ink);display:grid;grid-template-rows:44px minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-bottom:1px solid var(--ink)">
+      <button style="height:28px;padding:0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">✕ Ferramentas</button>
+      <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:16px;font-weight:700">Conversor</span>
+      <a href="#" style="margin-left:auto;font-size:12px">Histórico</a>
+    </div>
+    <div style="position:relative;min-height:0;overflow:hidden">
+      <div style="display:flex;flex-direction:column;gap:2px;padding:16px 16px 12px;border-bottom:2px solid var(--ink)"><span style="font-size:11px;color:var(--ink2)">Bancada</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:28px;font-weight:700;line-height:1.1">Início</span></div>
+      <div style="position:absolute;inset:0;background:color-mix(in srgb,var(--ink) 35%,transparent)"></div>
+      <div style="position:absolute;top:0;left:0;bottom:0;box-shadow:8px 0 24px rgba(0,0,0,.18)"><dc-import name="Indice" ativo="INI" sistema="{{ W.os }}" hint-size="250px,100%"></dc-import></div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="margin-left:auto;color:var(--ink2)">0.1.0 · web</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;width:720px;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — O mesmo componente do índice, por cima do conteúdo. O foco fica preso na gaveta; Esc, ✕ ou clicar fora fecha. Ao escolher uma ferramenta, a gaveta fecha sozinha. Soltar arquivos continua valendo na página toda.</p></sc-if>
+</div>
+
+</div>
+</section>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;sistema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;por tela&quot;,&quot;windows&quot;,&quot;macos&quot;,&quot;linux&quot;],&quot;default&quot;:&quot;por tela&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;claro&quot;,&quot;escuro&quot;],&quot;default&quot;:&quot;claro&quot;,&quot;tsType&quot;:&quot;'claro'|'escuro'&quot;},&quot;notas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.props.sistema ?? 'por tela';
+    const mk = d => {
+      const os = s === 'por tela' ? d : s; const m = os === 'macos';
+      const k = x => m ? '⌘' + (x === 'Enter' ? '↩' : x) : 'Ctrl ' + x;
+      return { os, open: k('O'), search: k('K'), hist: k('L'), run: k('Enter'), set: k(','),
+        ver: m ? '0.1.0 · macOS' : os === 'linux' ? '0.1.0 · Linux x64' : '0.1.0 · Windows x64',
+        path: m ? '~/Documents/Conversor' : os === 'linux' ? '~/Documentos/Conversor' : 'C:\\Users\\ana\\Documents\\Conversor' };
+    };
+    const ok = { st: 'Concluída', stc: 'var(--ok)', stbg: 'var(--ok)' };
+    const hist = [
+      { n: '0143', code: 'IMG-01', name: 'Converter imagens', color: 'var(--img)', fmt: 'TIFF → PNG', files: '12 → 12', date: '14:22', ...ok },
+      { n: '0142', code: 'PDF-03', name: 'Juntar PDFs', color: 'var(--pdf)', fmt: 'PDF → PDF', files: '3 → 1', date: '11:05', ...ok },
+      { n: '0141', code: 'IMG-01', name: 'Converter imagens', color: 'var(--img)', fmt: 'JPG → WebP', files: '8 → 6', date: 'ontem', st: '2 falhas', stc: 'var(--fail)', stbg: 'var(--fail)' },
+      { n: '0140', code: 'ZIP-02', name: 'Extrair', color: 'var(--zip)', fmt: 'ZIP → pasta', files: '1 → 312', date: 'ontem', ...ok },
+      { n: '0139', code: 'PDF-04', name: 'Dividir PDF', color: 'var(--pdf)', fmt: 'PDF → PDF', files: '1 → 14', date: '01/10', ...ok },
+      { n: '0138', code: 'PDF-01', name: 'PDF → imagem', color: 'var(--pdf)', fmt: 'PDF → JPG', files: '2 → 0', date: '30/09', st: 'Cancelada', stc: 'var(--ink2)', stbg: 'transparent' },
+    ];
+    return { theme: (this.props.tema ?? 'claro') === 'escuro' ? 'dark' : 'light', notes: this.props.notas ?? true,
+      A: mk('windows'), B: mk('macos'), C: mk('linux'), D: mk('windows'), W: mk('windows'), hist, histShort: hist.slice(0, 4) };
+  }
+}
+</script>
+</body>
+</html>

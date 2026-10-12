@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&display=swap">
+<style>
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Light.ttf") format("truetype");font-weight:300}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Regular.ttf") format("truetype");font-weight:400}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Medium.ttf") format("truetype");font-weight:500}
+@font-face{font-family:"Ioskeley Mono";src:url("fonts/IoskeleyMono-Bold.ttf") format("truetype");font-weight:700}
+:root{--paper:#fafaf8;--ink:#121212;--ink2:#5d5d58;--weak:#dcdcd7;--weak2:#cfcfca;--ctrl:#121212;--sunk:#f0f0ec;--sel:#e6e6e1;--inkH:#3a3a37;--dis:#a3a39e;--desk:#e9e9e5;--ok:oklch(0.45 0.12 150);--run:oklch(0.45 0.15 255);--fail:oklch(0.48 0.18 28);--focus:oklch(0.50 0.16 255);--img:oklch(0.62 0.13 235);--pdf:oklch(0.60 0.16 30);--zip:oklch(0.74 0.13 85);--fut:#8f8f8a;--nat:#efefed;--natInk:#1b1b1b;--natLine:#d4d4d0}
+[data-theme="dark"]{--paper:#121211;--ink:#e8e8e4;--ink2:#a2a29c;--weak:#3d3d3a;--weak2:#4a4a46;--ctrl:#6a6a65;--sunk:#1c1c1a;--sel:#262624;--inkH:#ffffff;--dis:#5f5f5a;--desk:#060606;--ok:oklch(0.74 0.13 150);--run:oklch(0.74 0.12 255);--fail:oklch(0.72 0.15 28);--focus:oklch(0.72 0.14 255);--nat:#272727;--natInk:#e6e6e6;--natLine:#000}
+body{margin:0}
+a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+a:hover{text-decoration-thickness:2px}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;background:var(--desk);color:var(--ink);font-family:'Ioskeley Mono',ui-monospace,monospace;font-variant-ligatures:none;font-feature-settings:'calt' 0,'liga' 0;font-size:13px;line-height:1.5;padding:64px;box-sizing:border-box;width:max-content">
+<div style="display:flex;flex-direction:column;gap:8px;margin-bottom:48px;max-width:1200px">
+  <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Conversor · Telas · 04</span>
+  <h1 style="margin:0;font-family:'IBM Plex Sans Condensed',sans-serif;font-size:34px;font-weight:700;line-height:1.1">ZIP-02 · Extrair</h1>
+  <span style="font-size:12px;color:var(--ink2)">Extração normal, aviso de limite de segurança e confirmação · <a href="01 Inicio v2.dc.html">Início</a> · <a href="03 PDF Juntar e Reordenar.dc.html">PDF-03/05</a></span>
+</div>
+<div style="display:grid;grid-template-columns:1200px 1200px;gap:72px 64px">
+
+<div id="4a" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">4a</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Antes de extrair · dentro do limite</span><span style="font-size:11px;color:var(--ink2)">{{ A.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);border-radius:8px 8px 0 0;box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ A.os }}" titulo="Conversor" hint-size="100%,40px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="ZIP-02" sistema="{{ A.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--zip)"></span>ZIP · ZIP-02 · amostras-fornecedor.zip</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Extrair</span></div>
+          <span style="display:flex;align-items:center;gap:6px;font-size:11px;white-space:nowrap;color:var(--ok);font-weight:500"><span style="width:8px;height:8px;background:var(--ok)"></span>Verificado · pronto para extrair</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column;min-height:0;overflow:hidden">
+            <div style="display:flex;justify-content:space-between;align-items:baseline;padding-bottom:4px;border-bottom:2px solid var(--ink)"><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Conteúdo · 34 itens</span><span style="font-size:11px;color:var(--ink2)">3 pastas · 31 arquivos</span></div>
+            <div style="display:grid;grid-template-columns:24px minmax(0,1fr) 88px 72px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span></span><span>Caminho</span><span>Tipo</span><span style="text-align:right">Itens</span></div>
+            <sc-for list="{{ tree }}" as="t" hint-placeholder-count="14">
+              <div style="display:grid;grid-template-columns:24px minmax(0,1fr) 88px 72px;gap:0 8px;height:26px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);color:var(--paper);font-size:10px;line-height:1;display:flex;align-items:center;justify-content:center">✕</span><span style="padding-left:{{ t.ind }}px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:{{ t.w }}">{{ t.name }}</span><span style="color:var(--ink2)">{{ t.type }}</span><span style="text-align:right;color:var(--ink2)">{{ t.n }}</span></div>
+            </sc-for>
+            <div style="height:28px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;color:var(--ink2);padding-left:32px">+ 18 arquivos em fotos/ e fichas/</div>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:20px;font-size:12px">
+            <div style="display:flex;flex-direction:column;gap:6px">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Destino</div>
+              <span style="font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">{{ A.path }}/amostras-fornecedor</span>
+              <a href="#" style="font-size:11px">Alterar pasta…</a>
+              <span style="display:flex;align-items:center;gap:8px;margin-top:4px"><span style="width:12px;height:12px;box-sizing:border-box;border:1px solid var(--ctrl);background:var(--ink);color:var(--paper);font-size:10px;line-height:1;display:flex;align-items:center;justify-content:center">✕</span>Criar pasta com o nome do pacote</span>
+              <span style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:8px;align-items:center;margin-top:4px"><span style="color:var(--ink2)">Se já existir</span><span style="height:28px;box-sizing:border-box;border:1px solid var(--ctrl);display:flex;align-items:center;justify-content:space-between;padding:0 8px">Renomear<span style="font-size:10px">▾</span></span></span>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Verificação de segurança</div>
+              <sc-for list="{{ checksOk }}" as="c" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:6px;align-items:center;min-height:28px;border-bottom:1px solid var(--weak)"><span style="color:var(--ok);font-weight:700">✓</span><span>{{ c.label }}</span><span style="font-size:11px;color:var(--ink2);white-space:nowrap">{{ c.val }}</span></div>
+              </sc-for>
+              <span style="font-size:11px;color:var(--ink2);margin-top:8px;text-wrap:pretty">Feita antes de gravar qualquer coisa, só lendo o índice do pacote.</span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 24px;border-top:2px solid var(--ink)">
+          <span style="font-size:12px;font-weight:700">ZIP → pasta</span><span style="font-size:12px;color:var(--ink2)">34 itens</span>
+          <button style="margin-left:auto;height:28px;padding:0 6px 0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0" style-hover="background:var(--inkH)">Extrair 34 itens<span style="font-size:11px;font-weight:400;border:1px solid var(--paper);padding:0 4px;line-height:16px">{{ A.run }}</span></button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — A verificação aparece sempre, mesmo quando tudo passa, para que o aviso de 4b não pareça surgir do nada. Os itens podem ser desmarcados para extrair só uma parte.</p></sc-if>
+</div>
+
+<div id="4b" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">4b</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Aviso · acima do limite de segurança</span><span style="font-size:11px;color:var(--ink2)">{{ B.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ B.os }}" titulo="Conversor" hint-size="100%,32px"></dc-import>
+    <div style="display:grid;grid-template-columns:250px minmax(0,1fr);min-height:0">
+      <dc-import name="Indice" ativo="ZIP-02" sistema="{{ B.os }}" hint-size="250px,100%"></dc-import>
+      <div style="display:grid;grid-template-rows:auto minmax(0,1fr) auto;min-height:0">
+        <div style="display:flex;justify-content:space-between;align-items:flex-end;gap:24px;padding:16px 24px 12px;border-bottom:2px solid var(--ink)">
+          <div style="display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2);display:flex;align-items:center;gap:6px"><span style="width:8px;height:8px;background:var(--zip)"></span>ZIP · ZIP-02 · backup-fotos-2019.zip</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Extrair</span></div>
+          <span style="display:flex;align-items:center;gap:6px;font-size:11px;white-space:nowrap;color:var(--fail);font-weight:500"><span style="width:8px;height:8px;background:var(--fail)"></span>Parado antes de gravar</span>
+        </div>
+        <div style="display:grid;grid-template-columns:minmax(0,1fr) 300px;min-height:0">
+          <div style="padding:20px 24px;display:flex;flex-direction:column;gap:20px;min-height:0;overflow:hidden">
+            <div style="border:2px solid var(--fail);display:flex;flex-direction:column">
+              <div style="display:flex;align-items:center;gap:10px;padding:6px 14px;background:var(--fail);color:var(--paper);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Limite de segurança · nada foi gravado</div>
+              <div style="padding:14px 14px 16px;display:flex;flex-direction:column;gap:8px">
+                <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:24px;font-weight:700;line-height:1.15">Este pacote fica grande demais ao extrair</span>
+                <p style="margin:0;font-size:13px;max-width:68ch;text-wrap:pretty">O arquivo tem 1,1 MB, mas o índice dele diz que vira <b>4,6 GB</b>, cerca de 4 200 vezes mais. Pacotes assim costumam ser feitos para lotar o disco. Também há 3 itens que tentam gravar fora da pasta de destino.</p>
+              </div>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="display:grid;grid-template-columns:minmax(0,1fr) 140px 120px 64px;gap:0 8px;height:28px;align-items:center;border-bottom:1px solid var(--ink);font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase"><span>Verificação</span><span style="text-align:right">Este pacote</span><span style="text-align:right">Limite</span><span></span></div>
+              <sc-for list="{{ checksBad }}" as="c" hint-placeholder-count="4">
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) 140px 120px 64px;gap:0 8px;height:30px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span>{{ c.label }}</span><span style="text-align:right;font-weight:700;color:{{ c.c }}">{{ c.val }}</span><span style="text-align:right;color:var(--ink2)">{{ c.lim }}</span><span style="display:flex;justify-content:flex-end;align-items:center;gap:6px;color:{{ c.c }};font-weight:500;font-size:11px"><span style="width:8px;height:8px;background:{{ c.c }}"></span>{{ c.st }}</span></div>
+              </sc-for>
+              <div style="height:1px;background:var(--ink)"></div>
+            </div>
+            <div style="display:flex;flex-direction:column">
+              <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Caminhos fora do destino · nunca extraídos</div>
+              <sc-for list="{{ badPaths }}" as="p" hint-placeholder-count="3">
+                <div style="display:grid;grid-template-columns:minmax(0,1fr) auto;height:26px;align-items:center;border-bottom:1px solid var(--weak);font-size:12px"><span style="color:var(--fail);font-weight:500">{{ p.path }}</span><span style="font-size:11px;color:var(--ink2)">{{ p.why }}</span></div>
+              </sc-for>
+            </div>
+          </div>
+          <div style="border-left:1px solid var(--weak);padding:20px;display:flex;flex-direction:column;gap:16px;font-size:12px">
+            <div style="padding-bottom:4px;border-bottom:2px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">O que dá para fazer</div>
+            <div style="display:grid;grid-template-columns:20px minmax(0,1fr);gap:4px 6px;margin-top:-8px">
+              <b>1</b><span><b style="font-weight:500">Cancelar.</b> <span style="color:var(--ink2)">Se você não esperava 4,6 GB, é o mais seguro.</span></span>
+              <b>2</b><span><b style="font-weight:500">Ver o conteúdo</b> <span style="color:var(--ink2)">em ZIP-01, sem gravar nada.</span></span>
+              <b>3</b><span><b style="font-weight:500">Extrair mesmo assim.</b> <span style="color:var(--ink2)">Pede confirmação. Os 3 caminhos inseguros continuam de fora.</span></span>
+            </div>
+            <div style="display:grid;grid-template-columns:96px minmax(0,1fr);border-top:1px solid var(--ink)">
+              <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Espaço livre</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">38,2 GB em {{ B.drive }}</span>
+              <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Limites</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)"><a href="#" style="font-size:11px">Ajustar em Configurações</a></span>
+            </div>
+          </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;padding:12px 24px;border-top:2px solid var(--ink)">
+          <span style="font-size:12px;font-weight:700;color:var(--fail)">4 de 5 verificações falharam</span>
+          <span style="margin-left:auto;display:flex;gap:8px">
+            <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)">Extrair mesmo assim…</button>
+            <button style="height:28px;padding:0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;cursor:pointer;border-radius:0" style-hover="background:var(--sunk)">Ver conteúdo · ZIP-01</button>
+            <button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0;outline:2px solid var(--focus);outline-offset:2px">Cancelar<span style="font-size:11px;font-weight:400;border:1px solid var(--paper);padding:0 4px;line-height:16px">Enter</span></button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — O aviso fica dentro da tela, não num pop-up: a pessoa vê os números ao lado dos limites. O botão em foco é Cancelar, então um Enter apressado nunca extrai. Caminhos fora do destino não têm exceção.</p></sc-if>
+</div>
+
+<div id="4c" style="display:flex;flex-direction:column;gap:12px">
+  <div style="display:flex;align-items:baseline;gap:12px"><span style="font-size:11px;font-weight:700;background:var(--ink);color:var(--paper);padding:2px 6px">4c</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:18px;font-weight:700">Extrair mesmo assim · confirmação</span><span style="font-size:11px;color:var(--ink2)">{{ B.os }}</span></div>
+  <div style="width:1200px;height:760px;background:var(--paper);border:1px solid var(--natLine);box-shadow:0 16px 40px rgba(0,0,0,.10);display:grid;grid-template-rows:auto minmax(0,1fr) 24px;overflow:hidden;box-sizing:border-box">
+    <dc-import name="BarraTitulo" sistema="{{ B.os }}" titulo="Conversor" hint-size="100%,32px"></dc-import>
+    <div style="position:relative;min-height:0">
+      <div style="display:grid;grid-template-columns:250px minmax(0,1fr);height:100%">
+        <dc-import name="Indice" ativo="ZIP-02" sistema="{{ B.os }}" hint-size="250px,100%"></dc-import>
+        <div style="display:flex;flex-direction:column"><div style="padding:16px 24px 12px;border-bottom:2px solid var(--ink);display:flex;flex-direction:column;gap:2px"><span style="font-size:11px;color:var(--ink2)">ZIP · ZIP-02 · backup-fotos-2019.zip</span><span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:30px;font-weight:700;line-height:1.1">Extrair</span></div><div style="margin:20px 24px;height:120px;border:2px solid var(--fail)"></div></div>
+      </div>
+      <div style="position:absolute;inset:0;background:color-mix(in srgb,var(--ink) 40%,transparent)"></div>
+      <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:520px;background:var(--paper);border:2px solid var(--ink);box-shadow:0 20px 48px rgba(0,0,0,.3);display:flex;flex-direction:column">
+        <div style="padding:6px 16px;border-bottom:1px solid var(--ink);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase">Confirmar extração</div>
+        <div style="padding:16px;display:flex;flex-direction:column;gap:14px">
+          <span style="font-family:'IBM Plex Sans Condensed',sans-serif;font-size:22px;font-weight:700;line-height:1.15">Gravar 4,6 GB em {{ B.drive }}?</span>
+          <div style="display:grid;grid-template-columns:140px minmax(0,1fr);font-size:12px;border-top:1px solid var(--ink)">
+            <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Itens</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">120 031 · 3 inseguros ficam de fora</span>
+            <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak)">Espaço livre depois</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--weak);font-weight:500">33,6 GB</span>
+            <span style="color:var(--ink2);height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink)">Parar se</span><span style="height:26px;display:flex;align-items:center;border-bottom:1px solid var(--ink);font-weight:500">passar de 4,6 GB de fato</span>
+          </div>
+          <span style="display:flex;align-items:flex-start;gap:8px;font-size:12px"><span style="width:12px;height:12px;flex:none;margin-top:3px;box-sizing:border-box;border:1px solid var(--ctrl);outline:2px solid var(--focus);outline-offset:2px"></span><span style="text-wrap:pretty">Confio na origem deste pacote e entendo que ele pode ocupar o disco.</span></span>
+        </div>
+        <div style="display:flex;justify-content:flex-end;gap:8px;padding:12px 16px;border-top:2px solid var(--ink)">
+          <button style="height:28px;padding:0 6px 0 12px;border:1px solid var(--ctrl);background:transparent;color:var(--ink);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;display:inline-flex;align-items:center;gap:10px;cursor:pointer;border-radius:0">Voltar<span style="font-size:11px;font-weight:400;color:var(--ink2);border:1px solid var(--weak2);padding:0 4px;line-height:16px">Esc</span></button>
+          <button disabled="" style="height:28px;padding:0 12px;border:1px solid var(--dis);background:var(--dis);color:var(--paper);font:500 13px 'Ioskeley Mono',monospace;white-space:nowrap;border-radius:0">Extrair 4,6 GB</button>
+        </div>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:12px;padding:0 12px;border-top:1px solid var(--ink);font-size:11px;white-space:nowrap;overflow:hidden"><span style="display:flex;align-items:center;gap:6px;font-weight:700"><span style="width:8px;height:8px;background:var(--ink)"></span>Sem acesso à rede</span><span style="color:var(--ink2)">·</span><span>Processamento local</span><span style="margin-left:auto;color:var(--ink2)">Conversor 0.1.0</span></div>
+  </div>
+  <sc-if value="{{ notes }}" hint-placeholder-val="{{ true }}"><p style="margin:0;max-width:96ch;font-size:12px;color:var(--ink2);text-wrap:pretty"><b style="color:var(--ink);font-weight:700">Notas</b> — Única janela modal do fluxo. O botão de extrair fica desabilitado até a caixa ser marcada, e o rótulo repete o número (4,6 GB) em vez de "OK". Durante a extração, o app mede o que grava de verdade e para se o pacote mentiu no índice.</p></sc-if>
+</div>
+
+</div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;sistema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;por tela&quot;,&quot;windows&quot;,&quot;macos&quot;,&quot;linux&quot;],&quot;default&quot;:&quot;por tela&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;tema&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;claro&quot;,&quot;escuro&quot;],&quot;default&quot;:&quot;claro&quot;,&quot;tsType&quot;:&quot;'claro'|'escuro'&quot;},&quot;notas&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;}}">
+class Component extends DCLogic {
+  renderVals() {
+    const s = this.props.sistema ?? 'por tela';
+    const mk = d => {
+      const os = s === 'por tela' ? d : s; const m = os === 'macos';
+      const k = x => m ? '⌘' + (x === 'Enter' ? '↩' : x) : 'Ctrl ' + x;
+      return { os, run: k('Enter'), drive: m ? 'Macintosh HD' : os === 'linux' ? '/home' : 'C:',
+        path: m ? '~/Documents/Conversor' : os === 'linux' ? '~/Documentos/Conversor' : 'C:\\Users\\ana\\Documents\\Conversor' };
+    };
+    const f = (name, type, n, ind, w) => ({ name, type, n, ind, w });
+    const tree = [
+      f('fotos/', 'Pasta', '18', 0, 500), f('produto-001.jpg', 'JPG', '', 20, 400), f('produto-002.jpg', 'JPG', '', 20, 400), f('produto-003.jpg', 'JPG', '', 20, 400), f('produto-004.png', 'PNG', '', 20, 400),
+      f('fichas/', 'Pasta', '12', 0, 500), f('ficha-001.pdf', 'PDF', '', 20, 400), f('ficha-002.pdf', 'PDF', '', 20, 400), f('ficha-003.pdf', 'PDF', '', 20, 400),
+      f('logos/', 'Pasta', '2', 0, 500), f('logo-cor.svg', 'SVG', '', 20, 400), f('logo-pb.svg', 'SVG', '', 20, 400),
+      f('leia-me.txt', 'TXT', '', 0, 400), f('tabela-precos.xlsx', 'XLSX', '', 0, 400),
+    ];
+    const checksOk = [
+      { label: 'Caminhos dentro do destino', val: '34 de 34' },
+      { label: 'Tamanho ao extrair', val: '3,4 MB · até 2 GB' },
+      { label: 'Crescimento', val: '3× · até 100×' },
+      { label: 'Quantidade de itens', val: '34 · até 10 000' },
+      { label: 'Senha', val: 'não tem' },
+    ];
+    const bad = 'var(--fail)', good = 'var(--ok)';
+    const checksBad = [
+      { label: 'Tamanho ao extrair', val: '4,6 GB', lim: 'até 2 GB', c: bad, st: 'acima' },
+      { label: 'Crescimento', val: '4 200×', lim: 'até 100×', c: bad, st: 'acima' },
+      { label: 'Quantidade de itens', val: '120 034', lim: 'até 10 000', c: bad, st: 'acima' },
+      { label: 'Caminhos dentro do destino', val: '3 fora', lim: 'nenhum fora', c: bad, st: 'falhou' },
+      { label: 'Senha', val: 'não tem', lim: '—', c: good, st: 'ok' },
+    ];
+    const badPaths = [
+      { path: '../../.bashrc', why: 'sobe 2 pastas acima do destino' },
+      { path: '/etc/hosts', why: 'caminho absoluto' },
+      { path: 'fotos/../../../AppData/inicio.bat', why: 'sobe 3 pastas acima do destino' },
+    ];
+    return { theme: (this.props.tema ?? 'claro') === 'escuro' ? 'dark' : 'light', notes: this.props.notas ?? true, A: mk('linux'), B: mk('windows'), tree, checksOk, checksBad, badPaths };
+  }
+}
+</script>
+</body>
+</html>

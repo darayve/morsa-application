@@ -1,0 +1,23 @@
+# Texto com fim de linha LF em todos os sistemas.
+* text=auto eol=lf
+
+# Arquivos do Windows que precisam de CRLF.
+*.bat text eol=crlf
+*.cmd text eol=crlf
+*.ps1 text eol=crlf
+
+# Binários: nunca converter.
+*.png binary
+*.jpg binary
+*.ico binary
+*.icns binary
+*.ttf binary
+*.otf binary
+*.woff2 binary
+*.pdf binary
+*.zip binary
+*.wasm binary
+corpus/** binary
+
+# Textos do corpus continuam texto.
+corpus/**/*.md text eol=lf

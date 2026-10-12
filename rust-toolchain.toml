@@ -1,0 +1,6 @@
+# Versão do Rust fixada para builds reproduzíveis (requisitos §15.2).
+# A build web usa o nightly à parte (ver README).
+[toolchain]
+channel = "1.99.0"
+components = ["rustfmt", "clippy"]
+targets = ["wasm32-unknown-unknown"]
