@@ -5,10 +5,10 @@
 // 'flutter create' template.
 
 // The application's name. By default this is also the title of the Flutter window.
-PRODUCT_NAME = morsa
+PRODUCT_NAME = Morsa
 
 // The application's bundle identifier
 PRODUCT_BUNDLE_IDENTIFIER = io.github.morsa.morsa
 
 // The copyright displayed in application information
-PRODUCT_COPYRIGHT = Copyright © 2026 io.github.morsa. All rights reserved.
+PRODUCT_COPYRIGHT = Copyright © 2026 Os contribuidores do Morsa. MIT OR Apache-2.0.

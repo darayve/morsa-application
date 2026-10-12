@@ -187,6 +187,14 @@ Win32Window::MessageHandler(HWND hwnd,
       }
       return 0;
 
+    case WM_GETMINMAXINFO: {
+      // Tamanho mínimo da janela: 1024 × 640 px lógicos (requisitos §9.5).
+      double scale = FlutterDesktopGetDpiForHWND(hwnd) / 96.0;
+      auto info = reinterpret_cast<MINMAXINFO*>(lparam);
+      info->ptMinTrackSize.x = static_cast<LONG>(1024 * scale);
+      info->ptMinTrackSize.y = static_cast<LONG>(640 * scale);
+      return 0;
+    }
     case WM_DPICHANGED: {
       auto newRectSize = reinterpret_cast<RECT*>(lparam);
       LONG newWidth = newRectSize->right - newRectSize->left;
