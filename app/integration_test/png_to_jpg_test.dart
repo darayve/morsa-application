@@ -60,8 +60,7 @@ void main() {
       for (final expected in ['valido-rgba.jpg', 'valido-rgba (1).jpg']) {
         final out = await convertImage(
           input: before,
-          target: FileFormat.jpeg,
-          quality: 85,
+          settings: defaultSettings(target: FileFormat.jpeg),
         );
         final saved = await writer.save(
           out.bytes,
@@ -87,7 +86,10 @@ void main() {
     final bytes = await corpus('image/png/truncado.png').readAsBytes();
     Object? error;
     try {
-      await convertImage(input: bytes, target: FileFormat.jpeg, quality: 85);
+      await convertImage(
+        input: bytes,
+        settings: defaultSettings(target: FileFormat.jpeg),
+      );
     } catch (e) {
       error = e;
     }

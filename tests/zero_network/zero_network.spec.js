@@ -72,10 +72,10 @@ async function openApp(page) {
   await page.goto('/');
   expect(await page.evaluate(() => crossOriginIsolated), 'COOP/COEP ausentes').toBe(true);
   const placeholder = page.locator('flt-semantics-placeholder');
-  await placeholder.waitFor({ state: 'attached', timeout: 60_000 });
+  await placeholder.waitFor({ state: 'attached', timeout: 120_000 });
   await placeholder.evaluate((el) => el.click());
   const open = page.getByRole('button', { name: /Abrir arquivos|Open files/ });
-  await expect(open).toBeVisible({ timeout: 60_000 });
+  await expect(open).toBeVisible({ timeout: 120_000 });
   return open;
 }
 

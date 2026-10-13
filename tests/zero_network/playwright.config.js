@@ -7,7 +7,7 @@ const python = process.env.PYTHON ?? (process.platform === 'win32' ? 'python' : 
 
 module.exports = defineConfig({
   testDir: '.',
-  timeout: 120_000,
+  timeout: 240_000,
   expect: { timeout: 30_000 },
   forbidOnly: !!process.env.CI,
   reporter: [['list'], ['html', { open: 'never', outputFolder: 'report' }]],

@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:path/path.dart' as p;
 
 import '../../app/failure.dart';
+import '../../app/formats.dart';
 import '../../app/l10n/app_localizations.dart';
 import '../../app/platform.dart';
 import '../../core_api/api.dart';
@@ -28,7 +29,7 @@ enum _ItemState { idle, running, done, failed }
 
 class _Img01ScreenState extends State<Img01Screen> {
   final _writer = OutputWriter();
-  final _quality = TextEditingController(text: '${defaultJpegQuality()}');
+  final _quality = TextEditingController(text: '${defaultQuality()}');
 
   String? _outputFolder;
   XFile? _file;
@@ -120,12 +121,9 @@ class _Img01ScreenState extends State<Img01Screen> {
   /// Aviso da RN14 quando a extensão não bate com o conteúdo.
   String? _mismatch(String name, FileFormat real) {
     final ext = p.extension(name).replaceFirst('.', '').toLowerCase();
-    final expected = switch (real) {
-      FileFormat.png => ['png'],
-      FileFormat.jpeg => ['jpg', 'jpeg', 'jpe', 'jfif'],
-    };
-    if (ext.isEmpty || expected.contains(ext)) return null;
-    return AppLocalizations.of(context).extensionMismatch(_label(real), ext);
+    if (ext.isEmpty || inputExtensions(real).contains(ext)) return null;
+    return AppLocalizations.of(context)
+        .extensionMismatch(formatLabel(real), ext);
   }
 
   Future<void> _convert() async {
@@ -138,8 +136,8 @@ class _Img01ScreenState extends State<Img01Screen> {
     try {
       final out = await convertImage(
         input: _bytes!,
-        target: FileFormat.jpeg,
-        quality: _qualityValue!,
+        settings: defaultSettings(target: FileFormat.jpeg)
+            .withQuality(_qualityValue!),
       );
       final saved = await _writer.save(
         out.bytes,
@@ -159,11 +157,6 @@ class _Img01ScreenState extends State<Img01Screen> {
       });
     }
   }
-
-  static String _label(FileFormat f) => switch (f) {
-    FileFormat.png => 'PNG',
-    FileFormat.jpeg => 'JPG',
-  };
 
   @override
   Widget build(BuildContext context) {
@@ -334,7 +327,7 @@ class _Img01ScreenState extends State<Img01Screen> {
                 children: [
                   if (_sourceFormat != null)
                     Text(
-                      l.formatsAndCount(_label(_sourceFormat!), 'JPG', 1),
+                      l.formatsAndCount(formatLabel(_sourceFormat!), 'JPG', 1),
                       style: text.bodyMedium,
                     ),
                   ...details,
@@ -410,7 +403,7 @@ class _Img01ScreenState extends State<Img01Screen> {
             child: Text(
               _sourceFormat == null
                   ? ''
-                  : l.formatsAndCount(_label(_sourceFormat!), 'JPG', 1),
+                  : l.formatsAndCount(formatLabel(_sourceFormat!), 'JPG', 1),
               style: text.bodySmall!.copyWith(color: tokens.ink2),
             ),
           ),
