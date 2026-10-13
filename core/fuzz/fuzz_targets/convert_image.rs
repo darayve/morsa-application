@@ -1,4 +1,5 @@
-//! Alvo de fuzzing: bytes quaisquer entram no conversor de imagens.
+//! Alvo de fuzzing: bytes quaisquer entram no conversor de imagens (todos os
+//! formatos de entrada, inclusive SVG, e todos os destinos).
 //!
 //! O libFuzzer gera milhões de entradas (a partir do corpus em
 //! `corpus/image`) e falha se o núcleo der panic, travar ou estourar a
@@ -14,7 +15,7 @@ use std::io::Cursor;
 
 use libfuzzer_sys::fuzz_target;
 use morsa_core::detect::ImageFormat;
-use morsa_core::image::{ConvertOptions, convert};
+use morsa_core::image::{ConvertOptions, SvgSize, convert};
 
 /// Imagens válidas até 500 MP são aceitas pelo núcleo, mas decodificá-las
 /// gastaria gigabytes por entrada. Aqui o fuzzing fica nas imagens pequenas;
@@ -34,12 +35,26 @@ fuzz_target!(|data: &[u8]| {
     {
         return;
     }
-    let target = if choice & 1 == 0 {
-        ImageFormat::Jpeg
-    } else {
-        ImageFormat::Png
+    // Os 3 bits de baixo escolhem o destino entre os 7 formatos de saída; os
+    // 5 de cima viram a qualidade (inclui 0 e valores acima de 100, que
+    // precisam virar E-104). O resto dos bytes é o arquivo.
+    let targets = [
+        ImageFormat::Png,
+        ImageFormat::Jpeg,
+        ImageFormat::WebP,
+        ImageFormat::Gif,
+        ImageFormat::Bmp,
+        ImageFormat::Tiff,
+        ImageFormat::Ico,
+    ];
+    let mut options = ConvertOptions::new(targets[usize::from(choice & 7) % targets.len()]);
+    options.quality = (choice >> 3) * 4;
+    options.webp_lossless = choice & 0x80 != 0;
+    // SVG declara o próprio tamanho (até 16 384 px por lado = 1 GB de pixels);
+    // no fuzzing, a rasterização fica pequena.
+    options.svg_size = SvgSize::Pixels {
+        width: Some(64),
+        height: None,
     };
-    // Inclui 0 e valores acima de 100, que precisam virar E-104.
-    let quality = choice >> 1;
-    let _ = convert(input, ConvertOptions { target, quality });
+    let _ = convert(input, &options);
 });
