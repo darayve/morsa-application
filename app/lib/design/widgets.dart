@@ -4,9 +4,6 @@ import 'package:flutter/services.dart';
 import 'focus_ring.dart';
 import 'theme.dart';
 
-/// Altura padrão de controles (§9.5).
-const kControlHeight = 28.0;
-
 /// Botão do sistema visual: cantos retos, 28 px, anel de foco azul por fora.
 /// Primário é tinta cheia; secundário é contorno. Hover é tom de papel,
 /// nunca cor (DOC-01 §5).
@@ -256,10 +253,10 @@ class ShortcutChip extends StatelessWidget {
       child: Text(
         text,
         style: TextStyle(
-          fontSize: 11,
+          fontSize: kFsMeta,
           fontWeight: FontWeight.w400,
           color: color,
-          height: 16 / 11,
+          height: 20 / kFsMeta,
         ),
       ),
     );
@@ -318,7 +315,7 @@ class FichaRow extends StatelessWidget {
     final t = context.tokens;
     final style = Theme.of(context).textTheme.bodySmall!;
     return Container(
-      constraints: const BoxConstraints(minHeight: 26),
+      constraints: const BoxConstraints(minHeight: kFichaHeight),
       padding: const EdgeInsets.symmetric(vertical: 4),
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: last ? t.ink : t.weak)),
@@ -326,7 +323,7 @@ class FichaRow extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-            width: 130,
+            width: 150,
             child: Text(label, style: style.copyWith(color: t.ink2)),
           ),
           Expanded(
@@ -445,7 +442,7 @@ class _MorsaTextFieldState extends State<MorsaTextField> {
                   const SizedBox(width: 6),
                   Text(
                     widget.suffix!,
-                    style: TextStyle(fontSize: 11, color: t.ink2),
+                    style: TextStyle(fontSize: kFsMeta, color: t.ink2),
                   ),
                 ],
               ],
@@ -460,7 +457,7 @@ class _MorsaTextFieldState extends State<MorsaTextField> {
               child: Text(
                 '✕ $error',
                 style: TextStyle(
-                  fontSize: 11,
+                  fontSize: kFsMeta,
                   fontWeight: FontWeight.w500,
                   color: t.fail,
                 ),

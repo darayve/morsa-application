@@ -50,12 +50,12 @@ class _ComponentGalleryState extends State<ComponentGallery> {
     final mod = modKeyLabel;
 
     const cols = [
-      MorsaColumn.fixed(44),
+      MorsaColumn.fixed(52),
       MorsaColumn.flex(),
-      MorsaColumn.fixed(100),
-      MorsaColumn.fixed(100),
-      MorsaColumn.fixed(120, alignEnd: true),
-      MorsaColumn.fixed(120, alignEnd: true),
+      MorsaColumn.fixed(120),
+      MorsaColumn.fixed(120),
+      MorsaColumn.fixed(150, alignEnd: true),
+      MorsaColumn.fixed(150, alignEnd: true),
     ];
     final rows = [
       (
@@ -124,7 +124,7 @@ class _ComponentGalleryState extends State<ComponentGallery> {
         children: [
           SizedBox(
             width: 120,
-            height: 28,
+            height: kControlHeight,
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
@@ -361,7 +361,7 @@ class _ComponentGalleryState extends State<ComponentGallery> {
                   ]),
                   section('Linhas de tabela · 28 px', [
                     MorsaTableHeader(
-                      columns: [const MorsaColumn.fixed(28), ...cols],
+                      columns: [const MorsaColumn.fixed(32), ...cols],
                       labels: const [
                         '',
                         'Item',
@@ -441,7 +441,7 @@ class _ComponentGalleryState extends State<ComponentGallery> {
                                 children: [
                                   Expanded(child: MorsaProgressBar(value: v)),
                                   const SizedBox(width: 12),
-                                  SizedBox(width: 92, child: StatusText(s, l)),
+                                  SizedBox(width: 124, child: StatusText(s, l)),
                                 ],
                               ),
                             ),
@@ -452,12 +452,18 @@ class _ComponentGalleryState extends State<ComponentGallery> {
                             children: [
                               Text(
                                 '3 de 5 arquivos',
-                                style: TextStyle(fontSize: 11, color: t.ink2),
+                                style: TextStyle(
+                                  fontSize: kFsMeta,
+                                  color: t.ink2,
+                                ),
                               ),
                               const Spacer(),
                               Text(
                                 '~4 s',
-                                style: TextStyle(fontSize: 11, color: t.ink2),
+                                style: TextStyle(
+                                  fontSize: kFsMeta,
+                                  color: t.ink2,
+                                ),
                               ),
                             ],
                           ),

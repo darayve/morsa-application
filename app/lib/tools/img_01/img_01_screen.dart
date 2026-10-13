@@ -196,7 +196,7 @@ class _Img01ScreenState extends State<Img01Screen> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: [
                         Expanded(child: SingleChildScrollView(child: content)),
-                        SizedBox(width: 280, child: panel),
+                        SizedBox(width: 340, child: panel),
                       ],
                     );
                   },
@@ -283,7 +283,7 @@ class _Img01ScreenState extends State<Img01Screen> {
     final t = context.tokens;
     final text = Theme.of(context).textTheme;
     if (_state == _ItemState.idle && _failure == null) {
-      return const SizedBox(height: 28);
+      return const SizedBox(height: kControlHeight);
     }
 
     final (stateText, stateColor) = switch (_state) {

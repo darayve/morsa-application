@@ -6,6 +6,19 @@ import 'tokens.dart';
 const kMono = 'Ioskeley Mono NL';
 const kTitle = 'IBM Plex Sans Condensed';
 
+/// Escala de texto e alturas. Maior que a dos protótipos (13 px no corpo),
+/// por pedido de leitura mais confortável; tudo passa por aqui.
+const kFsMeta = 14.0; // metadado, atalho, unidade (era 11)
+const kFsSmall = 15.0; // ficha e tabela (era 12)
+const kFsBody = 16.0; // corpo, células, campos, botões (era 13)
+const kFsPanel = 19.0; // título de painel (era 16)
+const kFsTitle = 34.0; // título de tela (era 30)
+
+/// Altura de controles, linhas de tabela, ficha e barra de status.
+const kControlHeight = 34.0;
+const kFichaHeight = 32.0;
+const kStatusBarHeight = 30.0;
+
 /// Fallback se uma fonte faltar: as monoespaçadas do sistema, nunca Roboto.
 const kFallback = ['monospace'];
 
@@ -58,7 +71,7 @@ ThemeData buildTheme(Brightness brightness) {
       // Título de tela: Plex Condensed 28–32 / 700.
       headlineMedium: TextStyle(
         fontFamily: kTitle,
-        fontSize: 30,
+        fontSize: kFsTitle,
         fontWeight: FontWeight.w700,
         letterSpacing: -0.3,
         color: t.ink,
@@ -67,16 +80,16 @@ ThemeData buildTheme(Brightness brightness) {
       // Rótulo de seção: Plex Condensed 12 / 700, caixa alta (§9.3).
       labelMedium: TextStyle(
         fontFamily: kTitle,
-        fontSize: 12,
+        fontSize: kFsSmall,
         fontWeight: FontWeight.w700,
         letterSpacing: 0.9,
         color: t.ink,
       ),
-      titleMedium: mono(16, FontWeight.w700),
-      bodyMedium: mono(13, FontWeight.w400),
-      labelLarge: mono(13, FontWeight.w500),
-      bodySmall: mono(12, FontWeight.w400),
-      labelSmall: mono(11, FontWeight.w300, t.ink2),
+      titleMedium: mono(kFsPanel, FontWeight.w700),
+      bodyMedium: mono(kFsBody, FontWeight.w400),
+      labelLarge: mono(kFsBody, FontWeight.w500),
+      bodySmall: mono(kFsSmall, FontWeight.w400),
+      labelSmall: mono(kFsMeta, FontWeight.w300, t.ink2),
     ),
     extensions: [t],
   );

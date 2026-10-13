@@ -55,13 +55,13 @@ class MorsaTableHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     return Container(
-      height: 28,
+      height: kControlHeight,
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: t.ink)),
       ),
       child: DefaultTextStyle(
         style: TextStyle(
-          fontSize: 11,
+          fontSize: kFsMeta,
           fontWeight: FontWeight.w700,
           letterSpacing: 0.66,
           color: t.ink,
@@ -143,7 +143,7 @@ class _MorsaTableRowState extends State<MorsaTableRow> {
             visible: _focus,
             inset: true,
             child: Container(
-              height: 28,
+              height: kControlHeight,
               decoration: BoxDecoration(
                 color: bg,
                 border: Border(bottom: BorderSide(color: t.weak)),
@@ -155,7 +155,7 @@ class _MorsaTableRowState extends State<MorsaTableRow> {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 28,
+                      width: 32,
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4),
                         child: Align(
@@ -190,13 +190,16 @@ class MorsaTableNote extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     return Container(
-      constraints: const BoxConstraints(minHeight: 28),
-      padding: const EdgeInsets.fromLTRB(72, 4, 0, 4),
+      constraints: const BoxConstraints(minHeight: kControlHeight),
+      padding: const EdgeInsets.fromLTRB(78, 4, 0, 4),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         border: Border(bottom: BorderSide(color: t.weak)),
       ),
-      child: Text(text, style: TextStyle(fontSize: 11, color: t.ink2)),
+      child: Text(
+        text,
+        style: TextStyle(fontSize: kFsMeta, color: t.ink2),
+      ),
     );
   }
 }
@@ -216,7 +219,7 @@ class MorsaTableTotal extends StatelessWidget {
   Widget build(BuildContext context) {
     final t = context.tokens;
     return Container(
-      height: 28,
+      height: kControlHeight,
       decoration: BoxDecoration(
         border: Border(top: BorderSide(color: t.ink, width: 2)),
       ),
@@ -225,7 +228,7 @@ class MorsaTableTotal extends StatelessWidget {
             .copyWith(fontWeight: FontWeight.w700),
         child: Row(
           children: [
-            const SizedBox(width: 28),
+            const SizedBox(width: 32),
             Expanded(child: _cells(columns, cells)),
           ],
         ),

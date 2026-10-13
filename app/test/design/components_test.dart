@@ -269,7 +269,7 @@ void main() {
             width: 600,
             child: MorsaTableRow(
               key: key,
-              columns: const [MorsaColumn.fixed(44), MorsaColumn.flex()],
+              columns: const [MorsaColumn.fixed(52), MorsaColumn.flex()],
               cells: const [Text('001'), Text('capa.png')],
               selected: selected,
               onSelectedChanged: (v) => set(() => selected = v),

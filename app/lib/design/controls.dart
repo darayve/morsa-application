@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 
 import 'focus_ring.dart';
 import 'theme.dart';
-import 'widgets.dart';
 
 /// Caixa de seleção de 12 px (DOC-01 §5): marcada (tinta + ✕), desmarcada,
 /// parcial (traço), foco (anel por fora) e desabilitada.
@@ -99,8 +98,8 @@ class CheckMark extends StatelessWidget {
     final t = context.tokens;
     final checked = value == true;
     return Container(
-      width: 12,
-      height: 12,
+      width: 14,
+      height: 14,
       alignment: Alignment.center,
       decoration: BoxDecoration(
         color: checked ? (enabled ? t.ink : t.dis) : null,
@@ -109,7 +108,7 @@ class CheckMark extends StatelessWidget {
       child: switch (value) {
         true => Text(
           '✕',
-          style: TextStyle(fontSize: 10, height: 1, color: t.paper),
+          style: TextStyle(fontSize: 13, height: 1, color: t.paper),
         ),
         null => Container(width: 6, height: 2, color: enabled ? t.ink : t.dis),
         false => null,
@@ -361,7 +360,7 @@ class _MorsaSelectState<T> extends State<MorsaSelect<T>> {
                         overflow: TextOverflow.ellipsis,
                       ),
                     ),
-                    Text('▾', style: TextStyle(fontSize: 10, color: fg)),
+                    Text('▾', style: TextStyle(fontSize: 13, color: fg)),
                   ],
                 ),
               ),
@@ -447,8 +446,10 @@ class _MorsaMenuItemState extends State<MorsaMenuItem> {
               ),
             ),
       style: ButtonStyle(
-        minimumSize: const WidgetStatePropertyAll(Size(160, 26)),
-        maximumSize: const WidgetStatePropertyAll(Size(double.infinity, 26)),
+        minimumSize: const WidgetStatePropertyAll(Size(180, kFichaHeight)),
+        maximumSize: const WidgetStatePropertyAll(
+          Size(double.infinity, kFichaHeight),
+        ),
         padding: const WidgetStatePropertyAll(
           EdgeInsets.symmetric(horizontal: 10),
         ),

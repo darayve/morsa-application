@@ -19,7 +19,7 @@ class MorsaStatusBar extends StatelessWidget {
     final style = Theme.of(context).textTheme.labelSmall!
         .copyWith(fontWeight: FontWeight.w400);
     return Container(
-      height: 24,
+      height: kStatusBarHeight,
       padding: const EdgeInsets.symmetric(horizontal: 12),
       decoration: BoxDecoration(
         color: t.paper,
@@ -32,7 +32,7 @@ class MorsaStatusBar extends StatelessWidget {
           Expanded(
             child: Row(
               children: [
-                Text('●', style: style.copyWith(color: t.ok, fontSize: 9)),
+                Text('●', style: style.copyWith(color: t.ok, fontSize: 11)),
                 const SizedBox(width: 6),
                 Text(
                   l.statusOffline,

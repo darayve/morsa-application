@@ -111,7 +111,7 @@ class MorsaDropArea extends StatelessWidget {
                   children: [
                     Text(
                       orLabel,
-                      style: TextStyle(fontSize: 11, color: t.ink2),
+                      style: TextStyle(fontSize: kFsMeta, color: t.ink2),
                     ),
                     const SizedBox(width: 12),
                     action,
@@ -123,7 +123,7 @@ class MorsaDropArea extends StatelessWidget {
                 Text(
                   formats,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 11, color: t.ink2),
+                  style: TextStyle(fontSize: kFsMeta, color: t.ink2),
                 ),
               ),
             ],
@@ -189,7 +189,7 @@ class _MorsaThumbnailState extends State<MorsaThumbnail> {
           excludeFromSemantics: true,
           onTap: widget.onTap,
           child: SizedBox(
-            width: 84,
+            width: 100,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisSize: MainAxisSize.min,
@@ -201,7 +201,7 @@ class _MorsaThumbnailState extends State<MorsaThumbnail> {
                         ? _RuledPainter(t.weak, 12)
                         : null,
                     child: Container(
-                      height: 112,
+                      height: 132,
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: t.ink,
@@ -224,7 +224,7 @@ class _MorsaThumbnailState extends State<MorsaThumbnail> {
                     Text(
                       widget.reference,
                       style: TextStyle(
-                        fontSize: 11,
+                        fontSize: kFsMeta,
                         fontWeight: FontWeight.w700,
                         color: t.ink,
                       ),
@@ -233,7 +233,7 @@ class _MorsaThumbnailState extends State<MorsaThumbnail> {
                     if (widget.detail != null)
                       Text(
                         widget.detail!,
-                        style: TextStyle(fontSize: 11, color: t.ink2),
+                        style: TextStyle(fontSize: kFsMeta, color: t.ink2),
                       ),
                   ],
                 ),
@@ -248,7 +248,7 @@ class _MorsaThumbnailState extends State<MorsaThumbnail> {
 
 /// Régua azul de 2 px que marca o ponto de inserção ao arrastar miniaturas.
 class InsertionMarker extends StatelessWidget {
-  const InsertionMarker({super.key, this.height = 112});
+  const InsertionMarker({super.key, this.height = 132});
 
   final double height;
 

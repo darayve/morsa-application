@@ -103,21 +103,21 @@ class MorsaNotice extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           children: [
             Container(
-              height: 26,
+              height: kFichaHeight,
               padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(
                 border: Border(bottom: BorderSide(color: color)),
               ),
               child: Row(
                 children: [
-                  Container(width: 8, height: 8, color: color),
+                  Container(width: 10, height: 10, color: color),
                   const SizedBox(width: 8),
                   Expanded(
                     child: Text(
                       title.toUpperCase(),
                       overflow: TextOverflow.ellipsis,
                       style: TextStyle(
-                        fontSize: 11,
+                        fontSize: kFsMeta,
                         fontWeight: FontWeight.w700,
                         letterSpacing: 0.66,
                         color: color,
