@@ -5,9 +5,10 @@ que rodam **100% offline** em Windows, macOS, Linux e no navegador. Sem conta, s
 servidor: nenhum arquivo sai do seu computador. Código aberto, sob
 **MIT OR Apache-2.0**.
 
-> **Situação:** em desenvolvimento (Marco 2, infraestrutura). Hoje o app converte
-> **PNG → JPG** de ponta a ponta no desktop e na web, com CI nas quatro plataformas,
-> política de licenças e teste automatizado de zero rede. O plano completo está em
+> **Situação:** em desenvolvimento (Marco 3, imagens). O núcleo já converte entre
+> **PNG, JPG, WebP, GIF, BMP, TIFF e ICO** (e lê SVG), com todas as opções do requisito RF06.
+> A tela ainda é a do Marco 1 (um PNG → JPG por vez); lote, triagem, edição e
+> pré-visualização chegam nas próximas etapas. O plano completo está em
 > [`docs/requisitos.md`](docs/requisitos.md), §18.
 
 ## Como o projeto é organizado
