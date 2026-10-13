@@ -7,13 +7,15 @@
 //! - `detect`: formato real pelo conteúdo;
 //! - `error`: erros tipados com os códigos `E-xxx`;
 //! - `image`: conversão de imagens;
-//! - `limits`: limites de segurança.
+//! - `limits`: limites de segurança;
+//! - `warning`: avisos que acompanham uma conversão bem-sucedida.
 
 pub mod api;
 pub mod detect;
 pub mod error;
 pub mod image;
 pub mod limits;
+pub mod warning;
 
 // Código gerado pelo flutter_rust_bridge (não editar à mão).
 #[rustfmt::skip]

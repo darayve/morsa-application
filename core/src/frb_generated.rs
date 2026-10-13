@@ -39,7 +39,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.13.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -754822073;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1844732933;
 
 // Section: executor
 
@@ -70,26 +70,25 @@ fn wire__crate__api__convert_image_impl(
             let mut deserializer =
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             let api_input = <Vec<u8>>::sse_decode(&mut deserializer);
-            let api_target = <crate::api::FileFormat>::sse_decode(&mut deserializer);
-            let api_quality = <u8>::sse_decode(&mut deserializer);
+            let api_settings = <crate::api::ConvertSettings>::sse_decode(&mut deserializer);
             deserializer.end();
             move |context| {
                 transform_result_sse::<_, crate::api::MorsaError>((move || {
-                    let output_ok = crate::api::convert_image(api_input, api_target, api_quality)?;
+                    let output_ok = crate::api::convert_image(api_input, api_settings)?;
                     std::result::Result::Ok(output_ok)
                 })())
             }
         },
     )
 }
-fn wire__crate__api__default_jpeg_quality_impl(
+fn wire__crate__api__default_quality_impl(
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
     rust_vec_len_: i32,
     data_len_: i32,
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
         flutter_rust_bridge::for_generated::TaskInfo {
-            debug_name: "default_jpeg_quality",
+            debug_name: "default_quality",
             port: None,
             mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
         },
@@ -105,7 +104,37 @@ fn wire__crate__api__default_jpeg_quality_impl(
                 flutter_rust_bridge::for_generated::SseDeserializer::new(message);
             deserializer.end();
             transform_result_sse::<_, ()>((move || {
-                let output_ok = Ok::<_, ()>(crate::api::default_jpeg_quality())?;
+                let output_ok = Ok::<_, ()>(crate::api::default_quality())?;
+                std::result::Result::Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__api__default_settings_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "default_settings",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_target = <crate::api::FileFormat>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Ok::<_, ()>(crate::api::default_settings(api_target))?;
                 std::result::Result::Ok(output_ok)
             })())
         },
@@ -173,6 +202,35 @@ fn wire__crate__api__detect_header_len_impl(
         },
     )
 }
+fn wire__crate__api__ico_sizes_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "ico_sizes",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Ok::<_, ()>(crate::api::ico_sizes())?;
+                std::result::Result::Ok(output_ok)
+            })())
+        },
+    )
+}
 fn wire__crate__api__init_app_impl(
     port_: flutter_rust_bridge::for_generated::MessagePort,
     ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
@@ -207,6 +265,66 @@ fn wire__crate__api__init_app_impl(
         },
     )
 }
+fn wire__crate__api__output_extension_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "output_extension",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_format = <crate::api::FileFormat>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Ok::<_, ()>(crate::api::output_extension(api_format))?;
+                std::result::Result::Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__api__valid_targets_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "valid_targets",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_source = <crate::api::FileFormat>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Ok::<_, ()>(crate::api::valid_targets(api_source))?;
+                std::result::Result::Ok(output_ok)
+            })())
+        },
+    )
+}
 
 // Section: dart2rust
 
@@ -218,6 +336,36 @@ impl SseDecode for String {
     }
 }
 
+impl SseDecode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u8().unwrap() != 0
+    }
+}
+
+impl SseDecode for crate::api::ConvertSettings {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_target = <crate::api::FileFormat>::sse_decode(deserializer);
+        let mut var_quality = <u8>::sse_decode(deserializer);
+        let mut var_webpLossless = <bool>::sse_decode(deserializer);
+        let mut var_background = <u32>::sse_decode(deserializer);
+        let mut var_icoSizes = <Vec<u16>>::sse_decode(deserializer);
+        let mut var_tiffCompression =
+            <crate::api::TiffCompressionSetting>::sse_decode(deserializer);
+        let mut var_svgSize = <crate::api::SvgSizeSetting>::sse_decode(deserializer);
+        return crate::api::ConvertSettings {
+            target: var_target,
+            quality: var_quality,
+            webp_lossless: var_webpLossless,
+            background: var_background,
+            ico_sizes: var_icoSizes,
+            tiff_compression: var_tiffCompression,
+            svg_size: var_svgSize,
+        };
+    }
+}
+
 impl SseDecode for crate::api::ConvertedImage {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -225,11 +373,13 @@ impl SseDecode for crate::api::ConvertedImage {
         let mut var_source = <crate::api::FileFormat>::sse_decode(deserializer);
         let mut var_target = <crate::api::FileFormat>::sse_decode(deserializer);
         let mut var_outputExtension = <String>::sse_decode(deserializer);
+        let mut var_warnings = <Vec<String>>::sse_decode(deserializer);
         return crate::api::ConvertedImage {
             bytes: var_bytes,
             source: var_source,
             target: var_target,
             output_extension: var_outputExtension,
+            warnings: var_warnings,
         };
     }
 }
@@ -253,6 +403,12 @@ impl SseDecode for crate::api::FileFormat {
         return match inner {
             0 => crate::api::FileFormat::Png,
             1 => crate::api::FileFormat::Jpeg,
+            2 => crate::api::FileFormat::Webp,
+            3 => crate::api::FileFormat::Gif,
+            4 => crate::api::FileFormat::Bmp,
+            5 => crate::api::FileFormat::Tiff,
+            6 => crate::api::FileFormat::Ico,
+            7 => crate::api::FileFormat::Svg,
             _ => unreachable!("Invalid variant for FileFormat: {}", inner),
         };
     }
@@ -265,6 +421,18 @@ impl SseDecode for i32 {
     }
 }
 
+impl SseDecode for Vec<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<String>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
 impl SseDecode for Vec<crate::api::ErrorParam> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -272,6 +440,30 @@ impl SseDecode for Vec<crate::api::ErrorParam> {
         let mut ans_ = Vec::with_capacity(len_ as usize);
         for idx_ in 0..len_ {
             ans_.push(<crate::api::ErrorParam>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::FileFormat> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::FileFormat>::sse_decode(deserializer));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<u16> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = Vec::with_capacity(len_ as usize);
+        for idx_ in 0..len_ {
+            ans_.push(<u16>::sse_decode(deserializer));
         }
         return ans_;
     }
@@ -303,6 +495,66 @@ impl SseDecode for crate::api::MorsaError {
     }
 }
 
+impl SseDecode for Option<u32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        if (<bool>::sse_decode(deserializer)) {
+            return Some(<u32>::sse_decode(deserializer));
+        } else {
+            return None;
+        }
+    }
+}
+
+impl SseDecode for crate::api::SvgSizeMode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::SvgSizeMode::Declared,
+            1 => crate::api::SvgSizeMode::Pixels,
+            2 => crate::api::SvgSizeMode::Scale,
+            _ => unreachable!("Invalid variant for SvgSizeMode: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::api::SvgSizeSetting {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_mode = <crate::api::SvgSizeMode>::sse_decode(deserializer);
+        let mut var_width = <Option<u32>>::sse_decode(deserializer);
+        let mut var_height = <Option<u32>>::sse_decode(deserializer);
+        let mut var_scalePercent = <u32>::sse_decode(deserializer);
+        return crate::api::SvgSizeSetting {
+            mode: var_mode,
+            width: var_width,
+            height: var_height,
+            scale_percent: var_scalePercent,
+        };
+    }
+}
+
+impl SseDecode for crate::api::TiffCompressionSetting {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::TiffCompressionSetting::None,
+            1 => crate::api::TiffCompressionSetting::Lzw,
+            2 => crate::api::TiffCompressionSetting::Deflate,
+            _ => unreachable!("Invalid variant for TiffCompressionSetting: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for u16 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_u16::<NativeEndian>().unwrap()
+    }
+}
+
 impl SseDecode for u32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -322,13 +574,6 @@ impl SseDecode for () {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {}
 }
 
-impl SseDecode for bool {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_u8().unwrap() != 0
-    }
-}
-
 fn pde_ffi_dispatcher_primary_impl(
     func_id: i32,
     port: flutter_rust_bridge::for_generated::MessagePort,
@@ -339,8 +584,8 @@ fn pde_ffi_dispatcher_primary_impl(
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
         1 => wire__crate__api__convert_image_impl(port, ptr, rust_vec_len, data_len),
-        3 => wire__crate__api__detect_format_impl(port, ptr, rust_vec_len, data_len),
-        5 => wire__crate__api__init_app_impl(port, ptr, rust_vec_len, data_len),
+        4 => wire__crate__api__detect_format_impl(port, ptr, rust_vec_len, data_len),
+        7 => wire__crate__api__init_app_impl(port, ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
@@ -353,14 +598,41 @@ fn pde_ffi_dispatcher_sync_impl(
 ) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
-        2 => wire__crate__api__default_jpeg_quality_impl(ptr, rust_vec_len, data_len),
-        4 => wire__crate__api__detect_header_len_impl(ptr, rust_vec_len, data_len),
+        2 => wire__crate__api__default_quality_impl(ptr, rust_vec_len, data_len),
+        3 => wire__crate__api__default_settings_impl(ptr, rust_vec_len, data_len),
+        5 => wire__crate__api__detect_header_len_impl(ptr, rust_vec_len, data_len),
+        6 => wire__crate__api__ico_sizes_impl(ptr, rust_vec_len, data_len),
+        8 => wire__crate__api__output_extension_impl(ptr, rust_vec_len, data_len),
+        9 => wire__crate__api__valid_targets_impl(ptr, rust_vec_len, data_len),
         _ => unreachable!(),
     }
 }
 
 // Section: rust2dart
 
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::ConvertSettings {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.target.into_into_dart().into_dart(),
+            self.quality.into_into_dart().into_dart(),
+            self.webp_lossless.into_into_dart().into_dart(),
+            self.background.into_into_dart().into_dart(),
+            self.ico_sizes.into_into_dart().into_dart(),
+            self.tiff_compression.into_into_dart().into_dart(),
+            self.svg_size.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::ConvertSettings {}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::ConvertSettings>
+    for crate::api::ConvertSettings
+{
+    fn into_into_dart(self) -> crate::api::ConvertSettings {
+        self
+    }
+}
 // Codec=Dco (DartCObject based), see doc to use other codecs
 impl flutter_rust_bridge::IntoDart for crate::api::ConvertedImage {
     fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
@@ -369,6 +641,7 @@ impl flutter_rust_bridge::IntoDart for crate::api::ConvertedImage {
             self.source.into_into_dart().into_dart(),
             self.target.into_into_dart().into_dart(),
             self.output_extension.into_into_dart().into_dart(),
+            self.warnings.into_into_dart().into_dart(),
         ]
         .into_dart()
     }
@@ -401,6 +674,12 @@ impl flutter_rust_bridge::IntoDart for crate::api::FileFormat {
         match self {
             Self::Png => 0.into_dart(),
             Self::Jpeg => 1.into_dart(),
+            Self::Webp => 2.into_dart(),
+            Self::Gif => 3.into_dart(),
+            Self::Bmp => 4.into_dart(),
+            Self::Tiff => 5.into_dart(),
+            Self::Ico => 6.into_dart(),
+            Self::Svg => 7.into_dart(),
             _ => unreachable!(),
         }
     }
@@ -428,11 +707,88 @@ impl flutter_rust_bridge::IntoIntoDart<crate::api::MorsaError> for crate::api::M
         self
     }
 }
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::SvgSizeMode {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Declared => 0.into_dart(),
+            Self::Pixels => 1.into_dart(),
+            Self::Scale => 2.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::SvgSizeMode {}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::SvgSizeMode> for crate::api::SvgSizeMode {
+    fn into_into_dart(self) -> crate::api::SvgSizeMode {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::SvgSizeSetting {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.mode.into_into_dart().into_dart(),
+            self.width.into_into_dart().into_dart(),
+            self.height.into_into_dart().into_dart(),
+            self.scale_percent.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive for crate::api::SvgSizeSetting {}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::SvgSizeSetting> for crate::api::SvgSizeSetting {
+    fn into_into_dart(self) -> crate::api::SvgSizeSetting {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::TiffCompressionSetting {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::None => 0.into_dart(),
+            Self::Lzw => 1.into_dart(),
+            Self::Deflate => 2.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::TiffCompressionSetting
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::TiffCompressionSetting>
+    for crate::api::TiffCompressionSetting
+{
+    fn into_into_dart(self) -> crate::api::TiffCompressionSetting {
+        self
+    }
+}
 
 impl SseEncode for String {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<u8>>::sse_encode(self.into_bytes(), serializer);
+    }
+}
+
+impl SseEncode for bool {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u8(self as _).unwrap();
+    }
+}
+
+impl SseEncode for crate::api::ConvertSettings {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::FileFormat>::sse_encode(self.target, serializer);
+        <u8>::sse_encode(self.quality, serializer);
+        <bool>::sse_encode(self.webp_lossless, serializer);
+        <u32>::sse_encode(self.background, serializer);
+        <Vec<u16>>::sse_encode(self.ico_sizes, serializer);
+        <crate::api::TiffCompressionSetting>::sse_encode(self.tiff_compression, serializer);
+        <crate::api::SvgSizeSetting>::sse_encode(self.svg_size, serializer);
     }
 }
 
@@ -443,6 +799,7 @@ impl SseEncode for crate::api::ConvertedImage {
         <crate::api::FileFormat>::sse_encode(self.source, serializer);
         <crate::api::FileFormat>::sse_encode(self.target, serializer);
         <String>::sse_encode(self.output_extension, serializer);
+        <Vec<String>>::sse_encode(self.warnings, serializer);
     }
 }
 
@@ -461,6 +818,12 @@ impl SseEncode for crate::api::FileFormat {
             match self {
                 crate::api::FileFormat::Png => 0,
                 crate::api::FileFormat::Jpeg => 1,
+                crate::api::FileFormat::Webp => 2,
+                crate::api::FileFormat::Gif => 3,
+                crate::api::FileFormat::Bmp => 4,
+                crate::api::FileFormat::Tiff => 5,
+                crate::api::FileFormat::Ico => 6,
+                crate::api::FileFormat::Svg => 7,
                 _ => {
                     unimplemented!("");
                 }
@@ -477,12 +840,42 @@ impl SseEncode for i32 {
     }
 }
 
+impl SseEncode for Vec<String> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <String>::sse_encode(item, serializer);
+        }
+    }
+}
+
 impl SseEncode for Vec<crate::api::ErrorParam> {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <i32>::sse_encode(self.len() as _, serializer);
         for item in self {
             <crate::api::ErrorParam>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::FileFormat> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::FileFormat>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<u16> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <u16>::sse_encode(item, serializer);
         }
     }
 }
@@ -506,6 +899,67 @@ impl SseEncode for crate::api::MorsaError {
     }
 }
 
+impl SseEncode for Option<u32> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <bool>::sse_encode(self.is_some(), serializer);
+        if let Some(value) = self {
+            <u32>::sse_encode(value, serializer);
+        }
+    }
+}
+
+impl SseEncode for crate::api::SvgSizeMode {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::SvgSizeMode::Declared => 0,
+                crate::api::SvgSizeMode::Pixels => 1,
+                crate::api::SvgSizeMode::Scale => 2,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::SvgSizeSetting {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::SvgSizeMode>::sse_encode(self.mode, serializer);
+        <Option<u32>>::sse_encode(self.width, serializer);
+        <Option<u32>>::sse_encode(self.height, serializer);
+        <u32>::sse_encode(self.scale_percent, serializer);
+    }
+}
+
+impl SseEncode for crate::api::TiffCompressionSetting {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::TiffCompressionSetting::None => 0,
+                crate::api::TiffCompressionSetting::Lzw => 1,
+                crate::api::TiffCompressionSetting::Deflate => 2,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for u16 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_u16::<NativeEndian>(self).unwrap();
+    }
+}
+
 impl SseEncode for u32 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -523,13 +977,6 @@ impl SseEncode for u8 {
 impl SseEncode for () {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {}
-}
-
-impl SseEncode for bool {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_u8(self as _).unwrap();
-    }
 }
 
 #[cfg(not(target_family = "wasm"))]

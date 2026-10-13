@@ -7,14 +7,32 @@ import 'frb_generated.dart';
 
 import 'package:flutter_rust_bridge/flutter_rust_bridge_for_generated.dart';
 
-// These functions are ignored because they are not marked as `pub`: `guard`
-// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `clone`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `from`, `from`, `from`
+// These functions are ignored because they are not marked as `pub`: `guard`, `into_options`
+// These function are ignored because they are on traits that is not defined in current crate (put an empty `#[frb]` on it to unignore): `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `assert_fields_are_eq`, `clone`, `clone`, `clone`, `clone`, `clone`, `eq`, `eq`, `eq`, `eq`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `fmt`, `from`, `from`, `from`
 
-/// Qualidade padrão do JPG, para a interface não duplicar o valor.
-int defaultJpegQuality() => RustLib.instance.api.crateApiDefaultJpegQuality();
+/// Qualidade padrão do JPG e do WebP, para a interface não duplicar o valor.
+int defaultQuality() => RustLib.instance.api.crateApiDefaultQuality();
 
-/// Quantos bytes do início do arquivo `detect_format` precisa.
+/// Opções padrão do RF06 para um destino: qualidade 85, fundo branco, ICO com
+/// 16, 32, 48 e 256, TIFF com LZW. É a única fonte desses valores.
+ConvertSettings defaultSettings({required FileFormat target}) =>
+    RustLib.instance.api.crateApiDefaultSettings(target: target);
+
+/// Tamanhos de ícone que o ICO aceita (RF06).
+Uint16List icoSizes() => RustLib.instance.api.crateApiIcoSizes();
+
+/// Quantos bytes do início do arquivo `detect_format` precisa (64 KB, por
+/// causa do SVG, que é texto; os formatos binários usam só os primeiros 4 KB).
 int detectHeaderLen() => RustLib.instance.api.crateApiDetectHeaderLen();
+
+/// Extensão da saída em minúsculas, sem o ponto (RN15).
+String outputExtension({required FileFormat format}) =>
+    RustLib.instance.api.crateApiOutputExtension(format: format);
+
+/// Destinos válidos para uma entrada: a matriz de conversão (§5.2, RN01) é a
+/// única fonte de verdade, e a interface só oferece o que está aqui (RF03).
+List<FileFormat> validTargets({required FileFormat source}) =>
+    RustLib.instance.api.crateApiValidTargets(source: source);
 
 /// Identifica o formato real pelo início do arquivo (RF02).
 Future<FileFormat> detectFormat({required List<int> header}) =>
@@ -23,13 +41,64 @@ Future<FileFormat> detectFormat({required List<int> header}) =>
 /// Converte uma imagem. Recebe os bytes do original e devolve um arquivo novo.
 Future<ConvertedImage> convertImage({
   required List<int> input,
-  required FileFormat target,
-  required int quality,
-}) => RustLib.instance.api.crateApiConvertImage(
-  input: input,
-  target: target,
-  quality: quality,
-);
+  required ConvertSettings settings,
+}) =>
+    RustLib.instance.api.crateApiConvertImage(input: input, settings: settings);
+
+/// As opções de uma conversão (RF06). Os padrões vêm de [`default_settings`];
+/// opções que não se aplicam ao destino são ignoradas.
+class ConvertSettings {
+  final FileFormat target;
+
+  /// 1–100; JPG e WebP com perdas.
+  final int quality;
+
+  /// WebP sem perdas em vez de com perdas.
+  final bool webpLossless;
+
+  /// Cor de fundo no formato 0xRRGGBB, para destinos sem transparência.
+  final int background;
+
+  /// Tamanhos do ICO.
+  final Uint16List icoSizes;
+  final TiffCompressionSetting tiffCompression;
+
+  /// Só vale para entrada SVG.
+  final SvgSizeSetting svgSize;
+
+  const ConvertSettings({
+    required this.target,
+    required this.quality,
+    required this.webpLossless,
+    required this.background,
+    required this.icoSizes,
+    required this.tiffCompression,
+    required this.svgSize,
+  });
+
+  @override
+  int get hashCode =>
+      target.hashCode ^
+      quality.hashCode ^
+      webpLossless.hashCode ^
+      background.hashCode ^
+      icoSizes.hashCode ^
+      tiffCompression.hashCode ^
+      svgSize.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ConvertSettings &&
+          runtimeType == other.runtimeType &&
+          target == other.target &&
+          quality == other.quality &&
+          webpLossless == other.webpLossless &&
+          background == other.background &&
+          icoSizes == other.icoSizes &&
+          tiffCompression == other.tiffCompression &&
+          svgSize == other.svgSize;
+}
 
 /// Imagem convertida.
 class ConvertedImage {
@@ -40,11 +109,15 @@ class ConvertedImage {
   /// Extensão da saída sem o ponto (`jpg`), conforme RN15.
   final String outputExtension;
 
+  /// Códigos dos avisos (`E-108`, `E-109`, `E-110`).
+  final List<String> warnings;
+
   const ConvertedImage({
     required this.bytes,
     required this.source,
     required this.target,
     required this.outputExtension,
+    required this.warnings,
   });
 
   @override
@@ -52,7 +125,8 @@ class ConvertedImage {
       bytes.hashCode ^
       source.hashCode ^
       target.hashCode ^
-      outputExtension.hashCode;
+      outputExtension.hashCode ^
+      warnings.hashCode;
 
   @override
   bool operator ==(Object other) =>
@@ -62,7 +136,8 @@ class ConvertedImage {
           bytes == other.bytes &&
           source == other.source &&
           target == other.target &&
-          outputExtension == other.outputExtension;
+          outputExtension == other.outputExtension &&
+          warnings == other.warnings;
 }
 
 /// Par nome → valor usado para preencher a mensagem traduzida do erro.
@@ -84,8 +159,8 @@ class ErrorParam {
           value == other.value;
 }
 
-/// Formato de arquivo, como visto pela interface.
-enum FileFormat { png, jpeg }
+/// Formato de imagem, como visto pela interface (§5.1).
+enum FileFormat { png, jpeg, webp, gif, bmp, tiff, ico, svg }
 
 /// Erro devolvido ao Dart. A interface usa `code` (`E-105`…) para a mensagem
 /// em linguagem simples; `detail` é técnico e vai só para o relatório.
@@ -112,3 +187,47 @@ class MorsaError implements FrbException {
           params == other.params &&
           detail == other.detail;
 }
+
+/// Como escolher o tamanho da rasterização de um SVG (RF06).
+enum SvgSizeMode {
+  /// O tamanho declarado no SVG (1024 px de largura se não houver).
+  declared,
+
+  /// Largura e/ou altura em px, 1–16 384 (`width` e `height`).
+  pixels,
+
+  /// Escala em porcentagem, 10 (0,1×) a 2000 (20×) (`scale_percent`).
+  scale,
+}
+
+/// Tamanho da rasterização de um SVG. Só os campos do `mode` escolhido valem.
+class SvgSizeSetting {
+  final SvgSizeMode mode;
+  final int? width;
+  final int? height;
+  final int scalePercent;
+
+  const SvgSizeSetting({
+    required this.mode,
+    this.width,
+    this.height,
+    required this.scalePercent,
+  });
+
+  @override
+  int get hashCode =>
+      mode.hashCode ^ width.hashCode ^ height.hashCode ^ scalePercent.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is SvgSizeSetting &&
+          runtimeType == other.runtimeType &&
+          mode == other.mode &&
+          width == other.width &&
+          height == other.height &&
+          scalePercent == other.scalePercent;
+}
+
+/// Compressão do TIFF (RF06).
+enum TiffCompressionSetting { none, lzw, deflate }

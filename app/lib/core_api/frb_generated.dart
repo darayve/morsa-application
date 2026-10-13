@@ -69,7 +69,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.13.0';
 
   @override
-  int get rustContentHash => -754822073;
+  int get rustContentHash => -1844732933;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -83,17 +83,24 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
 abstract class RustLibApi extends BaseApi {
   Future<ConvertedImage> crateApiConvertImage({
     required List<int> input,
-    required FileFormat target,
-    required int quality,
+    required ConvertSettings settings,
   });
 
-  int crateApiDefaultJpegQuality();
+  int crateApiDefaultQuality();
+
+  ConvertSettings crateApiDefaultSettings({required FileFormat target});
 
   Future<FileFormat> crateApiDetectFormat({required List<int> header});
 
   int crateApiDetectHeaderLen();
 
+  Uint16List crateApiIcoSizes();
+
   Future<void> crateApiInitApp();
+
+  String crateApiOutputExtension({required FileFormat format});
+
+  List<FileFormat> crateApiValidTargets({required FileFormat source});
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -107,16 +114,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @override
   Future<ConvertedImage> crateApiConvertImage({
     required List<int> input,
-    required FileFormat target,
-    required int quality,
+    required ConvertSettings settings,
   }) {
     return handler.executeNormal(
       NormalTask(
         callFfi: (port_) {
           final serializer = SseSerializer(generalizedFrbRustBinding);
           sse_encode_list_prim_u_8_loose(input, serializer);
-          sse_encode_file_format(target, serializer);
-          sse_encode_u_8(quality, serializer);
+          sse_encode_box_autoadd_convert_settings(settings, serializer);
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
@@ -129,7 +134,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeErrorData: sse_decode_morsa_error,
         ),
         constMeta: kCrateApiConvertImageConstMeta,
-        argValues: [input, target, quality],
+        argValues: [input, settings],
         apiImpl: this,
       ),
     );
@@ -137,11 +142,11 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
 
   TaskConstMeta get kCrateApiConvertImageConstMeta => const TaskConstMeta(
     debugName: "convert_image",
-    argNames: ["input", "target", "quality"],
+    argNames: ["input", "settings"],
   );
 
   @override
-  int crateApiDefaultJpegQuality() {
+  int crateApiDefaultQuality() {
     return handler.executeSync(
       SyncTask(
         callFfi: () {
@@ -152,15 +157,38 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           decodeSuccessData: sse_decode_u_8,
           decodeErrorData: null,
         ),
-        constMeta: kCrateApiDefaultJpegQualityConstMeta,
+        constMeta: kCrateApiDefaultQualityConstMeta,
         argValues: [],
         apiImpl: this,
       ),
     );
   }
 
-  TaskConstMeta get kCrateApiDefaultJpegQualityConstMeta =>
-      const TaskConstMeta(debugName: "default_jpeg_quality", argNames: []);
+  TaskConstMeta get kCrateApiDefaultQualityConstMeta =>
+      const TaskConstMeta(debugName: "default_quality", argNames: []);
+
+  @override
+  ConvertSettings crateApiDefaultSettings({required FileFormat target}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_file_format(target, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 3)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_convert_settings,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiDefaultSettingsConstMeta,
+        argValues: [target],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiDefaultSettingsConstMeta =>
+      const TaskConstMeta(debugName: "default_settings", argNames: ["target"]);
 
   @override
   Future<FileFormat> crateApiDetectFormat({required List<int> header}) {
@@ -172,7 +200,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 3,
+            funcId: 4,
             port: port_,
           );
         },
@@ -196,7 +224,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       SyncTask(
         callFfi: () {
           final serializer = SseSerializer(generalizedFrbRustBinding);
-          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 4)!;
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
         },
         codec: SseCodec(
           decodeSuccessData: sse_decode_u_32,
@@ -213,6 +241,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       const TaskConstMeta(debugName: "detect_header_len", argNames: []);
 
   @override
+  Uint16List crateApiIcoSizes() {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 6)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_prim_u_16_strict,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiIcoSizesConstMeta,
+        argValues: [],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiIcoSizesConstMeta =>
+      const TaskConstMeta(debugName: "ico_sizes", argNames: []);
+
+  @override
   Future<void> crateApiInitApp() {
     return handler.executeNormal(
       NormalTask(
@@ -221,7 +271,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
           pdeCallFfi(
             generalizedFrbRustBinding,
             serializer,
-            funcId: 5,
+            funcId: 7,
             port: port_,
           );
         },
@@ -239,6 +289,52 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   TaskConstMeta get kCrateApiInitAppConstMeta =>
       const TaskConstMeta(debugName: "init_app", argNames: []);
 
+  @override
+  String crateApiOutputExtension({required FileFormat format}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_file_format(format, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 8)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_String,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiOutputExtensionConstMeta,
+        argValues: [format],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiOutputExtensionConstMeta =>
+      const TaskConstMeta(debugName: "output_extension", argNames: ["format"]);
+
+  @override
+  List<FileFormat> crateApiValidTargets({required FileFormat source}) {
+    return handler.executeSync(
+      SyncTask(
+        callFfi: () {
+          final serializer = SseSerializer(generalizedFrbRustBinding);
+          sse_encode_file_format(source, serializer);
+          return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 9)!;
+        },
+        codec: SseCodec(
+          decodeSuccessData: sse_decode_list_file_format,
+          decodeErrorData: null,
+        ),
+        constMeta: kCrateApiValidTargetsConstMeta,
+        argValues: [source],
+        apiImpl: this,
+      ),
+    );
+  }
+
+  TaskConstMeta get kCrateApiValidTargetsConstMeta =>
+      const TaskConstMeta(debugName: "valid_targets", argNames: ["source"]);
+
   @protected
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
@@ -246,16 +342,52 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  bool dco_decode_bool(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as bool;
+  }
+
+  @protected
+  ConvertSettings dco_decode_box_autoadd_convert_settings(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return dco_decode_convert_settings(raw);
+  }
+
+  @protected
+  int dco_decode_box_autoadd_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
+  ConvertSettings dco_decode_convert_settings(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 7)
+      throw Exception('unexpected arr length: expect 7 but see ${arr.length}');
+    return ConvertSettings(
+      target: dco_decode_file_format(arr[0]),
+      quality: dco_decode_u_8(arr[1]),
+      webpLossless: dco_decode_bool(arr[2]),
+      background: dco_decode_u_32(arr[3]),
+      icoSizes: dco_decode_list_prim_u_16_strict(arr[4]),
+      tiffCompression: dco_decode_tiff_compression_setting(arr[5]),
+      svgSize: dco_decode_svg_size_setting(arr[6]),
+    );
+  }
+
+  @protected
   ConvertedImage dco_decode_converted_image(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 4)
-      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    if (arr.length != 5)
+      throw Exception('unexpected arr length: expect 5 but see ${arr.length}');
     return ConvertedImage(
       bytes: dco_decode_list_prim_u_8_strict(arr[0]),
       source: dco_decode_file_format(arr[1]),
       target: dco_decode_file_format(arr[2]),
       outputExtension: dco_decode_String(arr[3]),
+      warnings: dco_decode_list_String(arr[4]),
     );
   }
 
@@ -284,9 +416,27 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<String> dco_decode_list_String(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_String).toList();
+  }
+
+  @protected
   List<ErrorParam> dco_decode_list_error_param(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return (raw as List<dynamic>).map(dco_decode_error_param).toList();
+  }
+
+  @protected
+  List<FileFormat> dco_decode_list_file_format(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return (raw as List<dynamic>).map(dco_decode_file_format).toList();
+  }
+
+  @protected
+  Uint16List dco_decode_list_prim_u_16_strict(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as Uint16List;
   }
 
   @protected
@@ -315,6 +465,44 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int? dco_decode_opt_box_autoadd_u_32(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw == null ? null : dco_decode_box_autoadd_u_32(raw);
+  }
+
+  @protected
+  SvgSizeMode dco_decode_svg_size_mode(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return SvgSizeMode.values[raw as int];
+  }
+
+  @protected
+  SvgSizeSetting dco_decode_svg_size_setting(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    final arr = raw as List<dynamic>;
+    if (arr.length != 4)
+      throw Exception('unexpected arr length: expect 4 but see ${arr.length}');
+    return SvgSizeSetting(
+      mode: dco_decode_svg_size_mode(arr[0]),
+      width: dco_decode_opt_box_autoadd_u_32(arr[1]),
+      height: dco_decode_opt_box_autoadd_u_32(arr[2]),
+      scalePercent: dco_decode_u_32(arr[3]),
+    );
+  }
+
+  @protected
+  TiffCompressionSetting dco_decode_tiff_compression_setting(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return TiffCompressionSetting.values[raw as int];
+  }
+
+  @protected
+  int dco_decode_u_16(dynamic raw) {
+    // Codec=Dco (DartCObject based), see doc to use other codecs
+    return raw as int;
+  }
+
+  @protected
   int dco_decode_u_32(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as int;
@@ -340,17 +528,60 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  bool sse_decode_bool(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint8() != 0;
+  }
+
+  @protected
+  ConvertSettings sse_decode_box_autoadd_convert_settings(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_convert_settings(deserializer));
+  }
+
+  @protected
+  int sse_decode_box_autoadd_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return (sse_decode_u_32(deserializer));
+  }
+
+  @protected
+  ConvertSettings sse_decode_convert_settings(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_target = sse_decode_file_format(deserializer);
+    var var_quality = sse_decode_u_8(deserializer);
+    var var_webpLossless = sse_decode_bool(deserializer);
+    var var_background = sse_decode_u_32(deserializer);
+    var var_icoSizes = sse_decode_list_prim_u_16_strict(deserializer);
+    var var_tiffCompression = sse_decode_tiff_compression_setting(deserializer);
+    var var_svgSize = sse_decode_svg_size_setting(deserializer);
+    return ConvertSettings(
+      target: var_target,
+      quality: var_quality,
+      webpLossless: var_webpLossless,
+      background: var_background,
+      icoSizes: var_icoSizes,
+      tiffCompression: var_tiffCompression,
+      svgSize: var_svgSize,
+    );
+  }
+
+  @protected
   ConvertedImage sse_decode_converted_image(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var var_bytes = sse_decode_list_prim_u_8_strict(deserializer);
     var var_source = sse_decode_file_format(deserializer);
     var var_target = sse_decode_file_format(deserializer);
     var var_outputExtension = sse_decode_String(deserializer);
+    var var_warnings = sse_decode_list_String(deserializer);
     return ConvertedImage(
       bytes: var_bytes,
       source: var_source,
       target: var_target,
       outputExtension: var_outputExtension,
+      warnings: var_warnings,
     );
   }
 
@@ -376,6 +607,18 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  List<String> sse_decode_list_String(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <String>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_String(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
   List<ErrorParam> sse_decode_list_error_param(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
 
@@ -385,6 +628,25 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
       ans_.add(sse_decode_error_param(deserializer));
     }
     return ans_;
+  }
+
+  @protected
+  List<FileFormat> sse_decode_list_file_format(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    var len_ = sse_decode_i_32(deserializer);
+    var ans_ = <FileFormat>[];
+    for (var idx_ = 0; idx_ < len_; ++idx_) {
+      ans_.add(sse_decode_file_format(deserializer));
+    }
+    return ans_;
+  }
+
+  @protected
+  Uint16List sse_decode_list_prim_u_16_strict(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var len_ = sse_decode_i_32(deserializer);
+    return deserializer.buffer.getUint16List(len_);
   }
 
   @protected
@@ -411,6 +673,54 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  int? sse_decode_opt_box_autoadd_u_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    if (sse_decode_bool(deserializer)) {
+      return (sse_decode_box_autoadd_u_32(deserializer));
+    } else {
+      return null;
+    }
+  }
+
+  @protected
+  SvgSizeMode sse_decode_svg_size_mode(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return SvgSizeMode.values[inner];
+  }
+
+  @protected
+  SvgSizeSetting sse_decode_svg_size_setting(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var var_mode = sse_decode_svg_size_mode(deserializer);
+    var var_width = sse_decode_opt_box_autoadd_u_32(deserializer);
+    var var_height = sse_decode_opt_box_autoadd_u_32(deserializer);
+    var var_scalePercent = sse_decode_u_32(deserializer);
+    return SvgSizeSetting(
+      mode: var_mode,
+      width: var_width,
+      height: var_height,
+      scalePercent: var_scalePercent,
+    );
+  }
+
+  @protected
+  TiffCompressionSetting sse_decode_tiff_compression_setting(
+    SseDeserializer deserializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    var inner = sse_decode_i_32(deserializer);
+    return TiffCompressionSetting.values[inner];
+  }
+
+  @protected
+  int sse_decode_u_16(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getUint16();
+  }
+
+  @protected
   int sse_decode_u_32(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     return deserializer.buffer.getUint32();
@@ -428,15 +738,45 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  bool sse_decode_bool(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getUint8() != 0;
-  }
-
-  @protected
   void sse_encode_String(String self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     sse_encode_list_prim_u_8_strict(utf8.encoder.convert(self), serializer);
+  }
+
+  @protected
+  void sse_encode_bool(bool self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint8(self ? 1 : 0);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_convert_settings(
+    ConvertSettings self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_convert_settings(self, serializer);
+  }
+
+  @protected
+  void sse_encode_box_autoadd_u_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_u_32(self, serializer);
+  }
+
+  @protected
+  void sse_encode_convert_settings(
+    ConvertSettings self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_file_format(self.target, serializer);
+    sse_encode_u_8(self.quality, serializer);
+    sse_encode_bool(self.webpLossless, serializer);
+    sse_encode_u_32(self.background, serializer);
+    sse_encode_list_prim_u_16_strict(self.icoSizes, serializer);
+    sse_encode_tiff_compression_setting(self.tiffCompression, serializer);
+    sse_encode_svg_size_setting(self.svgSize, serializer);
   }
 
   @protected
@@ -449,6 +789,7 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     sse_encode_file_format(self.source, serializer);
     sse_encode_file_format(self.target, serializer);
     sse_encode_String(self.outputExtension, serializer);
+    sse_encode_list_String(self.warnings, serializer);
   }
 
   @protected
@@ -471,6 +812,15 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_list_String(List<String> self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_String(item, serializer);
+    }
+  }
+
+  @protected
   void sse_encode_list_error_param(
     List<ErrorParam> self,
     SseSerializer serializer,
@@ -480,6 +830,28 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
     for (final item in self) {
       sse_encode_error_param(item, serializer);
     }
+  }
+
+  @protected
+  void sse_encode_list_file_format(
+    List<FileFormat> self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    for (final item in self) {
+      sse_encode_file_format(item, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_list_prim_u_16_strict(
+    Uint16List self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.length, serializer);
+    serializer.buffer.putUint16List(self);
   }
 
   @protected
@@ -513,6 +885,49 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
+  void sse_encode_opt_box_autoadd_u_32(int? self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+
+    sse_encode_bool(self != null, serializer);
+    if (self != null) {
+      sse_encode_box_autoadd_u_32(self, serializer);
+    }
+  }
+
+  @protected
+  void sse_encode_svg_size_mode(SvgSizeMode self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_svg_size_setting(
+    SvgSizeSetting self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_svg_size_mode(self.mode, serializer);
+    sse_encode_opt_box_autoadd_u_32(self.width, serializer);
+    sse_encode_opt_box_autoadd_u_32(self.height, serializer);
+    sse_encode_u_32(self.scalePercent, serializer);
+  }
+
+  @protected
+  void sse_encode_tiff_compression_setting(
+    TiffCompressionSetting self,
+    SseSerializer serializer,
+  ) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    sse_encode_i_32(self.index, serializer);
+  }
+
+  @protected
+  void sse_encode_u_16(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putUint16(self);
+  }
+
+  @protected
   void sse_encode_u_32(int self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     serializer.buffer.putUint32(self);
@@ -527,11 +942,5 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_unit(void self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-  }
-
-  @protected
-  void sse_encode_bool(bool self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putUint8(self ? 1 : 0);
   }
 }
